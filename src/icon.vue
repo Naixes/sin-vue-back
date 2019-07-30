@@ -1,5 +1,5 @@
 <template>
-    <svg v-if="icon" class="s-icon">
+    <svg v-if="name" class="s-icon">
         <use :link:herf="`#icon-${name}`"></use>
     </svg>
 </template>
