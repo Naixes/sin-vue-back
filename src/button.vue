@@ -1,6 +1,6 @@
 <template>
 	<button class="s-button" :class="{[`icon-${iconPosition}`]: true}">
-		<s-icon v-if="icon" :name="icon"></s-icon>
+		<s-icon class="icon" v-if="icon" :name="icon"></s-icon>
 		<!-- 按钮内容：使用时标签里的内容会覆盖这里 -->
 		<div class="content">
 			<slot></slot>
@@ -55,14 +55,14 @@ export default {
 	>.content {
 		order: 2;
 	}
-	>.s-icon {
+	>.icon {
 		order: 1;
 	}
 	&.icon-right {
 		>.content {
 			order: 1;
 		}
-		>.s-icon {
+		>.icon {
 			order: 2;
 		}
 	}
