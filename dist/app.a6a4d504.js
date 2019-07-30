@@ -12404,7 +12404,7 @@ function patchScopedSlots (instance) {
   }
 }
 
-},{}],"src/Button.vue":[function(require,module,exports) {
+},{}],"src/button.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12415,21 +12415,55 @@ exports.default = void 0;
 //
 //
 //
-var _default = {};
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: {
+    icon: {
+      type: String,
+      default: ''
+    },
+    iconPosition: {
+      type: String,
+      default: 'left',
+      // 校验
+      validator: function validator(val) {
+        return val === 'left' || val === 'right';
+      }
+    }
+  }
+};
 exports.default = _default;
-        var $2555cd = exports.default || module.exports;
+        var $7b16b1 = exports.default || module.exports;
       
-      if (typeof $2555cd === 'function') {
-        $2555cd = $2555cd.options;
+      if (typeof $7b16b1 === 'function') {
+        $7b16b1 = $7b16b1.options;
       }
     
         /* template */
-        Object.assign($2555cd, (function () {
+        Object.assign($7b16b1, (function () {
           var render = function() {
+  var _obj
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("button", { staticClass: "s-button" }, [_vm._v("hi")])
+  return _c(
+    "button",
+    {
+      staticClass: "s-button",
+      class: ((_obj = {}), (_obj["icon-" + _vm.iconPosition] = true), _obj)
+    },
+    [
+      _vm.icon ? _c("s-icon", { attrs: { name: _vm.icon } }) : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "content" }, [_vm._t("default")], 2)
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12451,9 +12485,82 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$2555cd', $2555cd);
+            api.createRecord('$7b16b1', $7b16b1);
           } else {
-            api.reload('$2555cd', $2555cd);
+            api.reload('$7b16b1', $7b16b1);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/icon.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+var _default = {
+  props: {
+    name: {
+      type: String,
+      default: ''
+    }
+  }
+};
+exports.default = _default;
+        var $2445cb = exports.default || module.exports;
+      
+      if (typeof $2445cb === 'function') {
+        $2445cb = $2445cb.options;
+      }
+    
+        /* template */
+        Object.assign($2445cb, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.icon
+    ? _c("svg", { staticClass: "s-icon" }, [
+        _c("use", { attrs: { "link:herf": "#icon-" + _vm.name } })
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$2445cb', $2445cb);
+          } else {
+            api.reload('$2445cb', $2445cb);
           }
         }
 
@@ -12469,17 +12576,21 @@ render._withStripped = true
 
 var _vue = _interopRequireDefault(require("vue"));
 
-var _Button = _interopRequireDefault(require("./Button"));
+var _button = _interopRequireDefault(require("./button"));
+
+var _icon = _interopRequireDefault(require("./icon"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_vue.default.component('s-button', _Button.default);
+_vue.default.component('s-button', _button.default);
+
+_vue.default.component('s-icon', _icon.default);
 
 new _vue.default({
   el: '#app',
   data: {}
 });
-},{"vue":"node_modules/vue/dist/vue.common.js","./Button":"src/Button.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -12507,7 +12618,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "13534" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49974" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
