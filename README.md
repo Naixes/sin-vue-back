@@ -47,6 +47,8 @@ div {
 
 运行：`node_modules/bin/parsel --no-cache`，简写`npx parcel`
 
+> 报错：找不到入口，解决：使用 npx parcel index.html 运行
+
 报错：修改vue版本，vue官网有代码
 
 查看兼容性：caniuse.com
