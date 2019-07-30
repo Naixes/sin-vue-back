@@ -1,6 +1,6 @@
 <template>
     <svg v-if="name" class="s-icon">
-        <use :link:herf="`#icon-${name}`"></use>
+        <use :xlink:href="`#i-${name}`"></use>
     </svg>
 </template>
 
@@ -19,5 +19,6 @@ export default {
     .s-icon {
         width: 1em;
         height: 1em;
+				margin-left: .1em;
     }
 </style>

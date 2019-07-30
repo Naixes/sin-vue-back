@@ -51,7 +51,7 @@ export default {
 	// 布局
 	display: inline-flex;
 	// justify-content: center;
-	// align-items: center;
+	align-items: center;
 	>.content {
 		order: 2;
 	}
