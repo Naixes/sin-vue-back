@@ -17,8 +17,8 @@ export default {
 
 <style lang="scss">
     .s-icon {
-        width: 1em;
-        height: 1em;
-				margin-left: .1em;
+        width: 1.2em;
+        height: 1.2em;
+		margin-left: .2em;
     }
 </style>
