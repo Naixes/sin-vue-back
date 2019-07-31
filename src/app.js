@@ -8,5 +8,6 @@ Vue.component('s-icon', Icon)
 new Vue({
 	el: '#app',
 	data: {
+		loading: false
 	}
 })

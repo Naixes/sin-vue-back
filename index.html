@@ -30,13 +30,18 @@
 <body>
 	<div id="app">
 		<s-button>按钮</s-button>
-		<s-button icon="setting" icon-position="right">按钮</s-button>
+		<s-button 
+			icon="setting" 
+			:loading="loading" 
+			icon-position="right" 
+			@click="loading = !loading"
+		>按钮</s-button>
 		<!-- 使用iconfont的svg -->
 		<!-- <svg class="icon"><use xlink:href="#i-setting"></use></svg> -->
 	</div>
 
 	<script src="./src/app.js"></script>
 	<!-- 在body前添加了一个svg -->
-	<script src="//at.alicdn.com/t/font_1323906_silykhwqik.js"></script>
+	<script src="//at.alicdn.com/t/font_1323906_yj2jjd1yt3e.js"></script>
 </body>
 </html>
