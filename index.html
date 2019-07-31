@@ -13,6 +13,7 @@
 			--color: #333;
 			--border-color: #999;
 			--border-hover-color: #666;
+			/* --border-hover-color: red; */
 
 			--button-height: 32px;
 			--button-bgc: #fff;
@@ -29,7 +30,10 @@
 </head>
 <body>
 	<div id="app">
+		<!-- 按钮 -->
 		<s-button>按钮</s-button>
+
+		<!-- 带有图标的按钮 -->
 		<s-button 
 			icon="setting" 
 			:loading="loading" 
@@ -38,10 +42,22 @@
 		>按钮</s-button>
 		<!-- 使用iconfont的svg -->
 		<!-- <svg class="icon"><use xlink:href="#i-setting"></use></svg> -->
+
+		<!-- 按钮组 -->
+		<s-button-group>
+			<s-button icon="left">上一页</s-button>
+			<s-button>占位</s-button>
+			<s-button icon="right" icon-position="right">下一页</s-button>
+		</s-button-group>
+
+		<br/>
+		
+		<!-- icon -->
+		<s-icon name="loading"></s-icon>
 	</div>
 
 	<script src="./src/app.js"></script>
 	<!-- 在body前添加了一个svg -->
-	<script src="//at.alicdn.com/t/font_1323906_yj2jjd1yt3e.js"></script>
+	<script src="//at.alicdn.com/t/font_1323906_9utete9h0o6.js"></script>
 </body>
 </html>
