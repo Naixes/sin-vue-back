@@ -1,4 +1,29 @@
+持续集成标志
+
+## 介绍
+
+## 开始使用
+
+1. 安装
+
+   
+
+2. 
+
+## 文档
+
+## 提问
+
+## 变更方式
+
+## 练习方式
+
+## 贡献代码
+
+
+
 ## 我自己的Vue UI 组件库
+
 `* {margin: 0; padding: 0; box-sizing: border-box;}`
 
 ## 开发日志
@@ -398,9 +423,11 @@ travisc ci：没有数量限制， circle ci：一个以上收费
 
 如果你只是为了本地调试，可以在项目目录使用 npm link，然后在使用之处运行 npm link xxx，就是最新了
 
+### 修改bug
 
+要查看旧代码修改bug时，首先提交代码，然后回到旧版本`git reset --hard xxx`，安装依赖
 
-
+默认查找index，有index.js文件时，会出错，应该使用index.html
 
 
 
