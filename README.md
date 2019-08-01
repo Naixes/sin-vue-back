@@ -340,13 +340,11 @@ chai：not，deep，own，NaN
 
 #### travisc持续集成
 
-持续测试，持续交付，持续部署
-
-修改测试脚本
+包括：持续测试，持续交付，持续部署
 
 travisc ci：没有数量限制， circle ci：一个以上收费
 
-阮一峰教程
+阮一峰教程：<http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html>
 
 ##### 持续测试
 
