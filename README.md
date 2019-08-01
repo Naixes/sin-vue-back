@@ -356,9 +356,47 @@ travisc ci：没有数量限制， circle ci：一个以上收费
 
 报错：改为无头浏览器（没有界面）
 
+### 发布npm
 
+1. 测试通过
+2. 代码上传到npmjs.org
+   0. 更新 package.json 
+      1. 在 package.json 里将版本号改为 0.0.1，等我们做完了再改成 1.0.0
+      2. 创建 index.js，在 index.js 里将 要导出的内容全部导出
+      3. 添加配置 “mian”:“index.js”
+   1. 去 https://www.npmjs.com/ 注册一个账户
+   2. 确认一下邮箱（必须）
+   3. 项目根目录运行 npm adduser
+      - 如果错误提示里面含有 https://registry.npm.taobao.org 则说明你的 npm 源目前为淘宝源，需要更换为 npm 官方源
+   4. 运行 npm publish
 
+3. 使用
 
+   - 使用 vue-cli
+
+     **问题1**：不支持import报错
+
+     解决：用 babel 转译 import
+
+     ```js
+     npx parcel build index.js --no-cache --no-minify // 不加no-minify，组件会没有内容，slot被删了
+     ```
+
+     修改 main 配置：/dist/index.js
+
+     不能发布同一个版本
+
+     **问题2**：需要手动引入样式，手动写默认样式
+
+   - 使用 webpack
+
+   - 使用 parcel
+
+#### 提高效率
+
+别人通过 npm update xxx 来更新
+
+如果你只是为了本地调试，可以在项目目录使用 npm link，然后在使用之处运行 npm link xxx，就是最新了
 
 
 
