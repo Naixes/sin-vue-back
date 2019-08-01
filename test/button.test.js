@@ -1,30 +1,19 @@
 import Vue from 'vue'
-import Button from './button'
-import Icon from './icon'
-import ButtonGroup from './buttonGroup'
-
-Vue.component('s-button', Button)
-Vue.component('s-icon', Icon)
-Vue.component('s-button-group', ButtonGroup)
-
-new Vue({
-	el: '#app',
-	data: {
-		loading: false
-	}
-})
-
-// 单元测试：chai
-import chai from 'chai'
-import spies from 'chai-spies'
+// 引入要测试的组件
+import Button from '../src/button'
 
 const expect = chai.expect
-chai.use(spies)
 
-try{
-	// 测试按钮
-	// 测试 icon 属性
-	{
+// 阻止启动生产消息
+Vue.config.productionTip = false
+Vue.config.devtools = false
+
+describe('Button', () => {
+    it('存在', () => {
+        expect(Button).to.exist
+    })
+
+    it('可以设置icon', () => {
 		// 获取组件构造函数
 		const Constructor = Vue.extend(Button)
 		// 创建测试实例
@@ -41,9 +30,9 @@ try{
 		// 销毁实例
 		vm.$el.remove()
 		vm.$destroy()
-	}
-	// 测试 loading 属性
-	{
+    })
+    
+    it('可以设置loading', () => {
 		const Constructor = Vue.extend(Button)
 		const vm = new Constructor({
 			propsData: {
@@ -56,9 +45,9 @@ try{
 		expect(href).to.eq('#i-loading')
 		vm.$el.remove()
 		vm.$destroy()
-	}
-	// 测试 icon-position 属性
-	{
+    })
+    
+    it('icon默认order为1', () => {
 		// css 属性需要渲染到页面
 		const div = document.createElement('div')
 		document.body.appendChild(div)
@@ -77,8 +66,9 @@ try{
 		expect(order).to.eq('1')
 		vm.$el.remove()
 		vm.$destroy()
-	}
-	{
+    })
+    
+    it('可以设置icon-position修改order为2', () => {
 		const div = document.createElement('div')
 		document.body.appendChild(div)
 	
@@ -95,9 +85,9 @@ try{
 		expect(order).to.eq('2')
 		vm.$el.remove()
 		vm.$destroy()
-	}
-	// 测试事件
-	{
+    })
+    
+    it('点击button触发click事件', () => {
 		const Constructor = Vue.extend(Button)
 		const vm = new Constructor({
 			propsData: {
@@ -105,32 +95,16 @@ try{
 				iconPosition: 'right'
 			}
 		})
-		vm.$mount()
-	
-		// 方法1：
-		// vm.$on('click', function() {
-		// 	// 事件触发时执行
-		// 	expect(1).to.eq(1)
-		// })
-		// let button = vm.$el
-		// // 触发事件
-		// button.click()
-	
-		// 方法2：使用 chai-spies
-		let spy = chai.spy(function() {})
+        vm.$mount()
+        
+		let spy = sinon.fake()
 		vm.$on('click', spy)
 		let button = vm.$el
 		// 触发事件
 		button.click()
-		expect(spy).to.have.been.called()
+		expect(spy).to.have.been.called
 	
 		vm.$el.remove()
 		vm.$destroy()
-	}
-}catch(err) {
-	window.errors = [err]
-}finally {
-	window.errors && window.errors.forEach(err => {
-		console.log(err.message)
-	});
-}
+    })
+})

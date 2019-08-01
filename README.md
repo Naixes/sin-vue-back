@@ -255,8 +255,6 @@ const server = require('http').createServer(function (request, response) {
 })()
 ```
 
-
-
 ##### Karma+Mocha自动化测试
 
 
@@ -273,15 +271,62 @@ Sinon：spy/stub/mock库，用以辅助测试
    ```js
    module.exports = function (config) {
        config.set({
-           // base path that will be used to resolve all patterns (eg. files, exclude)
-           basePath: '',
+         // base path that will be used to resolve all patterns (eg. files, exclude)
+         basePath: '',
+         // frameworks to use
+         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+         frameworks: ['mocha', 'sinon-chai'],
+         client: {
+           chai: {
+             includeStack: true
+           }
+         },
+         // list of files / patterns to load in the browser
+         // 打包后会有css文件  
+         files: [
+           'dist/**/*.test.js',
+           'dist/**/*.test.css'
+         ],
+         // list of files / patterns to exclude
+         exclude: [],
+         // preprocess matching files before serving them to the browser
+         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+         preprocessors: {},
+         // test results reporter to use
+         // possible values: 'dots', 'progress'
+         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+         reporters: ['progress'],
+         // web server port
+         port: 9876,
+         // enable / disable colors in the output (reporters and logs)
+         colors: true,
+         // level of logging
+         // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+         logLevel: config.LOG_INFO,
+         // enable / disable watching file and executing tests whenever any file changes
+         autoWatch: true,
+         // start these browsers
+         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+         // 设置浏览器  
+         browsers: ['Chrome'],
+         // Continuous Integration mode
+         // if true, Karma captures browsers, runs the tests and exits
+         singleRun: false,
+         // Concurrency level
+         // how many browser should be started simultaneous
+         concurrency: Infinity
+       })
+     }
    ```
-
-   
 
 3. 创建test/button.test.js
 
 4. 创建测试脚本
+
+   ```js
+   "dev-test": "parcel watch test/* --no-cache & karma start",
+   "test": "parcel build test/* --no-cache --no-minify && karma start --single-run"
+   ```
 
 5. 运行测试脚本`npm run test`：打包js（打包会将 js 和 css 分开），打开浏览器，运行测试用例，关闭浏览器，把浏览器输出的内容输出到命令行
 
