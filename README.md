@@ -2,31 +2,58 @@
 
 ## 介绍
 
+基于Vue的UI框架
+
+[![Build Status](https://www.travis-ci.org/Naixes/sin-vue.svg?branch=master)](https://www.travis-ci.org/Naixes/sin-vue)
+
 ## 开始使用
 
 1. 安装
 
+   `npm --save sin-vue`
+
+2. 引入
+
+   ```js
+   import { Button, ButtonGroup, Icon } from 'sin-vue'
+   // 样式
+   import 'sin-vue/dist/index.css'
    
+   export default {
+     name: 'app',
+     components: {
+       's-button': Button,
+       's-button-group': ButtonGroup,
+       's-icon': Icon
+     }
+   }
+   ```
 
-2. 
+3. 添加css样式
 
-## 文档
-
-## 提问
-
-## 变更方式
-
-## 练习方式
-
-## 贡献代码
-
-
-
-## 我自己的Vue UI 组件库
-
-`* {margin: 0; padding: 0; box-sizing: border-box;}`
+   ```css
+   *,
+   *::before,
+   *::after {
+       box-sizing: border-box;
+   }
+   html {
+       --font-size: 14px ;
+   
+       --color: #333;
+       --border-color: #999;
+       --border-hover-color: #666;
+   
+       --button-height: 32px;
+       --button-bgc: #fff;
+       --button-radius: 4px;
+       --button-active-bgc: #eee;
+   }
+   ```
 
 ## 开发日志
+
+⏰ 07-27~08-02 完成
 
 ### 构建项目
 
@@ -121,15 +148,13 @@ mounted() {
 
 ### 单元测试
 
-chai：
+chai：断言库
 
 BDD：行为驱动开发
 
 TDD：测试驱动开发
 
-动态生成一个按钮
-
-测试参数和事件（chai-spies）
+测试组件参数和事件（chai-spies）
 
 #### 自动化测试
 
