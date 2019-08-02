@@ -20,47 +20,62 @@
 			--button-radius: 4px;
 			--button-active-bgc: #eee;
 		}
+
 		#app {
 			margin: 20px;
 		}
 		body {
 			font-size: var(--font-size);
 		}
+		.box {
+			margin: 20px;
+		}
 	</style>
 </head>
 <body>
 	<div id="app">
-		<!-- 按钮 -->
-		<s-button>按钮</s-button>
+		<div class="box">
+			<!-- input -->
+			<s-input placeholder="请输入"></s-input>
+			<s-input value="姓名" :disabled="true"></s-input>
+			<s-input value="姓名" :readonly="true"></s-input>
+			<s-input value="姓名" placeholder="请输入"></s-input>
+			<s-input value="姓名" error="必须大于3个字"></s-input>
+		</div>
+		<div class="box">
+			<!-- 按钮 -->
+			<s-button>按钮</s-button>
 
-		<!-- 带有图标的按钮 -->
-		<s-button 
-			icon="setting" 
-			:loading="loading" 
-			icon-position="right" 
-			@click="loading = !loading"
-		>按钮</s-button>
-		<!-- 使用iconfont的svg -->
-		<!-- <svg class="icon"><use xlink:href="#i-setting"></use></svg> -->
+			<!-- 带有图标的按钮 -->
+			<s-button 
+				icon="setting" 
+				:loading="loading" 
+				icon-position="right" 
+				@click="loading = !loading"
+			>按钮</s-button>
+		</div>
 
-		<!-- 按钮组 -->
-		<s-button-group>
-			<s-button icon="left">上一页</s-button>
-			<s-button>占位</s-button>
-			<s-button icon="right" icon-position="right">下一页</s-button>
-		</s-button-group>
+		<div class="box">
+			<!-- 按钮组 -->
+			<s-button-group>
+				<s-button icon="left">上一页</s-button>
+				<s-button>占位</s-button>
+				<s-button icon="right" icon-position="right">下一页</s-button>
+			</s-button-group>
+		</div>
 
-		<br/>
+		<div class="box">
+			<!-- icon -->
+			<s-icon name="loading"></s-icon>
+		</div>
 		
-		<!-- icon -->
-		<s-icon name="loading"></s-icon>
 	</div>
 
 	<!-- 测试 -->
 	<div id="test"></div>
 
 	<script src="./src/app.js"></script>
-	
+
 	<!-- 在body前添加了一个svg -->
 	<!-- 已经本地化,见svg.js -->
 	<!-- <script src="//at.alicdn.com/t/font_1323906_a2zn403tuun.js"></script> -->
