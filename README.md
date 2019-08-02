@@ -386,8 +386,8 @@ travisc ci：没有数量限制， circle ci：一个以上收费
 1. 测试通过
 2. 代码上传到npmjs.org
    0. 更新 package.json 
-      1. 在 package.json 里将版本号改为 0.0.1，等我们做完了再改成 1.0.0
-      2. 创建 index.js，在 index.js 里将 要导出的内容全部导出
+      1. 在 package.json 里将版本号为 0.0.1，每次发布要修改
+      2. 创建 index.js，在 index.js 里将要导出的内容全部导出
       3. 添加配置 “mian”:“index.js”
    1. 去 https://www.npmjs.com/ 注册一个账户
    2. 确认一下邮箱（必须）

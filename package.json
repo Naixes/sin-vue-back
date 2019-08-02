@@ -2,7 +2,7 @@
   "name": "sin-vue",
   "version": "0.0.1",
   "description": "vue ui",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "puppeteer-test": "parcel build index.html --no-minify --no-cache && node ./test.js",
     "dev-test": "parcel watch test/* --no-cache & karma start",
