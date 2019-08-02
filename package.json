@@ -1,9 +1,11 @@
 {
   "name": "sin-vue",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "vue ui",
   "main": "dist/index.js",
   "scripts": {
+    "start": "parcel index.html --no-cache",
+    "build": "parcel index.js --no-minify --no-cache",
     "puppeteer-test": "parcel build index.html --no-minify --no-cache && node ./test.js",
     "dev-test": "parcel watch test/* --no-cache & karma start",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single-run"

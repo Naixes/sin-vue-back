@@ -388,13 +388,15 @@ travisc ci：没有数量限制， circle ci：一个以上收费
    0. 更新 package.json 
       1. 在 package.json 里将版本号为 0.0.1，每次发布要修改
       2. 创建 index.js，在 index.js 里将要导出的内容全部导出
-      3. 添加配置 “mian”:“index.js”
+      3. 打包index.js代码
+      4. 添加配置 “mian”:“dist/index.js”
    1. 去 https://www.npmjs.com/ 注册一个账户
    2. 确认一下邮箱（必须）
    3. 项目根目录运行 npm adduser
       - 如果错误提示里面含有 https://registry.npm.taobao.org 则说明你的 npm 源目前为淘宝源，需要更换为 npm 官方源
-   4. 运行 npm publish
 
+   4. 运行 npm publish
+   
 3. 使用
 
    - 使用 vue-cli
