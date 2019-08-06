@@ -454,6 +454,82 @@ travisc ci：没有数量限制， circle ci：一个以上收费
 
 默认查找index，有index.js文件时，会出错，应该使用index.html
 
+### input组件
+
+#### 需求分析
+
+- 输入
+- 提示
+- 报错
+- 清空
+- 复制粘贴
+- tab，回车
+- 不可输入
+
+状态：hover，focused，error，error+focus/hover，success，success+focus/hover，disabled，readonly
+
+#### 书写样式
+
+vue中自定义组件不要自闭合
+
+**scoped**：标签上回家上表示不同组件的属性
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
