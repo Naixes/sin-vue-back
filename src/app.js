@@ -3,6 +3,8 @@ import Button from './button'
 import Icon from './icon'
 import ButtonGroup from './buttonGroup'
 import Input from './input'
+import Row from './row'
+import Col from './col'
 
 Vue.component('s-button', Button)
 Vue.component('s-button-group', ButtonGroup)
@@ -11,6 +13,9 @@ Vue.component('s-icon', Icon)
 
 Vue.component('s-input', Input)
 
+Vue.component('s-row', Row)
+Vue.component('s-col', Col)
+
 new Vue({
 	el: '#app',
 	data: {
@@ -18,8 +23,8 @@ new Vue({
 		msg: 'hi'
 	},
 	methods: {
-		eventHandle(e, type) {
-			console.log(e, type)
+		eventHandle(type, e) {
+			console.log(type, e)
 		}
 	}
 })

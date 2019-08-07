@@ -30,10 +30,23 @@
 		.box {
 			margin: 20px;
 		}
+		.s-col {
+			background-color: #eee;
+			border: 1px solid #ccc;
+		}
 	</style>
 </head>
 <body>
 	<div id="app">
+		<div class="box">
+			<!-- col,row -->
+			<s-row>
+				<s-col>1</s-col>
+				<s-col>2</s-col>
+				<s-col>3</s-col>
+				<s-col>4</s-col>
+			</s-row>
+		</div>
 		<div class="box">
 			<!-- input -->
 			<!-- vue中自定义组件不要自闭合 -->
@@ -42,13 +55,15 @@
 			<s-input value="姓名" :readonly="true"></s-input>
 			<s-input value="姓名" placeholder="请输入"></s-input>
 			<s-input value="姓名" error="必须大于3个字"></s-input>
+			<!-- $event 已经被value覆盖 -->
 			<s-input
 				placeholder="请输入"
-				@change="eventHandle(val, 'change')"
-				@input="eventHandle(val, 'input')"
-				@focus="eventHandle(val, 'focus')"
-				@blur="eventHandle(val, 'blur')"
+				@change="eventHandle('change', $event )"
+				@input="eventHandle('input', $event)"
+				@focus="eventHandle('focus', $event)"
+				@blur="eventHandle('blur', $event)"
 			></s-input>
+			<!-- ？？？ -->
 			<s-input placeholder="请输入" v-model="msg"></s-input>
 			{{msg}}
 		</div>

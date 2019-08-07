@@ -8,10 +8,10 @@
             :disabled="disabled" 
             :readonly="readonly"
             :placeholder="placeholder"
-            @input="$emit('input', $event.target.value)"
-            @change="$emit('change', $event.target.value)"
-            @focus="$emit('focus', $event.target.value)"
-            @blur="$emit('blur', $event.target.value)"
+            @input="$emit('input', $event.target.value, $event)"
+            @change="$emit('change', $event.target.value, $event)"
+            @focus="$emit('focus', $event.target.value, $event)"
+            @blur="$emit('blur', $event.target.value, $event)"
         >
         <template v-if="error">
             <s-icon class="err-icon" name="error"></s-icon>
