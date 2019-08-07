@@ -42,6 +42,13 @@
 			<s-input value="姓名" :readonly="true"></s-input>
 			<s-input value="姓名" placeholder="请输入"></s-input>
 			<s-input value="姓名" error="必须大于3个字"></s-input>
+			<s-input
+				placeholder="请输入"
+				@change="eventHandle($event, 'change')"
+				@input="eventHandle($event, 'input')"
+				@focus="eventHandle($event, 'focus')"
+				@blur="eventHandle($event, 'blur')"
+			></s-input>
 		</div>
 		<div class="box">
 			<!-- 按钮 -->

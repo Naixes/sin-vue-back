@@ -468,15 +468,19 @@ travisc ci：没有数量限制， circle ci：一个以上收费
 
 状态：hover，focused，error，error+focus/hover，success，success+focus/hover，disabled，readonly
 
-#### 书写样式
+事件：change，focus，blur，input
+
+#### 书写样式及事件
 
 vue中自定义组件不要自闭合
 
 **scoped**：标签上会加上表示不同组件的属性
 
+区分不同的状态
 
+#### 测试
 
-
+|-| 可以将属性测试封装一下
 
 
 
