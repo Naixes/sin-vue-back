@@ -36,7 +36,8 @@
 	<div id="app">
 		<div class="box">
 			<!-- input -->
-			<s-input placeholder="请输入"></s-input>
+			<!-- vue中自定义组件不要自闭合 -->
+			<s-input placeholder="请输入"/></s-input>
 			<s-input value="姓名" :disabled="true"></s-input>
 			<s-input value="姓名" :readonly="true"></s-input>
 			<s-input value="姓名" placeholder="请输入"></s-input>

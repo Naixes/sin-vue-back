@@ -1,6 +1,6 @@
 <template>
     <!-- :class="$style.input" -->
-    <div class="input" :class="{error}">
+    <div class="input-wrapper" :class="{error}">
         <input 
             type="text"
             :value="value" 
@@ -8,8 +8,10 @@
             :readonly="readonly"
             :placeholder="placeholder"
         >
-        <s-icon class="err-icon" name="setting"></s-icon>
-        <span class="err-msg">{{error}}</span>
+        <template v-if="error">
+            <s-icon class="err-icon" name="error"></s-icon>
+            <span class="err-msg">{{error}}</span>
+        </template>
     </div>
 </template>
 
@@ -43,16 +45,25 @@ export default {
 }
 </script>
 
-<style lang="scss" module>
-$height: 32px;
-$border-color: #999;
-$border-color-hover: #666;
-$border-radius: 4px;
-$font-size: 12px;
-$box-shadow-color: rgba(0, 0, 0, 0.2);
+<style lang="scss" scoped>
+
+// 样式
 $red: #F1453D;
 
-.input { 
+// 基础
+$height: 32px;
+$border-color: #999;
+$border-radius: 4px;
+$font-size: 12px;
+$color: #333;
+
+// 状态
+$hover-border-color: #666;
+// focus
+$focus-box-shadow-color: rgba(153, 153, 153, 0.4);
+$focus-err-box-shadow-color: rgba(241, 69, 61, 0.4);
+
+.input-wrapper { 
     font-size: $font-size;
     display: inline-flex;
     align-items: center;
@@ -60,16 +71,18 @@ $red: #F1453D;
         margin-right: .5em;
     }
     > input { 
+        color: $color;
         height: 32px;
         border: 1px solid $border-color;
         border-radius: 4px;
         padding: 0 8px;
         font-size: inherit;
         &:hover {
-            border-color: $border-color-hover;
+            border-color: $hover-border-color;
         }
         &:focus {
-            box-shadow: inset 0 1px 3px $box-shadow-color;
+            // h-shadow v-shadow blur spread color inset;
+            box-shadow: 2px 2px 1px $focus-box-shadow-color;
             outline: none;
         }
         &[disabled], &[readonly] {
@@ -81,6 +94,9 @@ $red: #F1453D;
     &.error {
         > input {
             border-color: $red;
+            &:focus {
+                box-shadow: 2px 2px 1px $focus-err-box-shadow-color;
+            }
         }
     }
     .err-icon {

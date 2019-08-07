@@ -4,7 +4,7 @@
   "description": "vue ui",
   "main": "dist/index.js",
   "scripts": {
-    "start": "parcel index.html --no-cache",
+    "dev": "parcel index.html --no-cache",
     "build": "parcel index.js --no-minify --no-cache",
     "puppeteer-test": "parcel build index.html --no-minify --no-cache && node ./test.js",
     "dev-test": "parcel watch test/* --no-cache & karma start",
