@@ -37,18 +37,20 @@
 		<div class="box">
 			<!-- input -->
 			<!-- vue中自定义组件不要自闭合 -->
-			<s-input placeholder="请输入"/></s-input>
+			<s-input placeholder="请输入"></s-input>
 			<s-input value="姓名" :disabled="true"></s-input>
 			<s-input value="姓名" :readonly="true"></s-input>
 			<s-input value="姓名" placeholder="请输入"></s-input>
 			<s-input value="姓名" error="必须大于3个字"></s-input>
 			<s-input
 				placeholder="请输入"
-				@change="eventHandle($event, 'change')"
-				@input="eventHandle($event, 'input')"
-				@focus="eventHandle($event, 'focus')"
-				@blur="eventHandle($event, 'blur')"
+				@change="eventHandle(val, 'change')"
+				@input="eventHandle(val, 'input')"
+				@focus="eventHandle(val, 'focus')"
+				@blur="eventHandle(val, 'blur')"
 			></s-input>
+			<s-input placeholder="请输入" v-model="msg"></s-input>
+			{{msg}}
 		</div>
 		<div class="box">
 			<!-- 按钮 -->

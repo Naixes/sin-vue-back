@@ -1,16 +1,17 @@
 <template>
     <!-- :class="$style.input" -->
     <div class="input-wrapper" :class="{error}">
+        <!-- ??? -->
         <input 
             type="text"
             :value="value" 
             :disabled="disabled" 
             :readonly="readonly"
             :placeholder="placeholder"
-            @input="$emit('input', $event)"
-            @change="$emit('change', $event)"
-            @focus="$emit('focus', $event)"
-            @blur="$emit('blur', $event)"
+            @input="$emit('input', $event.target.value)"
+            @change="$emit('change', $event.target.value)"
+            @focus="$emit('focus', $event.target.value)"
+            @blur="$emit('blur', $event.target.value)"
         >
         <template v-if="error">
             <s-icon class="err-icon" name="error"></s-icon>

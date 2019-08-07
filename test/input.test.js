@@ -92,12 +92,21 @@ describe('Input', () => {
                 vm = new Constructor({}).$mount()
                 let spy = sinon.fake()
                 vm.$on(eventName, spy)
+                // ？？？
                 let event = new Event(eventName)
+                Object.defineProperty(
+                    event, 'target', {
+                        value: {value: 'hi'},
+                        // 可枚举
+                        enumerable:true
+                    }
+                )
                 let inputEle = vm.$el.querySelector('input')
                 // 触发事件
                 inputEle.dispatchEvent(event)
-                // ???
-                expect(spy).to.have.been.calledWith(event)
+                // ？？？
+                // expect(spy).to.have.been.calledWith(event)
+                expect(spy).to.have.been.calledWith('hi')
             })
         })
     })
