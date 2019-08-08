@@ -4,7 +4,8 @@ module.exports = function (config) {
       // base path that will be used to resolve all patterns (eg. files, exclude)
       basePath: '',
       // frameworks to use
-      // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+			// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+			// 用到的框架
       frameworks: ['mocha', 'sinon-chai'],
       client: {
         chai: {
@@ -32,7 +33,8 @@ module.exports = function (config) {
   
       // test results reporter to use
       // possible values: 'dots', 'progress'
-      // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+			// available reporters: https://npmjs.org/browse/keyword/karma-reporter
+			// 日志打印，可选'dots', 'progress'
       reporters: ['progress'],
   
   

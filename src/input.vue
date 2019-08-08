@@ -1,7 +1,8 @@
 <template>
     <!-- :class="$style.input" -->
     <div class="input-wrapper" :class="{error}">
-        <!-- ??? -->
+        <!-- readonly可以focus -->
+				<!-- v-model相当于:value="message" @input="message = $event.target.value" -->
         <input 
             type="text"
             :value="value" 

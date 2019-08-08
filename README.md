@@ -478,13 +478,21 @@ vue中自定义组件不要自闭合
 
 区分不同的状态
 
+icon去色
+
 #### 测试
 
 |-| 可以将属性测试封装一下
 
+#### 实现v-model
 
+v-model相当于:value="message" @input="message = $event.target.value"，所以要支持v-model要做到以下两点：
 
+1. 接收value参数
 
+2. 要把值传出去
+
+`@input="$emit('input', $event.target.value, $event)"`
 
 
 
