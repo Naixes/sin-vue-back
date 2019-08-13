@@ -17,9 +17,9 @@ describe('Input', () => {
         // 获取组件构造函数
         const Constructor = Vue.extend(Input)
 
-				// 提升vm作用域
+		// 提升vm作用域
         let vm
-				// 在每一个测试用例之后
+		// 在每一个测试用例之后
         afterEach(() => {
             // 销毁实例
             vm.$el.remove()
@@ -48,7 +48,7 @@ describe('Input', () => {
             }).$mount()
             let inputEle = vm.$el.querySelector('input')
             // let disabled = inputEle.getAttribute('disabled')
-						// expect(disabled).to.eq('disabled')
+			// expect(disabled).to.eq('disabled')
             expect(inputEle.disabled).to.eq(true)
         })
         
@@ -77,13 +77,13 @@ describe('Input', () => {
         it('可以设置error', () => {
             vm = new Constructor({
                 propsData: {
-										error: 'error',
+					error: 'error',
                 }
             }).$mount()
-						let useEle = vm.$el.querySelector('inuseput')
-						let errMsgEle = vm.$el.querySelector('inuseput')
-						let href = useEle.getAttribute('err-msg')
-            expect(href).to.eq('#i-errpr')
+            let useEle = vm.$el.querySelector('use')
+            let errMsgEle = vm.$el.querySelector('.err-msg')
+            let href = useEle.getAttribute('xlink:href')
+            expect(href).to.eq('#i-error')
             expect(errMsgEle.innerHTML).to.eq('error')
         })
     })
@@ -97,13 +97,13 @@ describe('Input', () => {
         it('支持input，change，focus，blur事件', () => {
             ['change', 'input', 'focus', 'blur'].forEach(eventName => {
                 vm = new Constructor({}).$mount()
-								let spy = sinon.fake()
-								// 绑定事件
-								vm.$on(eventName, spy)
+                let spy = sinon.fake()
+                // 绑定事件
+                vm.$on(eventName, spy)
 								
                 // 声明一个事件对象，手动创建的事件所以它的isTrusted: false，也没有target
-								let event = new Event(eventName)
-								// 设置target及value，不能直接设target，target是一个只读属性
+                let event = new Event(eventName)
+                // 设置target及value，不能直接设target，target是一个只读属性
                 Object.defineProperty(
                     event, 'target', {
                         value: {value: 'hi'},
@@ -115,8 +115,8 @@ describe('Input', () => {
                 // 触发事件
                 inputEle.dispatchEvent(event)
                 // 在sinon-chai的文档中，karma中引入的sinon-chai，查看karma.conf.js
-								// expect(spy).to.have.been.calledWith(event)
-								// 兼容v-model
+                // expect(spy).to.have.been.calledWith(event)
+                // 兼容v-model
                 expect(spy).to.have.been.calledWith('hi')
             })
         })

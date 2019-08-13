@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import Icon from './icon'
+
 export default {
     props: {
         value: {
@@ -46,7 +48,7 @@ export default {
         }
     },
     components: {
-        's-icon': () => import('./icon')
+		's-icon': Icon
     }
 }
 </script>
