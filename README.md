@@ -494,6 +494,39 @@ v-model相当于:value="message" @input="message = $event.target.value"，所以
 
 `@input="$emit('input', $event.target.value, $event)"`
 
+### git的使用
+
+`git log`：log，q退出
+
+`git branch xxx`：新建分支
+
+`git push origin button-and-input:button and input`：将本地分支提交到远程分支
+
+`git checkout button-and-input`：切换到xx分支
+
+### 网格系统
+
+vue 中 template 里不能写 style 标签
+
+scss 中的循环：
+
+```scss
+.col {
+    // 声明class前缀
+    $class-prefix: col-
+        
+    @for $n from 1 thrsough 24 {
+        // .col.col-1...
+        &.#{$class-prefix}#{$n} {
+        	width: ( $n / 24 ) * 100%;
+        }
+    }
+}
+
+```
+
+
+
 
 
 
