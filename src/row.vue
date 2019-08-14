@@ -1,6 +1,6 @@
 <template>
     <!-- 抵消掉row两边的gutter -->
-    <div class="s-row" :style="rowStyle">
+    <div class="s-row" :style="rowStyle" :class="`align-${align}`">
         <slot></slot>
     </div>
 </template>
@@ -12,6 +12,14 @@ export default {
         // 间距
         gutter: {
             type: [Number, String]
+        },
+        // 对齐方式
+        align: {
+            type: String,
+            // 只允许['left', 'center', 'right']
+            validator(val) {
+                return ['left', 'center', 'right'].includes(val)
+            }
         }
     },
     data() {
@@ -39,5 +47,14 @@ export default {
 <style lang="scss" scoped>
 .s-row {
     display: flex;
+    &.align-left {
+        justify-content: flex-start;
+    }
+    &.align-center {
+        justify-content: center;
+    }
+    &.align-right {
+        justify-content: flex-end;
+    }
 }
 </style>
