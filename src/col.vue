@@ -10,6 +10,17 @@
 </template>
 
 <script>
+// 参数校验
+let validator = (obj) => {
+    let keys = Object.keys(obj)
+    let valid = true
+    keys.forEach(key => {
+        if(!['span', 'offset'].includes(key)) {
+            valid = false
+        }
+    })
+    return valid
+}
 export default {
     name: 'Col',
     props: {
@@ -20,7 +31,14 @@ export default {
         // 偏移
         offset: {
             type: [Number, String]
-        }
+        },
+        // 响应式
+        // phone: {type: Object, validator},
+        ipad: {type: Object, validator},
+        narrowPc: {type: Object, validator},
+        pc: {type: Object, validator},
+        widePc: {type: Object, validator},
+        extra: {type: Object, validator}
     },
     data() {
         return {
@@ -30,10 +48,16 @@ export default {
     // 写在data中时只会读取一次，要通过计算属性
     computed: {
         colClass() {
-            let {span, offset} = this
+            let {span, offset, ipad, narrowPc, pc, widePc, extra} = this
             return [
                 span && `col-${span}`,
-                offset && `offset-${offset}`
+                offset && `offset-${offset}`,
+                // ...(phone ? [`phone-col-${phone.span}`] : []),
+                ...(ipad ? [`ipad-col-${ipad.span}`] : []),
+                ...(narrowPc ? [`narrow-pc-col-${narrowPc.span}`] : []),
+                ...(pc ? [`pc-col-${pc.span}`] : []),
+                ...(widePc ? [`wide-pc-col-${widePc.span}`] : []),
+                ...(extra ? [`extra-col-${extra.span}`] : [])
             ]
         },
         colStyle() {
@@ -64,5 +88,98 @@ export default {
             margin-left: ($n / 24) * 100%;
         }
 	}
+
+    // 响应式
+    // 默认为phone的样式：移动端优先
+    // phone
+    // @media (max-width: 576px) {
+	//     $class-perfix: phone-col-;
+    //     @for $n from 1 through 24 {
+    //         &.#{$class-perfix}#{$n} {
+    //             width: ($n / 24) * 100%;
+    //         }
+    //     }
+	//     $class-perfix: phone-offset-;
+    //     @for $n from 1 through 24 {
+    //         &.#{$class-perfix}#{$n} {
+    //             margin-left: ($n / 24) * 100%;
+    //         }
+    //     }
+    // }
+    // ipad
+    @media (min-width: 577px) {
+	    $class-perfix: ipad-col-;
+        @for $n from 1 through 24 {
+            &.#{$class-perfix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+        }
+	    $class-perfix: ipad-offset-;
+        @for $n from 1 through 24 {
+            &.#{$class-perfix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+        }
+    }
+    // narrow-pc
+    @media (min-width: 769px) {
+	    $class-perfix: narrow-pc-col-;
+        @for $n from 1 through 24 {
+            &.#{$class-perfix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+        }
+	    $class-perfix: narrow-pc-offset-;
+        @for $n from 1 through 24 {
+            &.#{$class-perfix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+        }
+    }
+    // pc
+    @media (min-width: 993px) {
+	    $class-perfix: pc-col-;
+        @for $n from 1 through 24 {
+            &.#{$class-perfix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+        }
+	    $class-perfix: pc-offset-;
+        @for $n from 1 through 24 {
+            &.#{$class-perfix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+        }
+    }
+    // wide-pc
+    @media (min-width: 1201px) {
+	    $class-perfix: wide-pc-col-;
+        @for $n from 1 through 24 {
+            &.#{$class-perfix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+        }
+	    $class-perfix: wide-pc-offset-;
+        @for $n from 1 through 24 {
+            &.#{$class-perfix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+        }
+    }
+    // extra
+    @media (min-width: 1601px) {
+	    $class-perfix: extra-col-;
+        @for $n from 1 through 24 {
+            &.#{$class-perfix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+        }
+	    $class-perfix: extra-offset-;
+        @for $n from 1 through 24 {
+            &.#{$class-perfix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+        }
+    }
 }
 </style>
