@@ -1,10 +1,13 @@
 <template>
-    <div 
-        class="s-col" 
+    <div class="s-col-wrapper"
         :class="[`col-${span}`, `offset-${offset}`]"
-        :style="{paddingLeft: gutter / 2 + 'px', paddingRight: gutter / 2 + 'px'}"
+				:style="{paddingLeft: gutter / 2 + 'px', paddingRight: gutter / 2 + 'px'}"
     >
-        <slot></slot>
+			<div 
+        class="s-col" 
+			>
+					<slot></slot>
+			</div>
     </div>
 </template>
 
@@ -30,22 +33,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.s-col {
+.s-col-wrapper {
     width: 100%;
 
-    $class-perfix: col-;
-    // scss循环
-    @for $n from 1 through 24 {
-        &.#{$class-perfix}#{$n} {
-            width: ($n / 24) * 100%;
-        }
-    }
+	$class-perfix: col-;
+	// scss循环
+	@for $n from 1 through 24 {
+			&.#{$class-perfix}#{$n} {
+					width: ($n / 24) * 100%;
+			}
+	}
 
-    $class-perfix: offset-;
-    @for $n from 1 through 24 {
-        &.#{$class-perfix}#{$n} {
-            margin-left: ($n / 24) * 100%;
-        }
-    }
+	$class-perfix: offset-;
+	@for $n from 1 through 24 {
+			&.#{$class-perfix}#{$n} {
+					margin-left: ($n / 24) * 100%;
+			}
+	}
 }
 </style>
