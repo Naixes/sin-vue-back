@@ -11,7 +11,7 @@
 
 <script>
 // 参数校验
-let validator = (obj) => {
+const validator = (obj) => {
     let keys = Object.keys(obj)
     let valid = true
     keys.forEach(key => {
@@ -21,6 +21,25 @@ let validator = (obj) => {
     })
     return valid
 }
+// 添加类名
+const createClass = (obj, type='') => {
+    if(!obj) return []
+
+    let {span, offset} = obj
+    let classes = []
+    let typeStr = type
+
+    if(type) {
+        typeStr = type + '-'
+    }
+    if(span) {
+        classes.push(`${typeStr}col-${span}`)
+    }
+    if(offset) {
+        classes.push(`${typeStr}offset-${offset}`)
+    }
+    return classes
+} 
 export default {
     name: 'Col',
     props: {
@@ -50,14 +69,13 @@ export default {
         colClass() {
             let {span, offset, ipad, narrowPc, pc, widePc, extra} = this
             return [
-                span && `col-${span}`,
-                offset && `offset-${offset}`,
+                ...createClass({span, offset}),
                 // ...(phone ? [`phone-col-${phone.span}`] : []),
-                ...(ipad ? [`ipad-col-${ipad.span}`] : []),
-                ...(narrowPc ? [`narrow-pc-col-${narrowPc.span}`] : []),
-                ...(pc ? [`pc-col-${pc.span}`] : []),
-                ...(widePc ? [`wide-pc-col-${widePc.span}`] : []),
-                ...(extra ? [`extra-col-${extra.span}`] : [])
+                ...createClass(ipad, 'ipad'),
+                ...createClass(narrowPc, 'narrow-pc'),
+                ...createClass(pc, 'pc'),
+                ...createClass(widePc, 'wide-pc'),
+                ...createClass(extra, 'extra')
             ]
         },
         colStyle() {
