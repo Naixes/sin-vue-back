@@ -14,7 +14,8 @@
 			v-if="loading" name="loading"
 		></s-icon>
 		<!-- 按钮内容：使用时标签里的内容会覆盖这里 -->
-		<div class="content">
+		<!-- class注意：scoped可以保证内部样式不会影响外部，但是还是会被外部影响 -->
+		<div class="s-button-content">
 			<slot></slot>
 		</div>
 	</button>
@@ -48,7 +49,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // 加载中动画
 @keyframes spin {
 	0% {
@@ -84,14 +85,14 @@ export default {
 	align-items: center;
 	// 多个按钮对齐
 	vertical-align: middle;
-	>.content {
+	>.s-button-content {
 		order: 2;
 	}
 	>.icon {
 		order: 1;
 	}
 	&.icon-right {
-		>.content {
+		>.s-button-content {
 			order: 1;
 		}
 		>.icon {

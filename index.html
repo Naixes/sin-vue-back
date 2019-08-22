@@ -31,27 +31,65 @@
 			margin: 20px;
 		}
 		.s-col {
-    	height: 40px;
+    		height: 40px;
 			background-color: #eee;
 			border: 1px solid #ccc;
+		}
+		/* 布局 */
+		.content {
+			background-color: #eee;
+		}
+		.header {
+			background-color: #ccc;
+			height: 100px;
+		}
+		.footer {
+			background-color: #ccc;
+			height: 100px;
+		}
+		.aside {
+			width: 150px;
+			background-color: #aaa;
 		}
 	</style>
 </head>
 <body>
 	<div id="app">
-		<!-- 布局 -->
-		<div class="box" style="height: 100vh">
-			<s-layout>
-				<s-header></s-header>
-				<div>
-					<s-aside></s-aside>
-					<s-content></s-content>
-				</div>
-				<s-footer></s-footer>
+		<!-- 布局1 -->
+		<div class="box">
+			<s-layout style="height: 100vh">
+				<s-header class="header">header</s-header>
+				<s-content class="content">content</s-content>
+				<s-footer class="footer">footer</s-footer>
 			</s-layout>
 		</div>
+
+		<!-- 布局2 -->
 		<div class="box">
-			<!-- col,row -->
+			<s-layout style="height: 100vh">
+				<s-header class="header">header</s-header>
+				<s-layout>
+					<s-aside class="aside">aside</s-aside>
+					<s-content class="content">content</s-content>
+				</s-layout>
+				<s-footer class="footer">footer</s-footer>
+			</s-layout>
+		</div>
+
+		<!-- 布局3 -->
+		<div class="box">
+			<s-layout style="height: 100vh">
+				<s-aside class="aside">aside</s-aside>
+				<s-layout>
+					<s-header class="header">header</s-header>
+					<s-content class="content">content</s-content>
+					<s-footer class="footer">footer</s-footer>
+				</s-layout>
+			</s-layout>
+		</div>
+
+		<!-- col,row -->
+		<div class="box">
 			<s-row>
 				<s-col>1</s-col>
 				<s-col>2</s-col>
@@ -92,8 +130,9 @@
 				>2</s-col>
 			</s-row>
 		</div>
+
+		<!-- input -->
 		<div class="box">
-			<!-- input -->
 			<!-- vue中自定义组件不要自闭合 -->
 			<s-input placeholder="请输入"></s-input>
 			<s-input value="姓名" :disabled="true"></s-input>
@@ -111,8 +150,9 @@
 			<s-input placeholder="请输入" v-model="msg"></s-input>
 			{{msg}}
 		</div>
+
+		<!-- 按钮 -->
 		<div class="box">
-			<!-- 按钮 -->
 			<s-button>按钮</s-button>
 
 			<!-- 带有图标的按钮 -->
@@ -124,8 +164,8 @@
 			>按钮</s-button>
 		</div>
 
+		<!-- 按钮组 -->
 		<div class="box">
-			<!-- 按钮组 -->
 			<s-button-group>
 				<s-button icon="left">上一页</s-button>
 				<s-button>占位</s-button>
@@ -133,8 +173,8 @@
 			</s-button-group>
 		</div>
 
+		<!-- icon -->
 		<div class="box">
-			<!-- icon -->
 			<s-icon name="loading"></s-icon>
 		</div>
 		

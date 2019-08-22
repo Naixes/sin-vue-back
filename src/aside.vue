@@ -1,6 +1,5 @@
 <template>
     <div class="aside">
-        aside 
         <slot></slot>
     </div>
 </template>
