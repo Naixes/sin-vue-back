@@ -33,6 +33,7 @@ export default {
     flex-direction: column;
     // 当为子元素时
     flex-grow: 1;
+    overflow: hidden;
 }
 .has-aside {
     flex-direction: row;
