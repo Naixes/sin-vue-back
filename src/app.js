@@ -10,6 +10,8 @@ import Header from './header'
 import Aside from './aside'
 import Content from './content'
 import Footer from './footer'
+import Toast from './toast'
+import plugins from './plugins';
 
 Vue.component('s-button', Button)
 Vue.component('s-button-group', ButtonGroup)
@@ -27,6 +29,10 @@ Vue.component('s-aside', Aside)
 Vue.component('s-content', Content)
 Vue.component('s-footer', Footer)
 
+Vue.component('s-toast', Toast)
+
+Vue.use(plugins)
+
 new Vue({
 	el: '#app',
 	data: {
@@ -36,6 +42,9 @@ new Vue({
 	methods: {
 		eventHandle(type, e) {
 			console.log(type, e)
+		},
+		showToast() {
+			this.$toast('hello')
 		}
 	}
 })
