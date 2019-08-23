@@ -77,47 +77,63 @@ export default {
     $toast-background-color: #aaa;
     $toast-color: #fff;
     $toast-border-radius: 4px;
+
+    // 动画
+    @keyframes slide-down {
+        0% {opacity: 0; transform: translateY(-100%)}
+        100% {opacity: 1; transform: translateY(0%)}
+    }
+    @keyframes slide-up {
+        0% {opacity: 0; transform: translateY(100%)}
+        100% {opacity: 1; transform: translateY(0%)}
+    }
+    @keyframes fade {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+    $animation-duration: 1.5s;
+
     .s-toast-wrapper {
         font-size: $toast-font-size;
-
-        position: fixed;
-        left: 50%;
-
-        color: $toast-color;
-        background-color: $toast-background-color;
-        border-radius: $toast-border-radius;
+        position: fixed; left: 50%;
 
         .s-toast {
-            display: flex;
-            align-items: center;
+            display: flex; align-items: center;
+            background-color: $toast-background-color;
+            color: $toast-color; border-radius: $toast-border-radius;
         }
 
         &.position-top {
-            // border-radius: 
-            top: 0;
-            transform: translateX(-50%);
+            top: 0; transform: translateX(-50%);
+            // 给同一个元素添加两次transform会有问题：这里分别给两个元素添加transform
+            .s-toast {
+                border-top-left-radius: 0; border-top-right-radius: 0;
+                animation: slide-down $animation-duration;
+            }
         }
 
         &.position-middle {
-            top: 50%;
-            transform: translateX(-50%) translateY(-50%);
+            top: 50%; transform: translateX(-50%) translateY(-50%);
+            .s-toast {
+                animation: fade $animation-duration;
+            }
         }
 
         &.position-bottom {
-            bottom: 0;
-            transform: translateX(-50%);
+            bottom: 0; transform: translateX(-50%);
+            .s-toast {
+                border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+                animation: slide-up $animation-duration;
+            }
         }
 
-        .s-toast-text,
-        .s-toast-close {
+        .s-toast-text {
             padding: 5px 15px;
         }
 
         .s-toast-close {
+            padding: 5px 8px;
             cursor: pointer;
-        }
-
-        .s-toast-close {
             border-left: 1px solid #fff;
         }
     }
