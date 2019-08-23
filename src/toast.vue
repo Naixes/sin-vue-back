@@ -2,7 +2,8 @@
     <div class="s-toast-wrapper" :class="toastClasses">
         <div class="s-toast">
             <div class="s-toast-text">
-                <slot></slot>
+                <slot v-if="!html"></slot>
+                <div v-else v-html="html"></div>
             </div>
             <div class="s-toast-close" v-if="!autoClose" @click="clickClose">
                 <span class="toast-close-text">{{buttonText}}</span>
@@ -37,6 +38,10 @@ export default {
         afterClose: {
             type: Function,
             default: () => {}
+        },
+        html: {
+            type: String,
+            default: ''
         }
     },
     computed:{
@@ -128,13 +133,17 @@ export default {
         }
 
         .s-toast-text {
+            // max-width: 360px; min-width: 150px;
             padding: 5px 15px;
+            border-right: 1px solid #fff;
         }
 
         .s-toast-close {
+            // 防止换行
+            // flex-shrink: 0; // 会使边框出现问题
+            white-space: nowrap;
             padding: 5px 8px;
-            cursor: pointer;
-            border-left: 1px solid #fff;
+            cursor: pointer; 
         }
     }
 </style>

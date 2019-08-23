@@ -33,7 +33,7 @@ let createToast = function({Vue, tip, propsData, onClose}) {
         propsData
     })
     // 传递slot
-    toast.$slots.default = [tip]
+    !propsData.html && (toast.$slots.default = [tip])
     // 内存中挂载
     toast.$mount()
     // 相当于@close = onClose

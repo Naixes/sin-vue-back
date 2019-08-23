@@ -44,12 +44,14 @@ new Vue({
 			console.log(type, e)
 		},
 		showToast(options) {
-			this.$toast('hello', {
+			// 如果是连续字母的话不会换行。。。
+			this.$toast('他真的知道了他真的知道了他真的知道了他真的知道了他真的知道了他真的知道了', {
 				autoClose: false,
 				buttonText: '知道了',
 				afterClose() {
 					console.log('他真的知道了')
 				},
+				html: `<strong>我是html</strong>`,
 				...options
 			})
 		}
