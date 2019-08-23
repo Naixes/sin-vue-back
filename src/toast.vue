@@ -61,6 +61,7 @@ export default {
     methods: {
         close() {
             this.$el.remove()
+            this.$emit('close')
             this.$destroy()
         },
         clickClose() {
@@ -92,6 +93,7 @@ export default {
         }
 
         &.position-top {
+            // border-radius: 
             top: 0;
             transform: translateX(-50%);
         }
