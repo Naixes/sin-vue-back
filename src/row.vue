@@ -18,7 +18,8 @@ export default {
             type: String,
             // 只允许['left', 'center', 'right']
             validator(val) {
-                return ['left', 'center', 'right'].includes(val)
+                // return ['left', 'center', 'right'].includes(val)
+                return ['left', 'center', 'right'].indexOf(val) > -1
             }
         }
     },

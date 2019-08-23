@@ -57,8 +57,11 @@
 	<div id="app">
 		<!-- toast -->
 		<div class="box">
-			<s-button @click="showToast">测试toast按钮</s-button>
+			<s-button @click="showToast({position: 'top'})">测试toast按钮上</s-button>
+			<s-button @click="showToast({position: 'middle'})">测试toast按钮中</s-button>
+			<s-button @click="showToast({position: 'bottom'})">测试toast按钮下</s-button>
 		</div>
+
 		<!-- 布局1 -->
 		<div class="box">
 			<s-layout style="height: 100vh">

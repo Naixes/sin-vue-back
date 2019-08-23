@@ -43,8 +43,12 @@ new Vue({
 		eventHandle(type, e) {
 			console.log(type, e)
 		},
-		showToast() {
-			this.$toast('hello')
+		showToast(options) {
+			this.$toast('hello', {
+				autoClose: false,
+				buttonText: '知道了',
+				...options
+			})
 		}
 	}
 })
