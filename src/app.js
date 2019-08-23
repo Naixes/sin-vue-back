@@ -47,6 +47,9 @@ new Vue({
 			this.$toast('hello', {
 				autoClose: false,
 				buttonText: '知道了',
+				afterClose() {
+					console.log('他真的知道了')
+				},
 				...options
 			})
 		}

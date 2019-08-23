@@ -4,7 +4,7 @@
             <div class="s-toast-text">
                 <slot></slot>
             </div>
-            <div class="s-toast-close" v-if="!autoClose" @click="close">
+            <div class="s-toast-close" v-if="!autoClose" @click="clickClose">
                 <span class="toast-close-text">{{buttonText}}</span>
             </div>
         </div>
@@ -33,6 +33,10 @@ export default {
             validator(val) {
                 return ['top', 'middle', 'bottom'].indexOf(val) > -1
             }
+        },
+        afterClose: {
+            type: Function,
+            default: () => {}
         }
     },
     computed:{
@@ -58,6 +62,10 @@ export default {
         close() {
             this.$el.remove()
             this.$destroy()
+        },
+        clickClose() {
+            this.close()
+            this.afterClose()
         }
     }
 }
