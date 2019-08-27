@@ -55,6 +55,22 @@
 </head>
 <body>
 	<div id="app">
+		<!-- tabs -->
+		<div class="box">
+			<s-tabs>
+				<s-tabs-header>
+					<s-tabs-item name="sports">
+						<s-icon name="setting">运动</s-icon>
+					</s-tabs-item>
+					<s-tabs-item name="finance">财经</s-tabs-item>
+				</s-tabs-header>
+				<s-tabs-body>
+					<s-tabs-panel name="sports">运动</s-tabs-panel>
+					<s-tabs-panel name="finance">财经</s-tabs-panel>
+				</s-tabs-body>
+			</s-tabs>
+		</div>
+
 		<!-- toast -->
 		<div class="box">
 			<s-button @click="showToast({position: 'top'})">测试toast按钮上</s-button>
