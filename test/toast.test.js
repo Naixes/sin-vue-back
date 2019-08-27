@@ -45,13 +45,11 @@ describe('Toast', () => {
 
             const closeButton = vm.$el.querySelector('.s-toast-close')
             expect(closeButton.textContent.trim()).to.eq('关了吧')
-            setTimeout(() => {
-                closeButton.click()
-                expect(afterClose).to.have.been.called
-                done()
-                div.remove()
-                vm.$destroy()
-            }, 200)
+						closeButton.click()
+						expect(afterClose).to.have.been.called
+						done()
+						div.remove()
+						vm.$destroy()
         })
 
         it('可以设置position', () => {
