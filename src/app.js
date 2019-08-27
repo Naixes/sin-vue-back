@@ -46,7 +46,7 @@ new Vue({
 		showToast(options) {
 			// 如果是连续字母的话不会换行。。。
 			this.$toast('他真的知道了他真的知道了他真的知道了他真的知道了他真的知道了他真的知道了', {
-				autoClose: false,
+				// autoClose: false,
 				buttonText: '知道了',
 				afterClose() {
 					console.log('他真的知道了')

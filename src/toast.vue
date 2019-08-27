@@ -5,7 +5,7 @@
                 <slot v-if="!html"></slot>
                 <div v-else v-html="html"></div>
             </div>
-            <div class="s-toast-close" v-if="!autoClose" @click="clickClose">
+            <div class="s-toast-close" v-if="buttonText" @click="clickClose">
                 <span class="toast-close-text">{{buttonText}}</span>
             </div>
         </div>
@@ -21,7 +21,7 @@ export default {
         },
         delay: {
             type: Number,
-            // 表示延迟时间为两秒
+            // 表示默认延迟时间为两秒
             default: 2
         },
         buttonText: {

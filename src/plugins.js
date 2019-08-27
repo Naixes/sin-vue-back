@@ -6,12 +6,11 @@ export default {
     install(Vue, options) {
         // 向Vue原型中添加方法
         Vue.prototype.$toast = function(tip, toastOptions) {
-            console.log('toast msg', tip)
             // 保证当前只有一个toast
             if(currentToast) {
                 currentToast.close()
                 // close中清除了currentToast
-                console.log('currentToast', currentToast)
+                // console.log('currentToast', currentToast)
             }
             currentToast = createToast({
                 Vue, 
@@ -21,13 +20,11 @@ export default {
                     currentToast = null
                 }
             })
-            // console.log('currentToast', currentToast)
         }
     }
 }
 
 let createToast = function({Vue, tip, propsData, onClose}) {
-    console.log(propsData)
     let Constructor = Vue.extend(Toast)
     let toast = new Constructor({
         propsData
