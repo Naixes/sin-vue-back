@@ -51,22 +51,26 @@
 			width: 150px;
 			background-color: #aaa;
 		}
+		.s-tabs-body {
+			padding: 10px 20px;
+		}
 	</style>
 </head>
 <body>
 	<div id="app">
 		<!-- tabs -->
 		<div class="box">
-			<s-tabs>
+			<s-tabs :selected.sync="selected">
 				<s-tabs-header>
 					<s-tabs-item name="sports">
-						<s-icon name="setting">运动</s-icon>
+						<s-icon name="setting"></s-icon>
+						运动
 					</s-tabs-item>
-					<s-tabs-item name="finance">财经</s-tabs-item>
+					<s-tabs-item name="finance" disabled>财经</s-tabs-item>
 				</s-tabs-header>
 				<s-tabs-body>
-					<s-tabs-panel name="sports">运动</s-tabs-panel>
-					<s-tabs-panel name="finance">财经</s-tabs-panel>
+					<s-tabs-panel name="sports">运动相关内容</s-tabs-panel>
+					<s-tabs-panel name="finance">财经相关内容</s-tabs-panel>
 				</s-tabs-body>
 			</s-tabs>
 		</div>

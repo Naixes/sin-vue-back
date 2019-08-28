@@ -48,7 +48,8 @@ new Vue({
 	el: '#app',
 	data: {
 		loading: false,
-		msg: 'hi'
+		msg: 'hi',
+		selected: 'finance'
 	},
 	methods: {
 		eventHandle(type, e) {
@@ -65,6 +66,10 @@ new Vue({
 				html: `<strong>我是html</strong>`,
 				...options
 			})
+		},
+		yyy(data){
+			console.log('yyy')
+			console.log(data)
 		}
 	}
 })
