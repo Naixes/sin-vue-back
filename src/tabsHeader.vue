@@ -39,6 +39,7 @@ $tabs-border-color: #ccc;
         position: absolute; bottom: -1px;
         width: 80px;
         border-bottom: 1px solid $blue;
+        transition: all .5s;
     }
     // flex中的margin-left: auto;可以让元素靠右
     .action-wrapper {
