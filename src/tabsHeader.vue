@@ -3,6 +3,10 @@
         <slot></slot>
         <!-- 下方滑动横线 -->
         <div class="s-tabs-line" ref="line"></div>
+        <!-- 操作项插槽 -->
+        <div class="action-wrapper">
+            <slot name="action"></slot>
+        </div>
     </div>
 </template>
 <script>
@@ -35,6 +39,11 @@ $tabs-border-color: #ccc;
         position: absolute; bottom: -1px;
         width: 80px;
         border-bottom: 1px solid $blue;
+    }
+    // flex中的margin-left: auto;可以让元素靠右
+    .action-wrapper {
+        margin-left: auto; padding: 0 1em;
+        display: flex; align-items: center; justify-content: center;
     }
 }
 </style> 
