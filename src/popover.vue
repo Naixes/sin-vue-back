@@ -1,6 +1,7 @@
 <template>
-    <div class="s-popover" @click="toggle">
-        <div class="content-wrapper" v-if="visible">
+    <!-- 禁止冒泡 -->
+    <div class="s-popover" @click.stop="toggle">
+        <div class="content-wrapper" v-if="visible" @click.stop>
             <slot name="content"></slot>
         </div>
         <slot></slot>
@@ -17,6 +18,17 @@ export default {
     methods: {
         toggle() {
             this.visible = !this.visible
+            // 点击外部关闭，避免点开后立刻关闭使用nexttick
+            if(this.visible) {
+                this.$nextTick(() => {
+                    let clickHandle = () => {
+                        this.visible = false
+                        // 解除绑定
+                        document.removeEventListener('click', clickHandle)
+                    }
+                    document.addEventListener('click', clickHandle)
+                })
+            }
         }
     }
 }
