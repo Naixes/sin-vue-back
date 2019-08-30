@@ -32,10 +32,17 @@ export default {
         }
     },
     mounted() {
-        // console.log(this)
-        // console.log(this.eventBus)
-        // 发布
-        this.eventBus.$emit('update:selected', this.selected)
+        this.$children.forEach(childVm => {
+            // 选中指定选项
+            if(childVm.$options.name === 'tabsHeader') {
+                childVm.$children.forEach(childVm => {
+                    if(childVm.$options.name === 'tabsItem' && childVm.name === this.selected) {
+                        // 将选中的子组件传递出去，方便修改样式
+                        this.eventBus.$emit('update:selected', this.selected, childVm)
+                    }
+                })
+            }
+        })
     }
 }
 </script>

@@ -49,7 +49,7 @@ new Vue({
 	data: {
 		loading: false,
 		msg: 'hi',
-		selected: 'finance'
+		selected: 'sports'
 	},
 	methods: {
 		eventHandle(type, e) {
