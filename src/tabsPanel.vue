@@ -25,6 +25,7 @@ export default {
     },
     inject: ['eventBus'],
     created() {
+        console.log('panel', this.eventBus)
         this.eventBus.$on('update:selected', (name) => {
             if(this.name === name) {
                 this.isActive = true

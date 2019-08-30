@@ -66,10 +66,6 @@ new Vue({
 				html: `<strong>我是html</strong>`,
 				...options
 			})
-		},
-		yyy(data){
-			console.log('yyy')
-			console.log(data)
 		}
 	}
 })

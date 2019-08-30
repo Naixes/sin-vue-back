@@ -1,5 +1,6 @@
 <template>
-    <div class="s-tabs-item" @click="toggle" :class="classes">
+    <!-- data-name测试需要 -->
+    <div class="s-tabs-item" @click="toggle" :class="classes" :data-name="name">
         <slot></slot>
     </div>
 </template>
@@ -31,8 +32,7 @@ export default {
     },
     inject: ['eventBus'],
     created() {
-        console.log('$on:update:selected')
-        this.eventBus.$on('update:selected', (name) => {
+        this.eventBus && this.eventBus.$on('update:selected', (name) => {
             if(this.name === name) {
                 this.isActive = true
             }else {
