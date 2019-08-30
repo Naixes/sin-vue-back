@@ -58,9 +58,18 @@
 </head>
 <body>
 	<div id="app">
+		<!-- popover -->
+		<div class="box">
+			<s-popover>
+				<template slot="content">
+					xxxx
+				</template>
+				<s-button>点呀</s-button>
+			</s-popover>
+		</div>
 		<!-- tabs -->
 		<div class="box">
-			<s-tabs :selected="selected">
+			<s-tabs :selected="selected" direction="vertical">
 				<s-tabs-header>
 					<s-tabs-item name="sports">
 						<s-icon name="setting"></s-icon>

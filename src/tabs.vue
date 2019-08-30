@@ -1,5 +1,5 @@
 <template>
-    <div class="s-tabs">
+    <div class="s-tabs" :class="classes">
         <slot></slot>
     </div>
 </template>
@@ -23,7 +23,10 @@ export default {
     data() {
         return {
             // provide中的eventBus不能直接访问
-            eventBus: new Vue()
+            eventBus: new Vue(),
+            classes: {
+                vertical: this.direction === "vertical"
+            }
         }
     },
     provide() {
@@ -48,6 +51,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .s-tabs {
-
+    &.vertical {
+        
+    }
 }
 </style>
