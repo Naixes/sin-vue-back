@@ -35,17 +35,28 @@ export default {
         }
     },
     mounted() {
-        this.$children.forEach(childVm => {
-            // 选中指定选项
-            if(childVm.$options.name === 'tabsHeader') {
-                childVm.$children.forEach(childVm => {
-                    if(childVm.$options.name === 'tabsItem' && childVm.name === this.selected) {
-                        // 将选中的子组件传递出去，方便修改样式
-                        this.eventBus.$emit('update:selected', this.selected, childVm)
-                    }
-                })
+        this.checkChildren()
+        this.initSelectTab()
+    },
+    methods: {
+        checkChildren() {
+            if(this.$children.length === 0) {
+                console && console.warn && console.warn('tabs的子组件应该是tabs-head和tabs-nav，现在tabs的子组件是空的')
             }
-        })
+        },
+        initSelectTab() {
+            this.$children.forEach(childVm => {
+                // 选中指定选项
+                if(childVm.$options.name === 'tabsHeader') {
+                    childVm.$children.forEach(childVm => {
+                        if(childVm.$options.name === 'tabsItem' && childVm.name === this.selected) {
+                            // 将选中的子组件传递出去，方便修改样式
+                            this.eventBus.$emit('update:selected', this.selected, childVm)
+                        }
+                    })
+                }
+            })
+        }
     }
 }
 </script>
