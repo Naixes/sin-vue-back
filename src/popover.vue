@@ -2,7 +2,7 @@
     <!-- 禁止冒泡 -->
     <div class="s-popover" @click="toggle" ref="popover">
         <!-- 弹出内容 -->
-        <div ref="contentWrapper" class="s-popover-content-wrapper" v-if="visible">
+        <div ref="contentWrapper" class="s-popover-content-wrapper" :class="{[`position-${position}`]: true}" v-if="visible">
             <slot name="content"></slot>
         </div>
         <!-- 默认插槽 -->
@@ -14,6 +14,15 @@
 
 <script>
 export default {
+    props: {
+      position: {
+        type: String,
+        default: 'top',
+        validator (value) {
+          return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
+        }
+      }
+    },
     data() {
         return {
             visible: false
@@ -26,6 +35,7 @@ export default {
                 if(this.visible) {
                     this.close()
                 }else {
+                    console.log(this.$refs.triggerWrapper.contains(e.target))
                     this.open()
                 }
             }
@@ -44,16 +54,37 @@ export default {
             document.body.appendChild(this.$refs.contentWrapper)
             // 改变弹出位置
             let {left, top, width, height} = this.$refs.triggerWrapper.getBoundingClientRect()
-            // 不受滚动的影响
-            this.$refs.contentWrapper.style.left = left + screenX + 'px'
-            this.$refs.contentWrapper.style.top = top + scrollY + 'px'
+            let {width: contentWidth, height: contentHeight} = this.$refs.contentWrapper.getBoundingClientRect()
+            switch(this.position) {
+                case 'top': 
+                    // 不受滚动的影响
+                    this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
+                    this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
+                    break
+                case 'bottom': 
+                    this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
+                    this.$refs.contentWrapper.style.top = top + height * 2 + window.scrollY + 'px'
+                    break
+                case 'left': 
+                    this.$refs.contentWrapper.style.left = left - contentWidth + window.scrollX + 'px'
+                    this.$refs.contentWrapper.style.top = top + height + window.scrollY + 'px'
+                    break
+                case 'right': 
+                    this.$refs.contentWrapper.style.left = left + width + window.scrollX + 'px'
+                    this.$refs.contentWrapper.style.top = top + height + window.scrollY + 'px'
+                    break
+            }
         },
         clickHandle(e) {
             // 点击自身，直接返回
             if(this.$refs.popover && this.$refs.popover.contains(e.target) || this.$refs.popover === e.target) {
                 return
             }
-            // 解除监听
+            // 点击pop，直接返回
+            if(this.$refs.contentWrapper && this.$refs.contentWrapper.contains(e.target) || this.$refs.contentWrapper === e.target) {
+                return
+            }
+            // 关闭pop，解除监听
             this.close()
         },
         close() {
@@ -86,15 +117,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$border-color: #eee;
+$border-radius: 4px;
 .s-popover {
     display: inline-block;
     position: relative;
+    .trigger-wrapper {
+        display: inline-block;
+    }
 }
 .s-popover-content-wrapper {
     // height: fit-content; // 防止绝对定位后没有高度
-    position: absolute; bottom: 100%; left: 0; height: fit-content;
-    border: 1px solid red;
-    box-shadow: 0 0 3px rgba(0, 0, 0, .5);
-    transform: translateY(-100%);
+    position: absolute; bottom: 100%; left: 0; height: fit-content; transform: translateY(-100%);
+    border: 1px solid $border-color; box-shadow: 0 0 3px rgba(0, 0, 0, .5); border-radius: $border-radius;
+    padding: .5em 1em;
 }
 </style>
