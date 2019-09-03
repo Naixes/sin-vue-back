@@ -4,7 +4,24 @@
     </div>
 </template>
 <script>
+import Vue from 'Vue'
 export default {
+    props: {
+        single: {
+            type: Boolean,
+            default: false
+        }
+    },
+    provide() {
+        return {
+            eventBus: this.single ? this.eventBus : ''
+        }
+    },
+    data() {
+        return {
+            eventBus: new Vue()
+        }
+    }
 }
 </script>
 
