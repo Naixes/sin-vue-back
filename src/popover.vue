@@ -1,5 +1,5 @@
 <template>
-  <div class="s-popover" @click="toggle" ref="popover">
+  <div class="s-popover" ref="popover">
     <!-- 弹出内容 -->
     <div
       ref="contentWrapper"
@@ -25,12 +25,44 @@ export default {
       validator(value) {
         return ["top", "bottom", "left", "right"].indexOf(value) >= 0;
       }
+    },
+    // 触发方式
+    trigger: {
+      type: String,
+      default: "click",
+      validator(value) {
+        return ["click", "hover"].indexOf(value) >= 0;
+      }
     }
   },
+//   computed: {
+//       openEventType() {
+//           return this.trigger === "click" ? 'click' : 'mouseenter'
+//       },
+//       closeEventType() {
+//           return this.trigger === "click" ? 'click' : 'mouseleave'
+//       }
+//   },
   data() {
     return {
       visible: false
     };
+  },
+  mounted() {
+      if(this.trigger === 'click') {
+        this.$refs.popover.addEventListener('click', this.toggle)
+      }else {
+        this.$refs.popover.addEventListener('mouseenter', this.open)
+        this.$refs.popover.addEventListener('mouseleave', this.close)
+      }
+  },
+  destroyed() {
+      if(this.trigger === 'click') {
+        this.$refs.popover.removeEventListener('click', this.toggle)
+      }else {
+        this.$refs.popover.removeEventListener('mouseenter', this.open)
+        this.$refs.popover.removeEventListener('mouseleave', this.close)
+      }
   },
   methods: {
     toggle(e) {
@@ -39,7 +71,6 @@ export default {
         if (this.visible) {
           this.close();
         } else {
-          console.log(this.$refs.triggerWrapper.contains(e.target));
           this.open();
         }
       }
@@ -50,8 +81,13 @@ export default {
         // 显示弹框内容
         this.appendPopover();
         // 监听外部点击事件
-        document.addEventListener("click", this.clickHandle);
+        this.trigger === 'click' && document.addEventListener("click", this.clickHandle);
       });
+    },
+    // 收拢close方法
+    close() {
+      this.visible = false;
+      this.trigger === 'click' && document.removeEventListener("click", this.clickHandle);
     },
     appendPopover() {
       // 为了防止外部容器有overflow: hidden导致不能弹出内容，手动添加dom
@@ -133,11 +169,6 @@ export default {
       // 关闭pop，解除监听
       this.close();
     },
-    // 收拢close方法
-    close() {
-      this.visible = false;
-      document.removeEventListener("click", this.clickHandle);
-    }
     // toggle() {
     //     this.visible = !this.visible
     //     // 点击外部关闭，避免点开后立刻关闭使用nexttick
