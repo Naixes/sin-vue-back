@@ -58,6 +58,12 @@
 </head>
 <body>
 	<div id="app">
+		<!-- cascader -->
+		<div class="box">
+			<s-cascader :source="cascaderSource">
+				<s-input placeholder="请选择"></s-input>
+			</s-collapse>
+		</div>
 		<!-- collapse -->
 		<div class="box">
 			<s-collapse :selected.sync="selectedCollapse" single>
@@ -106,7 +112,7 @@
 		</div>
 		<!-- tabs -->
 		<div class="box">
-			<s-tabs :selected="selected" direction="vertical">
+			<s-tabs :selected="tabsSelected" direction="vertical">
 				<s-tabs-header>
 					<s-tabs-item name="sports">
 						<s-icon name="setting"></s-icon>

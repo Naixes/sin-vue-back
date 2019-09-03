@@ -20,6 +20,8 @@ import TabsPanel from './tabsPanel'
 import Popover from './popover'
 import Collapse from './collapse'
 import CollapseItem from './collapseItem'
+import Cascader from './cascader'
+import CascaderItem from './cascaderItem'
 
 Vue.component('s-button', Button)
 Vue.component('s-button-group', ButtonGroup)
@@ -50,6 +52,9 @@ Vue.component('s-popover', Popover)
 Vue.component('s-collapse', Collapse)
 Vue.component('s-collapse-item', CollapseItem)
 
+Vue.component('s-cascader', Cascader)
+Vue.component('s-cascader-item', CascaderItem)
+
 Vue.use(plugins)
 
 new Vue({
@@ -57,8 +62,43 @@ new Vue({
 	data: {
 		loading: false,
 		msg: 'hi',
-		selected: 'sports',
-		selectedCollapse: ['1', '2']
+		tabsSelected: 'sports',
+		selectedCollapse: ['1', '2'],
+		cascaderSource: [
+			{
+				name: '浙江',
+				children: [
+					{
+						name: '杭州',
+						children: [
+							{name: '上城'},
+							{name: '下城'},
+							{name: '江干'},
+						]
+					},
+					{
+						name: '嘉兴',
+						children: [
+							{name: '南湖'},
+							{name: '秀洲'},
+							{name: '嘉善'},
+						]
+					},
+				]
+		  }, {
+			name: '福建',
+			children: [
+				{
+					name: '福州',
+					children: [
+						{name: '鼓楼'},
+						{name: '台江'},
+						{name: '仓山'},
+					]
+				},
+			]
+		  }
+		]
 	},
 	methods: {
 		eventHandle(type, e) {

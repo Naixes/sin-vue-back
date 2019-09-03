@@ -13,7 +13,7 @@ export default {
         },
         selected: {
             type: Array,
-            default: () => {}
+            default: () => []
         }
     },
     provide() {
