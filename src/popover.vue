@@ -67,30 +67,52 @@ export default {
         width: contentWidth,
         height: contentHeight
       } = this.$refs.contentWrapper.getBoundingClientRect();
-      switch (this.position) {
-        case "top":
-          // 不受滚动的影响
-          this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
-          this.$refs.contentWrapper.style.top = top + window.scrollY + "px";
-          break;
-        case "bottom":
-          this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
-          this.$refs.contentWrapper.style.top =
-            top + height * 2 + window.scrollY + "px";
-          break;
-        case "left":
-          this.$refs.contentWrapper.style.left =
-            left - contentWidth + window.scrollX + "px";
-          this.$refs.contentWrapper.style.top =
-            top + height + window.scrollY + "px";
-          break;
-        case "right":
-          this.$refs.contentWrapper.style.left =
-            left + width + window.scrollX + "px";
-          this.$refs.contentWrapper.style.top =
-            top + height + window.scrollY + "px";
-          break;
+    //   switch (this.position) {
+    //     case "top":
+    //       // 不受滚动的影响
+    //       this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
+    //       this.$refs.contentWrapper.style.top = top + window.scrollY + "px";
+    //       break;
+    //     case "bottom":
+    //       this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
+    //       this.$refs.contentWrapper.style.top =
+    //         top + height + contentHeight + window.scrollY + "px";
+    //       break;
+    //     case "left":
+    //       this.$refs.contentWrapper.style.left =
+    //         left - contentWidth + window.scrollX + "px";
+    //       this.$refs.contentWrapper.style.top =
+    //         top + contentHeight - (contentHeight - height) / 2 + window.scrollY + "px";
+    //       break;
+    //     case "right":
+    //       this.$refs.contentWrapper.style.left =
+    //         left + width + window.scrollX + "px";
+    //       this.$refs.contentWrapper.style.top =
+    //         top + contentHeight - (contentHeight - height) / 2 + window.scrollY + "px";
+    //       break;
+    //   }
+      // 使用表结构重构
+      let map = {
+          "top": {
+              "top": top,
+              "left": left
+          },
+          "bottom": {
+              "top": top + height + contentHeight,
+              "left": left
+          },
+          "left": {
+              "top": top + contentHeight - (contentHeight - height) / 2,
+              "left": left - contentWidth
+          },
+          "right": {
+              "top": top + contentHeight - (contentHeight - height) / 2,
+              "left": left + width
+          },
       }
+      this.$refs.contentWrapper.style.left = map[this.position].left + window.scrollX + "px";
+      this.$refs.contentWrapper.style.top =
+      map[this.position].top + window.scrollY + "px";
     },
     clickHandle(e) {
       // 点击自身，直接返回
@@ -142,8 +164,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$border-color: #eee;
+$border-color: #999;
 $border-radius: 4px;
+$s-popover-max-width: 400px;
 .s-popover {
   display: inline-block;
   position: relative;
@@ -152,15 +175,79 @@ $border-radius: 4px;
   }
 }
 .s-popover-content-wrapper {
-  // height: fit-content; // 防止绝对定位后没有高度
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  height: fit-content;
-  transform: translateY(-100%);
-  border: 1px solid $border-color;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  border-radius: $border-radius;
   padding: 0.5em 1em;
+  position: absolute; display: inline-block;
+  transform: translateY(-100%);
+  max-width: $s-popover-max-width;
+  // height: fit-content; // 防止绝对定位后没有高度
+  border: 1px solid $border-color; border-radius: $border-radius;
+  // 阴影
+  // 兼容好
+  // box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  // 效果好，兼容差
+  // drop-shadow(offset-x offset-y blur-radius spread-radius color)
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+  background-color: #fff;
+  // 小三角
+  &::before,
+  &::after {
+    content: ''; width: 0; height: 0;
+    border: 10px solid transparent; 
+  }
+  // 不同位置
+  &.position-top {
+    margin-top: -10px;
+    &::before {
+        border-top-color: $border-color; 
+        position: absolute; top: 100%;
+    }
+    &::after {
+        border-top-color: #fff; 
+        position: absolute; top: calc(100% - 1px);
+    }
+  }
+  &.position-bottom {
+    margin-top: 10px;
+    &::before {
+        border-bottom-color: $border-color; 
+        position: absolute; bottom: 100%;
+    }
+    &::after {
+        border-bottom-color: #fff; 
+        position: absolute; bottom: calc(100% - 1px);
+    }
+  }
+  &.position-left {
+    margin-left: -10px;
+    &::before,
+    &::after {
+       // 三角位于中间
+       top: 50%; transform: translateY(-50%);
+    }
+    &::before {
+        border-left-color: $border-color; 
+        position: absolute; left: 100%;
+    }
+    &::after {
+        border-left-color: #fff; 
+        position: absolute; left: calc(100% - 1px);
+    }
+  }
+  &.position-right {
+    margin-left: 10px;
+    &::before,
+    &::after {
+       // 三角位于中间
+       top: 50%; transform: translateY(-50%);
+    }
+    &::before {
+        border-right-color: $border-color; 
+        position: absolute; right: 100%;
+    }
+    &::after {
+        border-right-color: #fff; 
+        position: absolute; right: calc(100% - 1px);
+    }
+  }
 }
 </style>
