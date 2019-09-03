@@ -4,9 +4,7 @@
             <slot></slot>
         </div>
         <div v-if="open" class="s-cascader-list">
-            <div v-for="(item, index) in source" :key="index">
-                <s-cascader-item :sourceItem="item"></s-cascader-item>
-            </div>
+            <s-cascader-item :sourceItem="source"></s-cascader-item>
         </div>
     </div>
 </template>
