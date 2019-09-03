@@ -7,7 +7,8 @@
       :class="{[`position-${position}`]: true}"
       v-if="visible"
     >
-      <slot name="content"></slot>
+      <!-- 作用域插槽：设置关闭回调 -->
+      <slot name="content" :close="close"></slot>
     </div>
     <!-- 默认插槽 -->
     <div ref="triggerWrapper" class="trigger-wrapper">
@@ -61,7 +62,7 @@ export default {
         this.$refs.popover.removeEventListener('click', this.toggle)
       }else {
         this.$refs.popover.removeEventListener('mouseenter', this.open)
-        this.$refs.popover.removeEventListener('mouseleave', this.close)
+        this.$refs.popover.removeEventListener('mouseleave', this.close($event))
       }
   },
   methods: {
@@ -86,8 +87,8 @@ export default {
     },
     // 收拢close方法
     close() {
-      this.visible = false;
-      this.trigger === 'click' && document.removeEventListener("click", this.clickHandle);
+        this.visible = false;
+        this.trigger === 'click' && document.removeEventListener("click", this.clickHandle);
     },
     appendPopover() {
       // 为了防止外部容器有overflow: hidden导致不能弹出内容，手动添加dom
@@ -228,6 +229,13 @@ $s-popover-max-width: 400px;
   // 不同位置
   &.position-top {
     margin-top: -10px;
+    &::before,
+    &::after {
+        // 固定水平方向
+        left: 0; transform: translateX(100%);
+        // 小三角下面多余一块会造成hover时事件不断触发，不断抖动
+        border-bottom: none;
+    }
     &::before {
         border-top-color: $border-color; 
         position: absolute; top: 100%;
@@ -238,6 +246,11 @@ $s-popover-max-width: 400px;
     }
   }
   &.position-bottom {
+    &::before,
+    &::after {
+        border-top: none;
+        left: 0; transform: translateX(100%);
+    }
     margin-top: 10px;
     &::before {
         border-bottom-color: $border-color; 
@@ -252,6 +265,7 @@ $s-popover-max-width: 400px;
     margin-left: -10px;
     &::before,
     &::after {
+        border-right: none;
        // 三角位于中间
        top: 50%; transform: translateY(-50%);
     }
@@ -268,6 +282,7 @@ $s-popover-max-width: 400px;
     margin-left: 10px;
     &::before,
     &::after {
+       border-left: none;
        // 三角位于中间
        top: 50%; transform: translateY(-50%);
     }

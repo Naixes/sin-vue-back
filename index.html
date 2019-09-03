@@ -61,26 +61,30 @@
 		<!-- popover -->
 		<div class="box" style="overflow: hidden; margin-top: 100px;">
 			<s-popover position="top" trigger="click">
-				<template slot="content">
+				<template slot="content" slot-scope="{close}">
 					<div>你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我</div>
+					<s-button @click="close">关闭</s-button>
 				</template>
 				<s-button>点呀</s-button>
 			</s-popover>
 			<s-popover position="bottom" trigger="hover">
-				<template slot="content">
-					<div>你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我</div>
+				<template slot="content" slot-scope="{close}">
+					<div>你点了我你点了我你点了我你点了我你点了我你点了了我你点了我你点了我你点了我你点了我你点了我你点了我</div>
+					<s-button @click="close">关闭</s-button>
 				</template>
 				<s-button>点呀</s-button>
 			</s-popover>
 			<s-popover position="left">
-				<template slot="content">
-					<div>你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我</div>
+				<template slot="content" slot-scope="{close}">
+					<div>你点了我你点了我你点了我你点了我你点了我你点了我了我你点了我你点了我你点了我你点了我你点了我你点了我</div>
+					<s-button @click="close">关闭</s-button>
 				</template>
 				<s-button>点呀</s-button>
 			</s-popover>
 			<s-popover position="right">
-				<template slot="content">
-					<div>你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我</div>
+				<template slot="content" slot-scope="{close}">
+					<div>你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我你点了我点了我你点了我</div>
+					<s-button @click="close">关闭</s-button>
 				</template>
 				<s-button>点呀</s-button>
 			</s-popover>
