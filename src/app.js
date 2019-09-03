@@ -57,7 +57,8 @@ new Vue({
 	data: {
 		loading: false,
 		msg: 'hi',
-		selected: 'sports'
+		selected: 'sports',
+		selectedCollapse: ['1', '2']
 	},
 	methods: {
 		eventHandle(type, e) {

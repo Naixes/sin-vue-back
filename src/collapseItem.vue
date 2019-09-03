@@ -12,6 +12,10 @@ export default {
         title: {
             type: String,
             default: ''
+        },
+        name: {
+            type: String,
+            default: ''
         }
     },
     data() {
@@ -21,24 +25,30 @@ export default {
     },
     inject: ['eventBus'],
     mounted() {
-        this.eventBus && this.eventBus.$on('update:selected', vm => {
-            if(vm != this) {
+        // 根据数据初始化选项
+        this.eventBus && this.eventBus.$on('update:initSelect', name => {
+            if(name.indexOf(this.name) < 0) {
                 this.close()
+            }else {
+                this.show()
             }
         })
     },
     methods: {
         toggle() {
-            console.log(this.open)
             if(this.open) {
-                this.close()
+                // 删除点击的对象
+                this.eventBus && this.eventBus.$emit('update:removeSelect', this.name)
             }else {
-                this.open = true
-                this.eventBus && this.eventBus.$emit('update:selected', this)
+                // 增加点击的对象
+                this.eventBus && this.eventBus.$emit('update:addSelect', this.name)
             }
         },
         close() {
             this.open = false
+        },
+        show() {
+            this.open = true
         }
     }
 }
@@ -50,6 +60,10 @@ $border-radius: 4px;
 .s-collapse-item {
     >.s-collapse-title {
         border-bottom: 1px solid $border-color;
+        padding: .5em 1em;
+    }
+    >.s-collapse-content {
+        padding: .5em 2em;
     }
     // 最后一个内容没有下边框
     &:not(:last-child) {
