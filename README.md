@@ -678,11 +678,24 @@ hover，click：js动态绑定事件，手动添加的事件，需要手动移�
 
 #### vuepress
 
-安装
+安装vuepress
 
-创建docs文件夹
+创建docs文件夹，和README.md
 
+```bash
+npx vuepress dev docs
+```
 
+增加脚本
+
+```json
+{
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  }
+}
+```
 
 
 
