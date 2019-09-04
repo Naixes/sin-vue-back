@@ -4,15 +4,20 @@
         <div class="dividing"></div>
         <s-button 
             icon="setting" 
-            :loading="loading" 
             icon-position="right" 
         >带有图标的按钮</s-button>
         <s-button 
             icon="setting" 
-            :loading="loading" 
             icon-position="left" 
         >带有图标的按钮</s-button>
         <div class="dividing"></div>
+        <s-button 
+            icon="setting" 
+            :loading="loading" 
+            icon-position="left" 
+        >loading的按钮</s-button>
+        <div class="dividing"></div>
+        <h4>按钮组</h4>
         <s-button-group>
             <s-button icon="left">上一页</s-button>
             <s-button>占位</s-button>
@@ -23,9 +28,16 @@
 
 <script>
 import Button from '../../../src/button';
+import ButtonGroup from '../../../src/buttonGroup'
 export default {
     components: {
-        's-button': Button
+        's-button': Button,
+        's-button-group': ButtonGroup
+    },
+    data() {
+        return {
+            loading: true
+        }
     }
 }
 </script>
