@@ -21,6 +21,6 @@ export default {
     .s-icon {
         width: 1.2em;
         height: 1.2em;
-		margin-left: .2em;
+		margin: 0 .2em;
     }
 </style>
