@@ -8,8 +8,8 @@ module.exports = {
         // 导航栏，可以下拉，可以禁用
         nav: [
             { text: '主页', link: '/' },
-            { text: '文档', link: '/' },
-            { text: '交流', link: '/' }
+            { text: '文档', link: 'https://github.com/Naixes/sin-vue/tree/master/docs' },
+            { text: 'Github', link: 'https://github.com/Naixes' }
         ],
         // 侧边栏
         sidebar: [

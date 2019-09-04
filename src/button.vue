@@ -50,6 +50,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$font-size: 14px ;
+
+$color: #333;
+$border-color: #999;
+$border-hover-color: #666;
+
+$button-height: 32px;
+$button-bgc: #fff;
+$button-radius: 4px;
+$button-active-bgc: #eee;
 // 加载中动画
 @keyframes spin {
 	0% {
@@ -60,20 +70,20 @@ export default {
 	}
 }
 .s-button {
-	font-size: var(--font-size);
-	height: var(--button-height);
+	font-size: $font-size;
+	height: $button-height;
 	padding: 0 1em;
 
-	background: var(--border-bgc);
+	background: $button-bgc;
 
-	border-radius: var(--button-radius);
-	border: 1px solid var(--border-color);
+	border-radius: $button-radius;
+	border: 1px solid $border-color;
 
 	&:hover {
-		border-color: var(--border-hover-color);
+		border-color: $border-hover-color;
 	}
 	&:active {
-		background-color: var(--button-active-bgc);
+		background-color: $button-active-bgc;
 	}
 	&:focus {
 		outline: none;

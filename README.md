@@ -697,11 +697,69 @@ npx vuepress dev docs
 }
 ```
 
+配置
 
+创建配置文件：`.vuepress/config.js`
 
+```js
+// 一个 VuePress 网站必要的配置文件是 .vuepress/config.js，它应该导出一个 JavaScript 对象
+module.exports = {
+    title: 'Sin Vue UI',
+    description: 'Vue 的 UI 框架',
+    themeConfig: {
+        // 显示所有页面的标题链接
+        // displayAllHeaders: true, // 默认值：false
+        // 导航栏，可以下拉，可以禁用
+        nav: [
+            { text: '主页', link: '/' },
+            { text: '文档', link: '/' },
+            { text: '交流', link: '/' }
+        ],
+        // 侧边栏
+        sidebar: [
+            // 分组
+            {
+                title: '快速入门',
+                // 展开
+                collapsable: false,
+                children: [
+                    // 显示的md路径
+                    '/install/',
+                    '/get-start/',
+                ]
+            },
+            {
+                title: '组件',
+                collapsable: false,
+                children: [
+                    '/components/button',
+                    '/components/input',
+                    '/components/icon',
+                    '/components/grid',
+                    '/components/layout',
+                    '/components/tabs',
+                    '/components/popover',
+                    '/components/collapse',
+                    '/components/cascader',
+                ]
+            },
+        ]
+    }
+  }
+```
 
+```js
+// md文件中最前面写以下内容表示在侧边栏显示的标题
+---
+title: 快速上手
+--- 
+```
 
+在md中使用vue组件
 
+创建`.vuepress/components`文件夹，将组件放进去：所有在 `.vuepress/components` 中找到的 `*.vue` 文件将会自动地被注册为全局的异步组件
+
+安装`sass-loader,node-sass`
 
 
 
