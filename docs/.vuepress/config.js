@@ -1,5 +1,7 @@
 // 一个 VuePress 网站必要的配置文件是 .vuepress/config.js，它应该导出一个 JavaScript 对象
 module.exports = {
+    // 部署到：https://<USERNAME>.github.io/<REPO>/
+    base: '/sin-vue/',
     title: 'Sin Vue UI',
     description: 'Vue 的 UI 框架',
     themeConfig: {
