@@ -630,7 +630,7 @@ vue事件不会冒泡
 2. 监听body范围太小，监听document
 3. 第三次点击点击后立即关闭，因为每次点击都会新增监听器，新增前关闭之前的监听器，注意bind会生成一个新的函数
 
-⏰ 08-31~09- 完成
+⏰ 08-31~09-05 完成
 
 不能使用.stop，会影响用户的事件
 
@@ -819,6 +819,22 @@ cd -
 
 5. 选择要部署的分支
 
+遇到问题：
+
+执行：`git push -f git@github.com:Naixes/sin-vue.git master:gh-pages`时报错
+
+```cmd
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+```
+
+原因是因为ssh key过期失效或者没有ssh key。 那么解决这种的问题的方法就是重新生成一个新的ssh key ，然后将这个ssh key添加到github账户上面，就可以了。参考下文
+
+<https://www.jianshu.com/p/eb742fe78b93>
+
 ### 级联选择
 
 手机页面的非级联地区案例：美团，i.meituan.com，房天下， m.fang.com
@@ -831,6 +847,8 @@ cd -
 - 清空
 - 禁用选项
 - 搜索
+
+⏰ ~ 完成
 
 #### 开发
 
