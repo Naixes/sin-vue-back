@@ -52,8 +52,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$blue: blue;
-$disabled-text-color: #aaa;
+@import "var";
+
 .s-tabs-item {
     display: flex; align-items: center;
     padding: 0 1em; height: 100%;

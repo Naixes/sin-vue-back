@@ -50,16 +50,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$font-size: 14px ;
+@import "var";
 
-$color: #333;
-$border-color: #999;
-$border-hover-color: #666;
+// $font-size: 14px ;
 
-$button-height: 32px;
-$button-bgc: #fff;
-$button-radius: 4px;
-$button-active-bgc: #eee;
+// $color: #333;
+// $border-color: #999;
+// $border-hover-color: #666;
+
+// $button-height: 32px;
+// $button-bgc: #fff;
+// $button-radius: 4px;
+// $button-active-bgc: #eee;
 // 加载中动画
 @keyframes spin {
 	0% {

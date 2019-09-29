@@ -1,5 +1,6 @@
 <template>
     <div class="s-cascader">
+        <!-- 触发器 -->
         <div class="s-cascader-trigger" @click="open = !open">
             <slot></slot>
         </div>
@@ -29,5 +30,6 @@ export default {
 
 <style lang="scss" scoped>
 .s-cascader {
+    background-color: red;
 }
 </style> 

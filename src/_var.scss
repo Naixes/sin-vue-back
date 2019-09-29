@@ -1,0 +1,42 @@
+
+$font-size: 14px ;
+$height: 32px;
+
+$color: #333;
+
+$red: #F1453D;
+$blue: blue;
+
+$border-color: #999;
+$border-hover-color: #666;
+$border-radius: 4px;
+
+// 状态
+$disabled-text-color: #aaa;
+
+$button-height: 32px;
+$button-bgc: #fff;
+$button-radius: 4px;
+$button-active-bgc: #eee;
+
+// 组件
+// **input**
+$input-font-size: 12px;
+// 状态
+$hover-border-color: #666;
+// focus
+$focus-box-shadow-color: rgba(153, 153, 153, 0.4);
+$focus-err-box-shadow-color: rgba(241, 69, 61, 0.4);
+
+// **popover**
+$s-popover-max-width: 400px;
+
+// **tabs**
+$tabs-height: 40px;
+$tabs-border-color: #ccc;
+
+// **toast**
+$toast-font-size: 14px;
+$toast-background-color: #aaa;
+$toast-color: #fff;
+$toast-border-radius: 4px;

@@ -1,5 +1,6 @@
 <template>
     <div class="s-cascader-item">
+        <!-- 左右布局 -->
         <div class="s-cascader-left">
             <div
                 v-for="(item, index) in sourceItem"
@@ -10,6 +11,7 @@
             </div>
         </div>
         <div v-if="rightItem" class="s-cascader-right">
+            <!-- 递归组件 -->
             <cascader-item :sourceItem="rightItem">
             </cascader-item>
         </div>

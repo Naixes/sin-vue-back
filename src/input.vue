@@ -54,25 +54,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-// 样式
-$red: #F1453D;
-
-// 基础
-$height: 32px;
-$border-color: #999;
-$border-radius: 4px;
-$font-size: 12px;
-$color: #333;
-
-// 状态
-$hover-border-color: #666;
-// focus
-$focus-box-shadow-color: rgba(153, 153, 153, 0.4);
-$focus-err-box-shadow-color: rgba(241, 69, 61, 0.4);
+@import "var";
 
 .input-wrapper { 
-    font-size: $font-size;
+    font-size: $input-font-size;
     display: inline-flex;
     align-items: center;
     > :not(:last-child) {

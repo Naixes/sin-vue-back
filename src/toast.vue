@@ -78,72 +78,69 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    $toast-font-size: 14px;
-    $toast-background-color: #aaa;
-    $toast-color: #fff;
-    $toast-border-radius: 4px;
+@import "var";
 
-    // 动画
-    @keyframes slide-down {
-        0% {opacity: 0; transform: translateY(-100%)}
-        100% {opacity: 1; transform: translateY(0%)}
-    }
-    @keyframes slide-up {
-        0% {opacity: 0; transform: translateY(100%)}
-        100% {opacity: 1; transform: translateY(0%)}
-    }
-    @keyframes fade {
-        0% {opacity: 0;}
-        100% {opacity: 1;}
-    }
-    $animation-duration: 1.5s;
+// 动画
+@keyframes slide-down {
+    0% {opacity: 0; transform: translateY(-100%)}
+    100% {opacity: 1; transform: translateY(0%)}
+}
+@keyframes slide-up {
+    0% {opacity: 0; transform: translateY(100%)}
+    100% {opacity: 1; transform: translateY(0%)}
+}
+@keyframes fade {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+$animation-duration: 1.5s;
 
-    .s-toast-wrapper {
-        font-size: $toast-font-size;
-        position: fixed; left: 50%;
+.s-toast-wrapper {
+    font-size: $toast-font-size;
+    position: fixed; left: 50%;
 
+    .s-toast {
+        display: flex; align-items: center;
+        background-color: $toast-background-color;
+        color: $toast-color; border-radius: $toast-border-radius;
+    }
+
+    &.position-top {
+        top: 0; transform: translateX(-50%);
+        // 给同一个元素添加两次transform会有问题：这里分别给两个元素添加transform
         .s-toast {
-            display: flex; align-items: center;
-            background-color: $toast-background-color;
-            color: $toast-color; border-radius: $toast-border-radius;
-        }
-
-        &.position-top {
-            top: 0; transform: translateX(-50%);
-            // 给同一个元素添加两次transform会有问题：这里分别给两个元素添加transform
-            .s-toast {
-                border-top-left-radius: 0; border-top-right-radius: 0;
-                animation: slide-down $animation-duration;
-            }
-        }
-
-        &.position-middle {
-            top: 50%; transform: translateX(-50%) translateY(-50%);
-            .s-toast {
-                animation: fade $animation-duration;
-            }
-        }
-
-        &.position-bottom {
-            bottom: 0; transform: translateX(-50%);
-            .s-toast {
-                border-bottom-left-radius: 0; border-bottom-right-radius: 0;
-                animation: slide-up $animation-duration;
-            }
-        }
-
-        .s-toast-text {
-            // max-width: 360px; min-width: 150px;
-            padding: 5px 15px;
-            border-right: 1px solid #fff;
-        }
-
-        .s-toast-close {
-            // 防止换行
-            // flex-shrink: 0; // 会使边框出现问题
-            white-space: nowrap;
-            padding: 5px 8px;
-            cursor: pointer; 
+            border-top-left-radius: 0; border-top-right-radius: 0;
+            animation: slide-down $animation-duration;
         }
     }
+
+    &.position-middle {
+        top: 50%; transform: translateX(-50%) translateY(-50%);
+        .s-toast {
+            animation: fade $animation-duration;
+        }
+    }
+
+    &.position-bottom {
+        bottom: 0; transform: translateX(-50%);
+        .s-toast {
+            border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+            animation: slide-up $animation-duration;
+        }
+    }
+
+    .s-toast-text {
+        // max-width: 360px; min-width: 150px;
+        padding: 5px 15px;
+        border-right: 1px solid #fff;
+    }
+
+    .s-toast-close {
+        // 防止换行
+        // flex-shrink: 0; // 会使边框出现问题
+        white-space: nowrap;
+        padding: 5px 8px;
+        cursor: pointer; 
+    }
+}
 </style>

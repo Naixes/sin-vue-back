@@ -55,8 +55,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$border-color: #999;
-$border-radius: 4px;
+@import "var";
+
 .s-collapse-item {
     >.s-collapse-title {
         border-bottom: 1px solid $border-color;
