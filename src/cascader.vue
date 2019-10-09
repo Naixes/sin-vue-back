@@ -10,9 +10,12 @@
     </div>
 </template>
 <script>
+import SCascaderItem from './cascaderItem'
 export default {
     components: {
-        SCascaderItem: () => import('./cascaderItem')
+        // 动态引入的组件，样式会不生效
+        // SCascaderItem: () => import('./cascaderItem')
+        's-cascader-item': SCascaderItem
     },
     props: {
         source: {
@@ -29,7 +32,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.s-cascader {
-    background-color: red;
-}
 </style> 
