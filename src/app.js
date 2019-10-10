@@ -64,6 +64,7 @@ new Vue({
 		msg: 'hi',
 		tabsSelected: 'sports',
 		selectedCollapse: ['1', '2'],
+		selectedCascader: [],
 		cascaderSource: [
 			{
 				name: '浙江',

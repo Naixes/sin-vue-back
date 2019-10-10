@@ -18,7 +18,10 @@
         </ul>
         <div v-if="rightItem" class="s-cascader-right">
             <!-- 递归组件 -->
-            <cascader-item :sourceItem="rightItem">
+            <cascader-item
+                :sourceItem="rightItem"
+                :selected="selected" @update:selected="updateSelected"
+            >
             </cascader-item>
         </div>
     </div>
@@ -35,6 +38,10 @@ export default {
         sourceItem: {
             type: Array,
             default: () => []
+        },
+        selected: {
+            type: Array,
+            default: () => []
         }
     },
     computed: {
@@ -47,12 +54,20 @@ export default {
     },
     data() {
         return {
-            leftSelected: ''
+            // leftSelected: ''
         }
     },
     methods: {
+        // 触发更新
         select(item) {
-            this.leftSelected = item
+            console.log('item', item)
+            // this.leftSelected = item
+            this.$emit('update:selected', item)
+        },
+        // 如果有子组件继续往下派发事件
+        updateSelected(newSelected) {
+            console.log('sub update newSelected', newSelected)
+            this.$emit('update:selected', newSelected)
         }
     }
 }

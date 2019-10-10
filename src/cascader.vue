@@ -5,7 +5,8 @@
             <slot></slot>
         </div>
         <div v-if="open" class="s-cascader-list">
-            <s-cascader-item :sourceItem="source"></s-cascader-item>
+            <!-- 继续向下传递selected -->
+            <s-cascader-item :sourceItem="source" :selected="selected" @update:selected="updateSelected"></s-cascader-item>
         </div>
     </div>
 </template>
@@ -21,11 +22,23 @@ export default {
         source: {
             type: Array,
             default: () => []
+        },
+        selected: {
+            type: Array,
+            default: () => []
         }
     },
     data() {
         return {
             open: false
+        }
+    },
+    methods: {
+        // 向下派发事件，子组件调用并传值
+        updateSelected(newSelected) {
+            console.log(this.$listeners)
+            console.log('update newSelected', newSelected)
+            this.$emit('update:selected', newSelected)
         }
     }
 }
