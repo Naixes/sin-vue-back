@@ -852,3 +852,8 @@ and the repository exists.
 
 #### 开发
 
+单向数据流简化操作
+
+##### 将parcel迁移到vue-cli
+
+![1. 文章 如何从 parcel 迁移到 vue-cli](E:\Jennifer\other\sin-vue\media4readme\1. 文章 如何从 parcel 迁移到 vue-cli.png)
