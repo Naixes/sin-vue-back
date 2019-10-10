@@ -1,10 +1,10 @@
 <template>
-    <div class="header">
+    <div class="s-header">
         <slot></slot>
     </div>
 </template>
 
 <style lang="scss" scoped>
-.header {
+.s-header {
 }
 </style>

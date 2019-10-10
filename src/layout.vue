@@ -1,5 +1,5 @@
 <template>
-    <div class="layout" :class="classList">
+    <div class="s-layout" :class="classList">
         <slot></slot>
     </div>
 </template>
@@ -19,7 +19,7 @@ export default {
         // console.log(this.$children)
         this.$children.forEach((vm) => {
             // console.log(vm.$options.name)
-            if(vm.$options.name === 's-aside') {
+            if(vm.$options.name === 'Aside') {
                 this.classList['has-aside'] = true
             }
         })
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.layout {
+.s-layout {
     display: flex;
     flex-direction: column;
     // 当为子元素时

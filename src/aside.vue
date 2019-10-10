@@ -2,7 +2,7 @@
     <!-- 添加动画 -->
     <transition name="slide">
         <!-- 问题：button也会消失，样式未确定 -->
-        <div class="aside" v-if="visible">
+        <div class="s-aside" v-if="visible">
             <slot></slot>
             <button @click="visible = false">close</button>
         </div>
@@ -11,6 +11,7 @@
 
 <script>
 export default {
+    name: "Aside",
     data() {
         return {
             visible: true
@@ -29,7 +30,7 @@ export default {
     // transform: translateX(-150px)
     margin-left: -150px;
 }
-.aside {
+.s-aside {
     position: relative;
     >button {
         position: absolute;
