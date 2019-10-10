@@ -65,7 +65,7 @@ export default {
     }
     > input { 
         color: $color;
-        height: 32px;
+        height: $input-height;
         border: 1px solid $border-color;
         border-radius: 4px;
         padding: 0 8px;

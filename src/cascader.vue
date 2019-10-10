@@ -2,11 +2,17 @@
     <div class="s-cascader">
         <!-- 触发器 -->
         <div class="s-cascader-trigger" @click="open = !open">
-            <slot></slot>
+            <!-- <slot :value="result"></slot> -->
+            {{result}}
         </div>
         <div v-if="open" class="s-cascader-list">
             <!-- 继续向下传递selected -->
-            <s-cascader-item :sourceItem="source" :selected="selected" @update:selected="updateSelected"></s-cascader-item>
+            <s-cascader-item
+                :sourceItem="source"
+                :selected="selected" 
+                :height="popWidth"
+                @update:selected="updateSelected"
+            ></s-cascader-item>
         </div>
     </div>
 </template>
@@ -26,11 +32,20 @@ export default {
         selected: {
             type: Array,
             default: () => []
+        },
+        popWidth: {
+            type: String
         }
     },
     data() {
         return {
             open: false
+        }
+    },
+    computed: {
+        result() {
+            // 拼接已选择项
+            return this.selected.map(ele => ele.name).join('/')
         }
     },
     methods: {
@@ -45,4 +60,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "var";
+
+.s-cascader-trigger {
+    height: $input-height;
+    min-width: 10em;
+    padding: 0 1em;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid $border-color;
+	border-radius: $button-radius;
+}
 </style> 

@@ -6,7 +6,7 @@
 				:source="cascaderSource" :selected.sync="selectedCascader"
 			>
 				<!-- 触发器 -->
-				<s-input placeholder="请选择"></s-input>
+				<!-- <s-input placeholder="请选择" v-slot="obj" :value="obj">{{obj}}111</s-input> -->
 			</s-cascader>
 		</div>
 		<!-- collapse -->
