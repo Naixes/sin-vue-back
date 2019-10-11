@@ -8,8 +8,17 @@ $red: #F1453D;
 $blue: blue;
 
 $border-color: #999;
+$border-color-lighter: #ddd;
 $border-hover-color: #666;
 $border-radius: 4px;
+
+$background-hover-color: #eee;
+
+.box-shadow {
+    // h-shadow v-shadow blur spread color inset;
+    box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.25);
+    border-radius: $border-radius;
+}
 
 // 状态
 $disabled-text-color: #aaa;

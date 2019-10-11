@@ -5,7 +5,7 @@
             <!-- <slot :value="result"></slot> -->
             {{result}}
         </div>
-        <div v-if="open" class="s-cascader-list">
+        <div v-if="open" class="s-cascader-wrapper">
             <!-- 继续向下传递selected -->
             <s-cascader-item
                 :sourceItem="source"
@@ -51,8 +51,6 @@ export default {
     methods: {
         // 向下派发事件，子组件调用并传值
         updateSelected(newSelected) {
-            console.log(this.$listeners)
-            console.log('update newSelected', newSelected)
             this.$emit('update:selected', newSelected)
         }
     }
@@ -62,13 +60,24 @@ export default {
 <style lang="scss" scoped>
 @import "var";
 
-.s-cascader-trigger {
-    height: $input-height;
-    min-width: 10em;
-    padding: 0 1em;
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid $border-color;
-	border-radius: $button-radius;
+.s-cascader {
+    position: relative;
+    .s-cascader-trigger {
+        height: $input-height;
+        min-width: 10em;
+        padding: 0 1em;
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid $border-color;
+        border-radius: $button-radius;
+    }
+    .s-cascader-wrapper {
+        display: flex;
+        position: absolute;
+        background-color: #fff;
+        top: 100%;
+        margin-top: 4px;
+        @extend .box-shadow
+    }
 }
 </style> 

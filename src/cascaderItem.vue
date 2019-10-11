@@ -1,5 +1,5 @@
 <template>
-    <div class="s-cascader-wrapper" :style="{height: height}">
+    <div class="s-cascader-list" :style="{height: height}">
         <!-- 左右布局 -->
         <ul class="s-cascader-left">
             <li
@@ -96,17 +96,22 @@ export default {
 <style lang="scss">
 @import "var";
 
-.s-cascader-wrapper {
+.s-cascader-list {
     display: flex;
     .s-cascader-left {
         padding: .3em 0;
-        border: 1px solid $border-color;
-        border-radius: $button-radius;
+    }
+    .s-cascader-right {
+        border-left: 1px solid $border-color-lighter;
     }
     .s-cascader-item {
         padding: .3em 1em;
         display: flex;
         align-items: center;
+        &:hover {
+            cursor: pointer;
+            background-color: $background-hover-color;
+        }
         .s-cascader-arrow {
             transform: scale(.5)
         }
