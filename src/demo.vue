@@ -1,6 +1,7 @@
 <template>
 	<div id="demo">
 		<!-- cascader -->
+		<!-- 动态 -->
 		<div class="box">
 			<s-cascader
 				:source.sync="cascaderSource" 
@@ -11,6 +12,17 @@
 			>
 			</s-cascader>
 			{{cascaderSource}}
+		</div>
+		<!-- 静态 -->
+		<div class="box">
+			<s-cascader
+				:source.sync="defaultCascaderSource" 
+				:selected.sync="defaultSelectedCascader"
+				@update:selected="updateSelected"
+				@update:source="updateSource"
+			>
+			</s-cascader>
+			{{defaultCascaderSource}}
 		</div>
 		<!-- collapse -->
 		<div class="box">
@@ -302,12 +314,47 @@
 		tabsSelected: 'sports',
 		selectedCollapse: ['1', '2'],
 		selectedCascader: [],
-		cascaderSource: []
+		defaultSelectedCascader: [],
+		cascaderSource: [],
+		defaultCascaderSource: [
+			{
+				name: '浙江',
+				children: [
+					{
+						name: '杭州',
+						children: [
+							{name: '上城'},
+							{name: '下城'},
+							{name: '江干'},
+						]
+					},
+					{
+						name: '嘉兴',
+						children: [
+							{name: '南湖'},
+							{name: '秀洲'},
+							{name: '嘉善'},
+						]
+					},
+				]
+		  }, {
+			name: '福建',
+			children: [
+				{
+					name: '福州',
+					children: [
+						{name: '鼓楼'},
+						{name: '台江'},
+						{name: '仓山'},
+					]
+				},
+			]
+		  }
+		]
       };
 	},
 	created() {
 		getArea().then(result => {
-			console.log(result)
 			this.cascaderSource = result
 		})
 	},
@@ -315,7 +362,6 @@
 		// cascader
 		// 查询当前元素的子元素，传给子组件，子组件调用
 		loadSource(parentId, updateSource) {
-			console.log(parentId)
 			getArea(parentId).then(result => {
 				// 执行回调
 				updateSource(result)

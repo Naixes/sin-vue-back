@@ -10,6 +10,7 @@
                 :sourceItem="source"
                 :height="popWidth"
                 :selected="selected" 
+				:loadSource="loadSource"
                 @update:selected="updateSelected"
             ></s-cascader-item>
         </div>
@@ -36,8 +37,7 @@ export default {
             type: String
         },
         loadSource: {
-            type: Function,
-            default: () => {}
+            type: Function
         }
     },
     data() {
@@ -53,23 +53,26 @@ export default {
     },
     methods: {
         updateSelected(newSelected) {
-            // 通知父组件更新source
-            // 查找到要添加的元素
-            let lastSelected = newSelected[newSelected.length - 1]
-            // 叶子节点不用查询
-            if(!lastSelected.isLeaf) {
-                // 查询children内容，拼接新的source，通知父组件更新source
-                this.loadSource(lastSelected.id, (result) => {
-                    let copy = JSON.parse(JSON.stringify(this.source))
-                    // 获取当前选中项
-                    let needUpdatedSource = getSource(copy, lastSelected.id)
-                    // 拼接children
-                    if(needUpdatedSource && result.length > 0) {
-                        needUpdatedSource.children = result
-                        // 通知更新
-                        this.$emit('update:source', copy)
-                    }
-                })
+            // 判断是否动态数据
+            if(this.loadSource) {
+                // 通知父组件更新source
+                // 查找到要添加的元素
+                let lastSelected = newSelected[newSelected.length - 1]
+                // 叶子节点不用查询
+                if(!lastSelected.isLeaf) {
+                    // 查询children内容，拼接新的source，通知父组件更新source
+                    this.loadSource(lastSelected.id, (result) => {
+                        let copy = JSON.parse(JSON.stringify(this.source))
+                        // 获取当前选中项
+                        let needUpdatedSource = getSource(copy, lastSelected.id)
+                        // 拼接children
+                        if(needUpdatedSource && result.length > 0) {
+                            needUpdatedSource.children = result
+                            // 通知更新
+                            this.$emit('update:source', copy)
+                        }
+                    })
+                }
             }
 
             // 向下派发事件，子组件调用并传值

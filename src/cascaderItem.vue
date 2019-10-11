@@ -10,7 +10,7 @@
             >
                 {{item.name}}
                 <s-icon
-                    v-if="!item.isLeaf"
+                    v-if="arrowVisible(item)"
                     class="s-cascader-arrow"
                     name="right"
                 ></s-icon>
@@ -22,6 +22,7 @@
                 :sourceItem="rightItem"
                 :selected="selected" 
                 :level="level+1"
+				:loadSource="loadSource"
                 @update:selected="updateSelected"
             >
             </cascader-item>
@@ -52,6 +53,9 @@ export default {
         level: {
             type: Number,
             default: 0
+        },
+        loadSource: {
+            type: Function
         }
     },
     computed: {
@@ -81,6 +85,9 @@ export default {
         }
     },
     methods: {
+        arrowVisible(item) {
+            return this.loadSource ? !item.isLeaf : item.children
+        },
         // 触发更新
         select(item) {
             // 拷贝已选择项
