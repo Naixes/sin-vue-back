@@ -2,15 +2,14 @@
     <div class="s-cascader">
         <!-- 触发器 -->
         <div class="s-cascader-trigger" @click="open = !open">
-            <!-- <slot :value="result"></slot> -->
-            {{result}}
+            <span>{{result}}</span>
         </div>
         <div v-if="open" class="s-cascader-wrapper">
             <!-- 继续向下传递selected -->
             <s-cascader-item
                 :sourceItem="source"
-                :selected="selected" 
                 :height="popWidth"
+                :selected="selected" 
                 @update:selected="updateSelected"
             ></s-cascader-item>
         </div>
@@ -35,6 +34,10 @@ export default {
         },
         popWidth: {
             type: String
+        },
+        loadSource: {
+            type: Function,
+            default: () => {}
         }
     },
     data() {
@@ -49,9 +52,64 @@ export default {
         }
     },
     methods: {
-        // 向下派发事件，子组件调用并传值
         updateSelected(newSelected) {
+            // 通知父组件更新source
+            // 查找到要添加的元素
+            let lastSelected = newSelected[newSelected.length - 1]
+            // 查询children内容，拼接新的source，通知父组件更新source
+            this.loadSource(lastSelected.id, (result) => {
+                let copy = JSON.parse(JSON.stringify(this.source))
+                // 获取当前选中项
+                let needUpdatedSource = getSource(copy, lastSelected.id)
+                // 拼接children
+                if(needUpdatedSource && result.length > 0) {
+                    needUpdatedSource.children = result
+                    // 通知更新
+                    this.$emit('update:source', copy)
+                }
+            })
+
+            // 向下派发事件，子组件调用并传值
             this.$emit('update:selected', newSelected)
+
+            // 递归寻找当前选中项：广度优先遍历
+            let getSource = (source, id) => {
+                // 将source分为两组
+                let noChildren = []
+                let hasChildren = []
+                source.forEach(ele => {
+                    if(ele.children) {
+                        hasChildren.push(ele)
+                    }else {
+                        noChildren.push(ele)
+                    }
+                });
+                // 先在noChildren中寻找
+                let found = findChildren(noChildren, id)
+                if(found) {
+                    // 找到了就返回
+                    return found
+                }else {
+                    // 在另一组中查找
+                    let found = findChildren(hasChildren, id)
+                    if(found) {
+                        // 找到了就返回
+                        return found
+                    }else {
+                        // 循环下一层
+                        for(let i = 0; i < hasChildren.length; i++) {
+                            found = getSource(hasChildren[i].children, id)
+                            if(found) {
+                                return found
+                            }
+                            return undefined
+                        }
+                    }
+                }
+            }
+            let findChildren = (item, id) => {
+                return item.filter(ele => ele.id === id)[0]
+            }
         }
     }
 }

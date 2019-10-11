@@ -3,11 +3,14 @@
 		<!-- cascader -->
 		<div class="box">
 			<s-cascader
-				:source="cascaderSource" :selected.sync="selectedCascader"
+				:source.sync="cascaderSource" 
+				:selected.sync="selectedCascader"
+				:loadSource="loadSource"
+				@update:selected="updateSelected"
+				@update:source="updateSource"
 			>
-				<!-- 触发器 -->
-				<!-- <s-input placeholder="请选择" v-slot="obj" :value="obj">{{obj}}111</s-input> -->
 			</s-cascader>
+			{{cascaderSource}}
 		</div>
 		<!-- collapse -->
 		<div class="box">
@@ -235,7 +238,19 @@
     import Collapse from './collapse'
     import CollapseItem from './collapseItem'
     import Cascader from './cascader'
-    import CascaderItem from './cascaderItem'
+	import CascaderItem from './cascaderItem'
+
+	import db from './db'
+	
+	// 模拟数据获取
+	function getArea(parentId = 0) {
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				let result = db.filter(ele => ele.parent_id === parentId)
+				resolve(result)
+			}, 500)
+		})
+	}
 
     export default {
         name: "demo",
@@ -280,44 +295,32 @@
 		tabsSelected: 'sports',
 		selectedCollapse: ['1', '2'],
 		selectedCascader: [],
-		cascaderSource: [
-			{
-				name: '浙江',
-				children: [
-					{
-						name: '杭州',
-						children: [
-							{name: '上城'},
-							{name: '下城'},
-							{name: '江干'},
-						]
-					},
-					{
-						name: '嘉兴',
-						children: [
-							{name: '南湖'},
-							{name: '秀洲'},
-							{name: '嘉善'},
-						]
-					},
-				]
-		  }, {
-			name: '福建',
-			children: [
-				{
-					name: '福州',
-					children: [
-						{name: '鼓楼'},
-						{name: '台江'},
-						{name: '仓山'},
-					]
-				},
-			]
-		  }
-		]
+		cascaderSource: []
       };
-    },
+	},
+	created() {
+		getArea().then(result => {
+			console.log(result)
+			this.cascaderSource = result
+		})
+	},
     methods: {
+		// cascader
+		// 查询当前元素的子元素，传给子组件，子组件调用
+		loadSource(parentId, updateSource) {
+			console.log(parentId)
+			getArea(parentId).then(result => {
+				// 执行回调
+				updateSource(result)
+			})
+		},
+		// 先更新selected，再更新source
+		updateSelected() {
+			console.log("updateSelected")
+		},
+		updateSource() {
+			console.log("updateSource")
+		},
 		eventHandle(type, e) {
 			console.log(type, e)
 		},

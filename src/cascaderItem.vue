@@ -57,14 +57,22 @@ export default {
     computed: {
         // 计算出子组件显示的内容
         rightItem() {
-            // if(this.leftSelected && this.leftSelected.children) {
-            //     return this.leftSelected.children
+            // 这样写右边不会更新，因为它依赖selected和level，选择地区时会触发两次更新，一次selected一次source，而第二次更新它的依赖没有变化所以没有更新
+            // let current = this.selected[this.level]
+            // if(current && current.children) {
+            //     return current.children
             // }
-            let current = this.selected[this.level]
-            if(current && current.children) {
-                return current.children
+            // return null
+
+            // 改为依赖source
+            if(this.selected[this.level]) {
+                // 获取当前选择项
+                let current = this.sourceItem.filter(ele => ele.name === this.selected[this.level].name)
+                // 返回当前选择项的children
+                if(current[0] && current[0].children && current[0].children.length > 0) {
+                    return current[0].children
+                }
             }
-            return null
         }
     },
     data() {
@@ -100,6 +108,7 @@ export default {
     display: flex;
     .s-cascader-left {
         padding: .3em 0;
+        overflow: auto;
     }
     .s-cascader-right {
         border-left: 1px solid $border-color-lighter;
