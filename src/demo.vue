@@ -248,6 +248,13 @@
 			setTimeout(() => {
 				let result = db.filter(ele => ele.parent_id === parentId)
 				resolve(result)
+				result.forEach(ele => {
+					if(db.filter(item => item.parent_id === ele.id).length > 0) {
+						ele.isLeaf = false
+					}else {
+						ele.isLeaf = true
+					}
+				})
 			}, 500)
 		})
 	}

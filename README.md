@@ -852,8 +852,13 @@ and the repository exists.
 
 #### 开发
 
-单向数据流简化操作
-
 ##### 将parcel迁移到vue-cli
 
 ![1. 文章 如何从 parcel 迁移到 vue-cli](E:\Jennifer\other\sin-vue\media4readme\1. 文章 如何从 parcel 迁移到 vue-cli.png)
+
+##### 单向数据流简化操作
+
+##### 改为动态获取数据
+
+遍历递归查找当前项为其添加子元素
+

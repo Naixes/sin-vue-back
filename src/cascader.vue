@@ -56,22 +56,26 @@ export default {
             // 通知父组件更新source
             // 查找到要添加的元素
             let lastSelected = newSelected[newSelected.length - 1]
-            // 查询children内容，拼接新的source，通知父组件更新source
-            this.loadSource(lastSelected.id, (result) => {
-                let copy = JSON.parse(JSON.stringify(this.source))
-                // 获取当前选中项
-                let needUpdatedSource = getSource(copy, lastSelected.id)
-                // 拼接children
-                if(needUpdatedSource && result.length > 0) {
-                    needUpdatedSource.children = result
-                    // 通知更新
-                    this.$emit('update:source', copy)
-                }
-            })
+            // 叶子节点不用查询
+            if(!lastSelected.isLeaf) {
+                // 查询children内容，拼接新的source，通知父组件更新source
+                this.loadSource(lastSelected.id, (result) => {
+                    let copy = JSON.parse(JSON.stringify(this.source))
+                    // 获取当前选中项
+                    let needUpdatedSource = getSource(copy, lastSelected.id)
+                    // 拼接children
+                    if(needUpdatedSource && result.length > 0) {
+                        needUpdatedSource.children = result
+                        // 通知更新
+                        this.$emit('update:source', copy)
+                    }
+                })
+            }
 
             // 向下派发事件，子组件调用并传值
             this.$emit('update:selected', newSelected)
 
+            // 自定义方法
             // 递归寻找当前选中项：广度优先遍历
             let getSource = (source, id) => {
                 // 将source分为两组

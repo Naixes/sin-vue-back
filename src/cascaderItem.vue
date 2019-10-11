@@ -10,7 +10,7 @@
             >
                 {{item.name}}
                 <s-icon
-                    v-if="item.children"
+                    v-if="!item.isLeaf"
                     class="s-cascader-arrow"
                     name="right"
                 ></s-icon>
@@ -122,6 +122,8 @@ export default {
             background-color: $background-hover-color;
         }
         .s-cascader-arrow {
+            // 将箭头对齐
+            margin-left: auto;
             transform: scale(.5)
         }
     }
