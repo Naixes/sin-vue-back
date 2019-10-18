@@ -862,3 +862,43 @@ and the repository exists.
 
 遍历递归查找当前项为其添加子元素
 
+##### 总结
+
+**组件及参数传递**
+
+demo：
+	组件参数
+	selected：当前选择数据，用来显示选择结果，初始：[]
+ 	source：源数据，用来显示列表，初始：[]
+ 	loadSource：查询数据的方法，根据parent_id
+
+cascadere：
+	props
+	selected：
+		updateSelected：定义selected的更新方法
+	source：
+	loadSource：
+	height：弹出框高度
+
+​	computed
+​	result：显示选择结果
+item：
+​	props
+​	selected：
+​		updateSelected：定义selected的更新方法
+​	sourceItem：source
+​	loadSource：
+​	height：
+​	level：当前层级
+
+​    computed
+​	rightItem：传递给下一层的数据源，根据sourceItem得出
+
+​    methods
+​    select：点击时触发更新selected
+
+**数据流**
+
+初始化：【demo】-created：loadSource()获取第一层sourse数据
+
+选择第一层：【item】-select：

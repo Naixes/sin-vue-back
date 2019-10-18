@@ -313,8 +313,10 @@
 		msg: 'hi',
 		tabsSelected: 'sports',
 		selectedCollapse: ['1', '2'],
+		// [{第一层选择的数据}， {第二层}， {第三层}]
 		selectedCascader: [],
 		defaultSelectedCascader: [],
+		// 下拉展示的数据，[{}，{}]，所有数据都在第一层
 		cascaderSource: [],
 		defaultCascaderSource: [
 			{

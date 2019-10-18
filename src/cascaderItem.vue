@@ -124,6 +124,7 @@ export default {
         padding: .3em 1em;
         display: flex;
         align-items: center;
+        user-select: none;
         &:hover {
             cursor: pointer;
             background-color: $background-hover-color;

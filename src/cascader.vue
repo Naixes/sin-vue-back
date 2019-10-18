@@ -8,7 +8,7 @@
             <!-- 继续向下传递selected -->
             <s-cascader-item
                 :sourceItem="source"
-                :height="popWidth"
+                :height="height"
                 :selected="selected" 
 				:loadSource="loadSource"
                 @update:selected="updateSelected"
@@ -33,7 +33,7 @@ export default {
             type: Array,
             default: () => []
         },
-        popWidth: {
+        height: {
             type: String
         },
         loadSource: {
@@ -53,6 +53,7 @@ export default {
     },
     methods: {
         updateSelected(newSelected) {
+            console.log('newSelected', newSelected)
             // 判断是否动态数据
             if(this.loadSource) {
                 // 通知父组件更新source
