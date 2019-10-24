@@ -371,10 +371,10 @@
 		},
 		// 先更新selected，再更新source
 		updateSelected() {
-			console.log("updateSelected")
+			// console.log("updateSelected")
 		},
 		updateSource() {
-			console.log("updateSource")
+			// console.log("updateSource")
 		},
 		eventHandle(type, e) {
 			console.log(type, e)

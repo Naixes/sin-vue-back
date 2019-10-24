@@ -899,6 +899,10 @@ item：
 
 **数据流**
 
-初始化：【demo】-created：loadSource()获取第一层sourse数据
+初始化：【demo】-created()：loadSource()获取第一层sourse数据向下传递，selected：[]
 
-选择第一层：【item】-select：
+选择第一层：【item】-**select()**：根据level获得新的**selected**，通知上级（cascader层）更新selected触发了**updateSelected方法**（查询下级数据**children**添加到**source**）继续通知上级更新selected，上级（demo层）更新了selected
+
+​									-**rightItem**：根据source自动计算出右边的source并传递
+
+​					  【cascader】-**result**：计算出当前结果显示到指定位置

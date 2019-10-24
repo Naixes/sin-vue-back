@@ -72,6 +72,7 @@ export default {
             if(this.selected[this.level]) {
                 // 获取当前选择项
                 let current = this.sourceItem.filter(ele => ele.name === this.selected[this.level].name)
+                // console.log(current)
                 // 返回当前选择项的children
                 if(current[0] && current[0].children && current[0].children.length > 0) {
                     return current[0].children

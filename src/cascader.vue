@@ -53,7 +53,6 @@ export default {
     },
     methods: {
         updateSelected(newSelected) {
-            console.log('newSelected', newSelected)
             // 判断是否动态数据
             if(this.loadSource) {
                 // 通知父组件更新source
@@ -76,7 +75,7 @@ export default {
                 }
             }
 
-            // 向下派发事件，子组件调用并传值
+            // 通知上级更新selected
             this.$emit('update:selected', newSelected)
 
             // 自定义方法
@@ -110,13 +109,15 @@ export default {
                             if(found) {
                                 return found
                             }
-                            return undefined
                         }
+                        return undefined
                     }
                 }
             }
             let findChildren = (item, id) => {
-                return item.filter(ele => ele.id === id)[0]
+                return item.filter(ele => {
+                    return ele.id === id
+                })[0]
             }
         }
     }
