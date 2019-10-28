@@ -909,6 +909,59 @@ item：
 
 ##### 点击外部关闭弹窗
 
-封装指令click-outside
-
 分别封装open和close，同时添加事件监控是否点击了外部
+
+```js
+onclickDocument(e) {
+    console.log('onclickDocument')
+    let {cascader} = this.$refs
+    let {target} = e
+    if(cascader === target || cascader.contains(target)) {
+        return
+    }
+    this.close()
+},
+open() {
+    this.popVisible = true
+    document.addEventListener('click', this.onclickDocument)
+    // 不知道有啥用
+    // this.$nextTick(() => {
+    //     document.addEventListener('click', this.onclickDocument)
+    // })
+},
+close() {
+    this.popVisible = false
+    document.removeEventListener('click', this.onclickDocument)
+},
+toggle() {
+    if(this.popVisible) {
+       this.close()
+    }else {
+       this.open()
+    }
+},
+```
+
+改为封装指令click-outside
+
+```js
+export default {
+    inserted(el, bindings) {
+        el.onclickDocument = e => {
+            // console.log('onclickDocument')
+            let {target} = e
+            if(el === target || el.contains(target)) {
+                return
+            }
+            // console.log('bindings', bindings)
+            bindings.value()
+        }
+        document.addEventListener('click', el.onclickDocument)
+    },
+    unbind(el) {        
+        document.removeEventListener('click', el.onclickDocument)
+    }
+}
+```
+
+##### 懒加载效果
