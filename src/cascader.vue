@@ -1,10 +1,10 @@
 <template>
-    <div class="s-cascader">
+    <div class="s-cascader" ref="cascader">
         <!-- 触发器 -->
-        <div class="s-cascader-trigger" @click="open = !open">
+        <div class="s-cascader-trigger" @click="toggle">
             <span>{{result}}</span>
         </div>
-        <div v-if="open" class="s-cascader-wrapper">
+        <div v-if="popVisible" class="s-cascader-wrapper">
             <!-- 继续向下传递selected -->
             <s-cascader-item
                 :sourceItem="source"
@@ -42,7 +42,7 @@ export default {
     },
     data() {
         return {
-            open: false
+            popVisible: false
         }
     },
     computed: {
@@ -52,6 +52,31 @@ export default {
         }
     },
     methods: {
+        onclickDocument(e) {
+            let {cascader} = this.$refs
+            let {target} = e
+            console.log(cascader, target)
+            if(cascader === target || cascader.contains(target)) {
+                console.log('return')
+                return
+            }
+            this.close()
+        },
+        open() {
+            this.popVisible = true
+            document.addEventListener('click', this.onclickDocument)
+        },
+        close() {
+            this.popVisible = false
+            document.removeEventListener('click', this.onclickDocument)
+        },
+        toggle() {
+            if(this.popVisible) {
+                this.close()
+            }else {
+                this.open()
+            }
+        },
         updateSelected(newSelected) {
             // 判断是否动态数据
             if(this.loadSource) {
@@ -128,6 +153,8 @@ export default {
 @import "var";
 
 .s-cascader {
+    // 点击外部关闭需要
+    display: inline-block;
     position: relative;
     .s-cascader-trigger {
         height: $input-height;

@@ -122,6 +122,7 @@ export default {
         border-left: 1px solid $border-color-lighter;
     }
     .s-cascader-item {
+        white-space: nowrap;
         padding: .3em 1em;
         display: flex;
         align-items: center;
