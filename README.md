@@ -862,7 +862,7 @@ and the repository exists.
 
 遍历递归查找当前项为其添加子元素
 
-##### 总结
+###### 总结
 
 **组件及参数传递**
 
@@ -906,3 +906,9 @@ item：
 ​									-**rightItem**：根据source自动计算出右边的source并传递
 
 ​					  【cascader】-**result**：计算出当前结果显示到指定位置
+
+##### 点击外部关闭弹窗
+
+封装指令click-outside
+
+分别封装open和close，同时添加事件监控是否点击了外部

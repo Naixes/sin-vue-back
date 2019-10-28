@@ -1,5 +1,5 @@
 <template>
-    <div class="s-cascader" ref="cascader">
+    <div class="s-cascader" v-click-outside="close">
         <!-- 触发器 -->
         <div class="s-cascader-trigger" @click="toggle">
             <span>{{result}}</span>
@@ -18,11 +18,15 @@
 </template>
 <script>
 import SCascaderItem from './cascaderItem'
+import clickOutside from './click-outside.js'
 export default {
     components: {
         // 动态引入的组件，样式会不生效
         // SCascaderItem: () => import('./cascaderItem')
         's-cascader-item': SCascaderItem
+    },
+    directives: {
+        clickOutside
     },
     props: {
         source: {
@@ -52,30 +56,39 @@ export default {
         }
     },
     methods: {
-        onclickDocument(e) {
-            let {cascader} = this.$refs
-            let {target} = e
-            console.log(cascader, target)
-            if(cascader === target || cascader.contains(target)) {
-                console.log('return')
-                return
-            }
-            this.close()
-        },
-        open() {
-            this.popVisible = true
-            document.addEventListener('click', this.onclickDocument)
-        },
+        // onclickDocument(e) {
+        //     console.log('onclickDocument')
+        //     let {cascader} = this.$refs
+        //     let {target} = e
+        //     if(cascader === target || cascader.contains(target)) {
+        //         return
+        //     }
+        //     this.close()
+        // },
+        // open() {
+        //     this.popVisible = true
+        //     document.addEventListener('click', this.onclickDocument)
+        //     // 不知道有啥用
+        //     // this.$nextTick(() => {
+        //     //     document.addEventListener('click', this.onclickDocument)
+        //     // })
+        // },
+        // close() {
+        //     this.popVisible = false
+        //     document.removeEventListener('click', this.onclickDocument)
+        // },
+        // toggle() {
+        //     if(this.popVisible) {
+        //         this.close()
+        //     }else {
+        //         this.open()
+        //     }
+        // },
         close() {
             this.popVisible = false
-            document.removeEventListener('click', this.onclickDocument)
         },
         toggle() {
-            if(this.popVisible) {
-                this.close()
-            }else {
-                this.open()
-            }
+            this.popVisible = !this.popVisible
         },
         updateSelected(newSelected) {
             // 判断是否动态数据
