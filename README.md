@@ -944,6 +944,8 @@ toggle() {
 
 改为封装指令click-outside
 
+指令的常见用法就是封装dom操作
+
 ```js
 export default {
     inserted(el, bindings) {
@@ -965,3 +967,14 @@ export default {
 ```
 
 ##### 懒加载效果
+
+同时点击多个时，数据可能会出现错乱
+
+#### 单元测试
+
+之前的单元测试会报错
+
+创建一个新项目
+
+npm run test:unit
+
