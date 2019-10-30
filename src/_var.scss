@@ -50,3 +50,13 @@ $toast-font-size: 14px;
 $toast-background-color: #aaa;
 $toast-color: #fff;
 $toast-border-radius: 4px;
+
+// 加载中旋转动画
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

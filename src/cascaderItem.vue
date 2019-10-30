@@ -9,11 +9,21 @@
                 @click="select(item)"
             >
                 {{item.name}}
-                <s-icon
-                    v-if="arrowVisible(item)"
-                    class="s-cascader-arrow"
-                    name="right"
-                ></s-icon>
+                <!-- transform不能在同一个元素上使用两次 -->
+                <span class="s-cascader-icons">
+                    <template v-if="item.name === loadingName">
+                    <s-icon
+                        class="s-cascader-loading"
+                        name="loading"
+                    ></s-icon>
+                    </template>
+                    <template v-else>
+                    <s-icon
+                        v-if="arrowVisible(item)"
+                        name="right"
+                    ></s-icon>
+                    </template>
+                </span>
             </li>
         </ul>
         <div v-if="rightItem" class="s-cascader-right">
@@ -23,6 +33,7 @@
                 :selected="selected" 
                 :level="level+1"
 				:loadSource="loadSource"
+                :loadingName="loadingName"
                 @update:selected="updateSelected"
             >
             </cascader-item>
@@ -56,6 +67,9 @@ export default {
         },
         loadSource: {
             type: Function
+        },
+        loadingName: {
+            type: String
         }
     },
     computed: {
@@ -115,10 +129,12 @@ export default {
 .s-cascader-list {
     display: flex;
     .s-cascader-left {
+        z-index: 1;
         padding: .3em 0;
         overflow: auto;
     }
     .s-cascader-right {
+        z-index: 1;
         border-left: 1px solid $border-color-lighter;
     }
     .s-cascader-item {
@@ -127,14 +143,18 @@ export default {
         display: flex;
         align-items: center;
         user-select: none;
+        background-color: #fff;
         &:hover {
             cursor: pointer;
             background-color: $background-hover-color;
         }
-        .s-cascader-arrow {
+        .s-cascader-icons {
             // 将箭头对齐
             margin-left: auto;
-            transform: scale(.5)
+            transform: scale(.5);
+        }
+        .s-cascader-loading {
+		    animation: spin 1s infinite linear;
         }
     }
 }

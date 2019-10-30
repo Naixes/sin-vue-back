@@ -11,7 +11,7 @@
 				@update:source="updateSource"
 			>
 			</s-cascader>
-			{{cascaderSource}}
+			{{selectedCascader}}
 		</div>
 		<!-- 静态 -->
 		<div class="box">
@@ -267,7 +267,7 @@
 						ele.isLeaf = true
 					}
 				})
-			}, 500)
+			}, 1500)
 		})
 	}
 
