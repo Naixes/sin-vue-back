@@ -11,6 +11,7 @@
                 :height="height"
                 :selected="selected" 
 				:loadSource="loadSource"
+                :loadingName="loadingItemName"
                 @update:selected="updateSelected"
             ></s-cascader-item>
         </div>
@@ -46,7 +47,8 @@ export default {
     },
     data() {
         return {
-            popVisible: false
+            popVisible: false,
+            loadingItemName: null
         }
     },
     computed: {
@@ -94,12 +96,17 @@ export default {
             // 判断是否动态数据
             if(this.loadSource) {
                 // 通知父组件更新source
-                // 查找到要添加的元素
+                // 当前点击的元素
                 let lastSelected = newSelected[newSelected.length - 1]
+                // 设置要loading的元素name
+                this.loadingItemName = lastSelected.name
+                // 查找到要添加的元素
                 // 叶子节点不用查询
                 if(!lastSelected.isLeaf) {
                     // 查询children内容，拼接新的source，通知父组件更新source
                     this.loadSource(lastSelected.id, (result) => {
+                        // 数据获取完成之后删除loading元素
+                        // this.loadingItemName = null
                         let copy = JSON.parse(JSON.stringify(this.source))
                         // 获取当前选中项
                         let needUpdatedSource = getSource(copy, lastSelected.id)
