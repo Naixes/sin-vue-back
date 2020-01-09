@@ -12,10 +12,10 @@
                 <!-- transform不能在同一个元素上使用两次 -->
                 <span class="s-cascader-icons">
                     <template v-if="item.name === loadingName">
-                    <s-icon
-                        class="s-cascader-loading"
-                        name="loading"
-                    ></s-icon>
+                        <s-icon
+                            class="s-cascader-loading"
+                            name="loading"
+                        ></s-icon>
                     </template>
                     <template v-else>
                     <s-icon

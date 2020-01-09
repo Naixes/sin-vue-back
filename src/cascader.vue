@@ -99,14 +99,14 @@ export default {
                 // 当前点击的元素
                 let lastSelected = newSelected[newSelected.length - 1]
                 // 设置要loading的元素name
-                this.loadingItemName = lastSelected.name
+                this.loadingItemName = lastSelected.isLeaf ? '' : lastSelected.name
                 // 查找到要添加的元素
                 // 叶子节点不用查询
                 if(!lastSelected.isLeaf) {
                     // 查询children内容，拼接新的source，通知父组件更新source
                     this.loadSource(lastSelected.id, (result) => {
                         // 数据获取完成之后删除loading元素
-                        // this.loadingItemName = null
+                        this.loadingItemName = null
                         let copy = JSON.parse(JSON.stringify(this.source))
                         // 获取当前选中项
                         let needUpdatedSource = getSource(copy, lastSelected.id)
