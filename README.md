@@ -978,3 +978,7 @@ export default {
 
 npm run test:unit
 
+模仿新项目编写测试，修改svgjs文件，开启watch模式，安装sinon-chai和sinon，vue test utils的使用
+
+测试css放弃
+
