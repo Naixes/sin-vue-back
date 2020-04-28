@@ -50,27 +50,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "var";
+// 测试会报错？？？
+// @import 'var';
 
-// $font-size: 14px ;
+$font-size: 14px ;
 
-// $color: #333;
-// $border-color: #999;
-// $border-hover-color: #666;
+$color: #333;
+$border-color: #999;
+$border-hover-color: #666;
 
-// $button-height: 32px;
-// $button-bgc: #fff;
-// $button-radius: 4px;
-// $button-active-bgc: #eee;
+$button-height: 32px;
+$button-bgc: #fff;
+$button-radius: 4px;
+$button-active-bgc: #eee;
 // 加载中动画
-// @keyframes spin {
-// 	0% {
-// 		transform: rotate(0deg);
-// 	}
-// 	100% {
-// 		transform: rotate(360deg);
-// 	}
-// }
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 .s-button {
 	font-size: $font-size;
 	height: $button-height;

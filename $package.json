@@ -1,0 +1,58 @@
+{
+	"name": "sin-vue",
+	"version": "0.0.3",
+	"description": "vue ui",
+	"main": "dist/index.js",
+	"scripts": {
+		"dev": "parcel index.html --no-cache",
+		"build": "parcel index.js --no-minify --no-cache",
+		"puppeteer-test": "parcel build index.html --no-minify --no-cache && node ./test.js",
+		"dev-test": "parcel watch test/* --no-cache & karma start",
+		"test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
+		"docs:dev": "vuepress dev docs",
+		"docs:build": "vuepress build docs"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Naixes/sin-vue.git"
+	},
+	"keywords": [
+		"vue",
+		"ui"
+	],
+	"author": "Naixes",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Naixes/sin-vue/issues"
+	},
+	"homepage": "https://github.com/Naixes/sin-vue#readme",
+	"dependencies": {
+		"vue": "^2.6.10",
+		"vue-hot-reload-api": "^2.3.3"
+	},
+	"devDependencies": {
+		"@vue/component-compiler-utils": "^3.0.0",
+		"chai": "^4.2.0",
+		"chai-spies": "^1.0.0",
+		"karma": "^4.2.0",
+		"karma-chai": "^0.1.0",
+		"karma-chai-spies": "^0.1.4",
+		"karma-chrome-launcher": "^3.0.0",
+		"karma-mocha": "^1.3.0",
+		"karma-sinon-chai": "^2.0.2",
+		"mocha": "^6.2.0",
+		"node-sass": "^4.12.0",
+		"node-static": "^0.7.11",
+		"parcel-bundler": "^1.12.3",
+		"puppeteer": "^1.19.0",
+		"sass": "^1.22.7",
+		"sass-loader": "^8.0.0",
+		"sinon": "^7.3.2",
+		"sinon-chai": "^3.3.0",
+		"vue-template-compiler": "^2.6.10",
+		"vuepress": "^1.0.3"
+	},
+	"alias": {
+		"vue": "./node_modules/vue/dist/vue.common.js"
+	}
+} 
