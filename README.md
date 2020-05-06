@@ -972,13 +972,13 @@ export default {
 
 #### 单元测试
 
-之前的单元测试会报错
+由于修改了package.json，之前的单元测试会报错
 
-创建一个新项目
+创建一个新项目，npm run test:unit
 
-npm run test:unit
+模仿新项目编写测试，修改svgjs文件，开启watch模式（--watch）
 
-模仿新项目编写测试，修改svgjs文件，开启watch模式，安装sinon-chai和sinon，vue test utils的使用
+安装sinon-chai和sinon，vue test utils的使用
 
 测试css放弃
 

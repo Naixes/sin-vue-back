@@ -44,26 +44,16 @@ describe('Button', () => {
 		expect(href).to.eq('#i-loading')
     })
     
-    // it('icon默认order为1', () => {
-	// 	// css 属性需要渲染到页面
-	// 	const div = document.createElement('div')
-	// 	document.body.appendChild(div)
-	
-	// 	const Constructor = Vue.extend(Button)
-	// 	const vm = new Constructor({
-	// 		propsData: {
-	// 			icon: 'setting'
-	// 		}
-	// 	})
-	// 	// 渲染组件
-	// 	vm.$mount(div)
-	// 	let svg = vm.$el.querySelector('svg')
-	// 	// window.getComputedStyle()：返回对象，包含元素的所有CSS属性的值。
-	// 	let {order} = window.getComputedStyle(svg)
-	// 	expect(order).to.eq('1')
-	// 	vm.$el.remove()
-	// 	vm.$destroy()
-    // })
+    it('icon默认order为1', () => {
+		const wrapper = mount(Button, {
+			propsData: {
+				icon: 'setting'
+			}
+		})
+		const icon = wrapper.find('svg')
+		console.log('icon', icon)
+		expect(getComputedStyle(icon).order).to.be.eq('1')
+    })
     
     // it('可以设置icon-position修改order为2', () => {
 	// 	const div = document.createElement('div')
