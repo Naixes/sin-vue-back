@@ -980,5 +980,40 @@ export default {
 
 安装sinon-chai和sinon，vue test utils的使用
 
-测试css放弃
+测试css放弃，暂时使用xit标记
 
+slot的测试方式，nextTick的测试方式
+
+修改持续集成：增加默认的test命令
+
+### slides
+
+#### 动画
+
+##### transition
+
+transition标签设置动画名，css过渡类名，设置初始值
+
+插入类名的顺序：enter---enter/enter-active---enter-to/enter-active---空
+
+##### animation
+
+active+animation
+
+##### 库
+
+animate
+
+##### js钩子
+
+velocity（js动画库）
+
+##### 多元素过渡
+
+key，mode
+
+多组件：is动态组件
+
+##### 列表过渡
+
+transition-group，key，for
