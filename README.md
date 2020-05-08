@@ -992,13 +992,82 @@ slot的测试方式，nextTick的测试方式
 
 ##### transition
 
-transition标签设置动画名，css过渡类名，设置初始值
+过渡
 
-插入类名的顺序：enter---enter/enter-active---enter-to/enter-active---空
+transition标签设置动画名（默认v），css过渡类名（六个），设置初始值
+
+```vue
+<!-- 使用 transition 将需要过渡的元素包裹起来，name是类名的前缀，没有时是v- -->
+<transition name="fade">
+    <div v-show="show1" class="box1">动画</div>
+</transition>
+
+<tyle>
+    /* 定义进入和离开时候的过渡状态 */
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: all 5s;
+    }
+
+    /* 定义进入过渡的开始状态 和 离开过渡的结束状态 */
+    .fade-enter,
+    .fade-leave-to {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+<tyle>
+```
+
+当插入或删除包含在 `transition` 组件中的元素时，Vue 将会做以下处理：
+
+1. 自动嗅探目标元素是否应用了 CSS 过渡或动画，如果是，在恰当的时机添加/删除 CSS 类名。
+2. 如果过渡组件提供了 [JavaScript 钩子函数](https://cn.vuejs.org/v2/guide/transitions.html#JavaScript-钩子)，这些钩子函数将在恰当的时机被调用。
+3. 如果没有找到 JavaScript 钩子并且也没有检测到 CSS 过渡/动画，DOM 操作 (插入/删除) 在下一帧中立即执行。(注意：此指浏览器逐帧动画机制，和 Vue 的 `nextTick` 概念不同)
+
+插入类名的顺序：enter/enter-active---enter-active/enter-to---空
+
+可以自定义过渡类名，他们的优先级高于普通的类名，这对于 Vue 的过渡系统和其他第三方 CSS 动画库，如 [Animate.css](https://daneden.github.io/animate.css/) 结合使用十分有用。
+
+```vue
+<link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+
+<div id="example-3">
+  <button @click="show = !show">
+    Toggle render
+  </button>
+  <transition
+    name="custom-classes-transition"
+    enter-active-class="animated tada"
+    leave-active-class="animated bounceOutRight"
+  >
+    <p v-if="show">hello</p>
+  </transition>
+</div>
+```
 
 ##### animation
 
-active+animation
+动画：CSS 动画用法同 CSS 过渡，区别是在动画中 `v-enter` 类名在节点插入 DOM 后不会立即删除，而是在 `animationend` 事件触发时删除。
+
+```css
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+```
 
 ##### 库
 
@@ -1006,14 +1075,123 @@ animate
 
 ##### js钩子
 
+```vue
+<transition
+  v-on:before-enter="beforeEnter"
+  v-on:enter="enter"
+  v-on:after-enter="afterEnter"
+  v-on:enter-cancelled="enterCancelled"
+
+  v-on:before-leave="beforeLeave"
+  v-on:leave="leave"
+  v-on:after-leave="afterLeave"
+  v-on:leave-cancelled="leaveCancelled"
+>
+  <!-- ... -->
+</transition>
+```
+
+可以结合 CSS `transitions/animations` 使用，也可以单独使用。
+
 velocity（js动画库）
+
+```vue
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+
+<div id="example-4">
+  <button @click="show = !show">
+    Toggle
+  </button>
+  <transition
+    v-on:before-enter="beforeEnter"
+    v-on:enter="enter"
+    v-on:leave="leave"
+    v-bind:css="false"
+  >
+    <p v-if="show">
+      Demo
+    </p>
+  </transition>
+</div>
+
+
+new Vue({
+  el: '#example-4',
+  data: {
+    show: false
+  },
+  methods: {
+    beforeEnter: function (el) {
+      el.style.opacity = 0
+      el.style.transformOrigin = 'left'
+    },
+    enter: function (el, done) {
+      Velocity(el, { opacity: 1, fontSize: '1.4em' }, { duration: 300 })
+      Velocity(el, { fontSize: '1em' }, { complete: done })
+    },
+    leave: function (el, done) {
+      Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+      Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
+      Velocity(el, {
+        rotateZ: '45deg',
+        translateY: '30px',
+        translateX: '30px',
+        opacity: 0
+      }, { complete: done })
+    }
+  }
+})
+```
+
+**可以通过 `appear` attribute 设置节点在初始渲染的过渡**
 
 ##### 多元素过渡
 
-key，mode
+key
 
-多组件：is动态组件
+过渡模式：mode
+
+- `in-out`：新元素先进行过渡，完成之后当前元素过渡离开。
+- `out-in`：当前元素先进行过渡，完成之后新元素过渡进入。
+
+##### 多组件过渡
+
+is动态组件
 
 ##### 列表过渡
 
-transition-group，key，for
+`<transition-group>`
+
+- 不同于 `<transition>`，它会以一个真实元素呈现：默认为一个 `<span>`。你也可以通过 `tag` attribute 更换为其他元素。
+- [过渡模式](https://cn.vuejs.org/v2/guide/transitions.html#过渡模式)不可用，因为我们不再相互切换特有的元素。
+- 内部元素**总是需要**提供唯一的 `key` attribute 值。
+- CSS 过渡的类将会应用在内部的元素中，而不是这个组/容器本身。
+
+`<transition-group>` 组件还有一个特殊之处。不仅可以进入和离开动画，还可以改变定位。要使用这个新功能只需了解新增的 **v-move class**，它会在元素的改变定位的过程中应用。内部的实现，Vue 使用了一个叫 [FLIP](https://aerotwist.com/blog/flip-your-animations/) 简单的动画队列使用 transforms 将元素从之前的位置平滑过渡新的位置。
+
+```css
+/* 列表动画 */
+.list-enter-active,
+.list-leave-active {
+    transition: all .5s ease;
+}
+.list-leave-active {
+    /* -leave-active可以改变定位与-move结合使用 */
+    /* 可以让过渡更加平滑 */
+    position: absolute;
+}
+.list-move {
+    transition: all .5s ease;
+}
+.list-enter,
+.list-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+}
+```
+
+需要注意的是使用 FLIP 过渡的元素不能设置为 `display: inline` 。作为替代方案，可以设置为 `display: inline-block` 或者放置于 flex 中
+
+##### 其他
+
+复用过渡，动态过渡，状态过渡
