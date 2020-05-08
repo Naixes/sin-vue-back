@@ -1,5 +1,19 @@
 <template>
 	<div id="demo">
+		<!-- slides -->
+		<div class="box">
+			<s-slides :selected.sync="selected">
+				<s-slides-item name="1">
+					<div style="height:300px;">1</div>
+				</s-slides-item>
+				<s-slides-item name="2">
+					<div style="height:300px;">2</div>
+				</s-slides-item>
+				<s-slides-item name="3">
+					<div style="height:300px;">3</div>
+				</s-slides-item>
+			</s-slides>
+		</div>
 		<!-- cascader -->
 		<!-- 动态 -->
 		<div class="box">
@@ -251,6 +265,8 @@
     import CollapseItem from './collapseItem'
     import Cascader from './cascader'
 	import CascaderItem from './cascaderItem'
+    import Slides from './slides'
+	import SlidesItem from './slidesItem'
 
 	import db from './db'
 	
@@ -274,7 +290,6 @@
     export default {
         name: "demo",
         components: {
-
             's-button': Button,
             's-button-group': ButtonGroup,
 
@@ -305,10 +320,16 @@
             's-collapse-item': CollapseItem,
 
             's-cascader': Cascader,
-            's-cascader-item': CascaderItem
+            's-cascader-item': CascaderItem,
+
+            's-slides': Slides,
+            's-slides-item': SlidesItem
         },
     data () {
       return {
+		// slides
+		selected: '1',
+
 		loading: false,
 		msg: 'hi',
 		tabsSelected: 'sports',
