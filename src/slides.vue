@@ -1,18 +1,18 @@
 <template>
-  <div class="s-slides">
+  <div class="s-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <div class="s-slides-window">
       <slot></slot>
       <div class="s-slides-arrow">
-        <span class="s-slides-arrow-left">
+        <span class="s-slides-arrow-left" @click="onClickPrev">
           <s-icon name="left"></s-icon>
         </span>
-        <span class="s-slides-arrow-right">
+        <span class="s-slides-arrow-right" @click="onClickNext">
           <s-icon name="right"></s-icon>
         </span>
       </div>
     </div>
     <div class="s-slides-dots">
-      <span :class="{active: selectedIndex === n-1}" v-for="n in itemsLength" :key="n">{{n}}</span>
+      <span :class="{active: selectedIndex === n-1}" v-for="n in itemsLength" :key="n" @click="select(n-1, selectedIndex > n-1)">{{n}}</span>
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
     },
     autoPlayDelay: {
       type: Number,
-      default: 1000
+      default: 5000
     }
   },
   computed: {
@@ -64,14 +64,27 @@ export default {
       itemsLength: 0
     }
   },
-  updated() {
-    // 更新子组件
-    this.updateChildren()
-  },
+  // updated() {
+  //   console.log('updated')
+  //   // 更新子组件
+  //   this.updateChildren()
+  // },
   beforeDestroy() {
     this.pause()
   },
   methods: {
+    onClickPrev() {
+      this.select(this.selectedIndex - 1, true)
+    },
+    onClickNext() {
+      this.select(this.selectedIndex + 1, false)
+    },
+    onMouseEnter() {
+      this.pause()
+    },
+    onMouseLeave() {
+      this.playAutomatically()
+    },
     playAutomatically() {
       // 使用setTimeout模拟setInterval
       if(this.timerId) { return }
@@ -83,15 +96,26 @@ export default {
         this.select(newIndex)
         this.timerId = setTimeout(run, this.autoPlayDelay)
       }
-      this.timerId = setTimeout(run(), this.autoPlayDelay)
+      this.timerId = setTimeout(run, this.autoPlayDelay)
     },
-    select(newIndex) {
+    select(newIndex, reverse) {
+      let index = newIndex
+      console.log('newIndex', newIndex)
+      newIndex === this.names.length && (index = 0)
+      newIndex === -1 && (index = this.names.length - 1)
       // 触发updated
-      this.$emit("update:selected", this.names[newIndex])
+      this.$emit("update:selected", this.names[index])
+      // 更新子组件
+      this.updateChildren(reverse)
     },
-    updateChildren() {
+    updateChildren(reverse) {
+      console.log(reverse)
       this.items.forEach(vm => {
-        vm.selected = this._selected
+        vm.reverse = reverse
+        // !!!注意这里要使用nextTick
+        this.$nextTick(() => {
+          vm.selected = this._selected
+        })
       });
     },
     pause() {

@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <div class="g-slides-item" v-if="visible">
+    <div class="s-slides-item" v-if="visible" :class="{reverse: reverse}">
         <slot></slot>
     </div>
   </transition>
@@ -23,7 +23,9 @@ export default {
   data() { 
     return {
       // 由父组件修改
-      selected: undefined
+      selected: undefined,
+      // 控制动画方向，由父组件修改
+      reverse: false
     }
   }
  }
@@ -44,5 +46,11 @@ export default {
   }
   .slide-leave-to {
     transform: translateX(-100%) ;
+  }
+  .slide-enter.reserve {
+    transform: translateX(-100%) ;
+  }
+  .slide-leave-to.reserve {
+    transform: translateX(100%) ;
   }
 </style>
