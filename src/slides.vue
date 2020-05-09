@@ -1,11 +1,26 @@
 <template>
-  <div class="g-slides">
-    <slot></slot>
+  <div class="s-slides">
+    <div class="s-slides-window">
+      <slot></slot>
+      <div class="s-slides-arrow">
+        <span class="s-slides-arrow-left">
+          <s-icon name="left"></s-icon>
+        </span>
+        <span class="s-slides-arrow-right">
+          <s-icon name="right"></s-icon>
+        </span>
+      </div>
+    </div>
+    <div class="s-slides-dots">
+      <span :class="{active: selectedIndex === n-1}" v-for="n in itemsLength" :key="n">{{n}}</span>
+    </div>
   </div>
 </template>
 
 <script>
+import SIcon from './icon'
 export default {
+  components: {SIcon},
   name: '',
   props: {
     selected: {
@@ -32,16 +47,21 @@ export default {
     // 当前的选中的name
     _selected(){
       return this.selected || this.items[0].name
+    },
+    selectedIndex() {
+      return this.names.indexOf(this._selected)
     }
   },
   mounted() {
     // 初始化子组件参数
     this.updateChildren()
     this.autoPlay && this.playAutomatically()
+    this.itemsLength = this.items.length
   },
   data() {
     return {
-      timerId: undefined
+      timerId: undefined,
+      itemsLength: 0
     }
   },
   updated() {
@@ -83,9 +103,46 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .g-slides {
-    border: 1px solid black;
-    position: relative;
-    overflow: hidden;
+  .s-slides {
+    &-dots {
+      display: flex;
+      justify-content: center;
+      >span {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+        width: 20px;
+        height: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+        margin: 10px 10px;
+        &:hover, &.active {
+          cursor: pointer;
+          color: #fff;
+          background-color: #333;
+        }
+      }
+    }
+    &-window {
+      background-color: #eee;
+      position: relative;
+      overflow: hidden;
+      .s-slides-arrow {
+        span {
+          position: absolute;
+          top: 50%;
+          svg {
+            fill: #aaa;
+          }
+          svg:hover {
+            cursor: pointer;
+            fill: #333;
+          }
+        }
+        .s-slides-arrow-left { left: 0; }
+        .s-slides-arrow-right { right: 0; }
+      }
+    }
   }
 </style>
