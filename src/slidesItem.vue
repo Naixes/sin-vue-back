@@ -1,7 +1,9 @@
 <template>
-  <div class="g-slides-item" v-if="visible">
-      <slot></slot>
-  </div>
+  <transition name="slide">
+    <div class="g-slides-item" v-if="visible">
+        <slot></slot>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -28,6 +30,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .g-slides-item {
+  .slide-enter-active, .slide-leave-active {
+    transition: all 0.5s;
+  }
+  .slide-leave-active {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .slide-enter {
+    transform: translateX(100%) ;
+  }
+  .slide-leave-to {
+    transform: translateX(-100%) ;
   }
 </style>
