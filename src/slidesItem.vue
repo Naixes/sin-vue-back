@@ -1,7 +1,8 @@
+
 <template>
   <transition name="slide">
-    <div class="s-slides-item" v-if="visible" :class="{reverse: reverse}">
-        <slot></slot>
+    <div class="g-slides-item" v-if="visible" :class="{reverse}">
+      <slot></slot>
     </div>
   </transition>
 </template>
@@ -42,15 +43,19 @@ export default {
     height: 100%;
   }
   .slide-enter {
-    transform: translateX(100%) ;
+    transform: translateX(100%);
+    opacity: 0;
   }
   .slide-leave-to {
-    transform: translateX(-100%) ;
+    transform: translateX(-100%) scale(0.5);
+    opacity: 0;
   }
   .slide-enter.reserve {
-    transform: translateX(-100%) ;
+    transform: translateX(-100%);
+    opacity: 0;
   }
   .slide-leave-to.reserve {
-    transform: translateX(100%) ;
+    transform: translateX(100%) scale(0.5);
+    opacity: 0;
   }
 </style>
