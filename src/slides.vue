@@ -1,5 +1,5 @@
 <template>
-  <div class="s-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+  <div class="s-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
     <div class="s-slides-window">
       <slot></slot>
       <div class="s-slides-arrow">
@@ -61,7 +61,9 @@ export default {
   data() {
     return {
       timerId: undefined,
-      itemsLength: 0
+      itemsLength: 0,
+      startTouch: undefined,
+      endTouch: undefined
     }
   },
   // updated() {
@@ -73,6 +75,38 @@ export default {
     this.pause()
   },
   methods: {
+    // 移动端
+    onTouchStart(e) {
+      console.log(e.changedTouches[0])
+      this.pause()
+      // 多个手指
+      if(e.touches.length > 1) { return }
+      this.startTouch = e.touches[0]
+    },
+    onTouchMove() {
+    },
+    onTouchEnd(e) {
+      console.log(e.changedTouches[0])
+      this.endTouch = e.changedTouches[0]
+      let {clientX: startX, clientY: startY} = this.startTouch
+      let {clientX: endX, clientY: endY} = this.endTouch
+      let distance = Math.sqrt(Math.pow(endX-startX, 2) + Math.pow(endY-startY, 2))
+      let distanceY = Math.abs(endY-startY)
+      // rate越大越接近水平滑动
+      let rate = distance / distanceY
+      if(rate > 2) {
+        let reverse = endX > startX
+        if(reverse) {
+          this.select(this.selectedIndex - 1 , reverse)
+        }else {
+          this.select(this.selectedIndex + 1 , reverse)
+        }
+      }
+      this.$nextTick(() => {
+        this.playAutomatically()
+      })
+    },
+    // 左右箭头
     onClickPrev() {
       this.select(this.selectedIndex - 1, true)
     },
@@ -89,7 +123,6 @@ export default {
       // 使用setTimeout模拟setInterval
       if(this.timerId) { return }
       let run = () => {
-        console.log('run')
         let index = this.names.indexOf(this._selected)
         let newIndex = index + 1
         // 更新当前项
@@ -100,7 +133,6 @@ export default {
     },
     select(newIndex, reverse) {
       let index = newIndex
-      console.log('newIndex', newIndex)
       newIndex === this.names.length && (index = 0)
       newIndex === -1 && (index = this.names.length - 1)
       // 触发updated
@@ -109,7 +141,6 @@ export default {
       this.updateChildren(reverse)
     },
     updateChildren(reverse) {
-      console.log(reverse)
       this.items.forEach(vm => {
         vm.reverse = reverse
         // !!!注意这里要使用nextTick
