@@ -1,4 +1,3 @@
-
 <template>
   <transition name="slide">
     <div class="g-slides-item" v-if="visible" :class="{reverse}">
@@ -50,11 +49,11 @@ export default {
     transform: translateX(-100%) scale(0.5);
     opacity: 0;
   }
-  .slide-enter.reserve {
+  .slide-enter.reverse {
     transform: translateX(-100%);
     opacity: 0;
   }
-  .slide-leave-to.reserve {
+  .slide-leave-to.reverse {
     transform: translateX(100%) scale(0.5);
     opacity: 0;
   }
