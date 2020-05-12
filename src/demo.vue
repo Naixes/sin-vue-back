@@ -4,7 +4,11 @@
 		<div class="box">
 			<s-nav :selected.sync = "selectedNav">
 				<s-nav-item name="home">首页</s-nav-item>
-				<s-nav-item name="product">商品</s-nav-item>
+				<s-sub-nav name="product">
+					<span slot="title">商品</span>
+					<s-nav-item name="electronic">电子产品</s-nav-item>
+					<s-nav-item name="daily">日常用品</s-nav-item>
+				</s-sub-nav>
 				<s-nav-item name="finance">财务</s-nav-item>
 			</s-nav>
 		</div>
@@ -277,6 +281,7 @@
 	import SlidesItem from './slidesItem'
     import Snav from './nav'
 	import SnavItem from './navItem'
+	import SsubNav from './subNav'
 
 	import db from './db'
 	
@@ -336,7 +341,8 @@
             's-slides-item': SlidesItem,
 
             's-nav': Snav,
-            's-nav-item': SnavItem
+            's-nav-item': SnavItem,
+            's-sub-nav': SsubNav
         },
     data () {
       return {
