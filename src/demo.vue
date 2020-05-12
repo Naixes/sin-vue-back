@@ -1,8 +1,16 @@
 <template>
 	<div id="demo">
+		<!-- nav -->
+		<div class="box">
+			<s-nav :selected.sync = "selectedNav">
+				<s-nav-item name="home">首页</s-nav-item>
+				<s-nav-item name="product">商品</s-nav-item>
+				<s-nav-item name="finance">财务</s-nav-item>
+			</s-nav>
+		</div>
 		<!-- slides -->
 		<div class="box">
-			<s-slides :selected.sync="selected">
+			<s-slides :selected.sync="selectedSlides">
 				<s-slides-item name="1">
 					<div style="height:300px;">1</div>
 				</s-slides-item>
@@ -267,6 +275,8 @@
 	import CascaderItem from './cascaderItem'
     import Slides from './slides'
 	import SlidesItem from './slidesItem'
+    import Snav from './nav'
+	import SnavItem from './navItem'
 
 	import db from './db'
 	
@@ -323,12 +333,17 @@
             's-cascader-item': CascaderItem,
 
             's-slides': Slides,
-            's-slides-item': SlidesItem
+            's-slides-item': SlidesItem,
+
+            's-nav': Snav,
+            's-nav-item': SnavItem
         },
     data () {
       return {
+		// nav
+		selectedNav: ['home'],
 		// slides
-		selected: '1',
+		selectedSlides: '1',
 
 		loading: false,
 		msg: 'hi',
