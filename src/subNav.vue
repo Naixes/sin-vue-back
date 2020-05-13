@@ -1,13 +1,13 @@
 <template>
-  <div class="s-sub-nav" :class="{active: opened}" v-click-outside="close">
+  <div class="s-sub-nav" :class="{'active': opened || active, vertical}" v-click-outside="close">
       <!-- tab的标题 -->
-      <span class="s-sub-nav-label" @click="open">
+      <div class="s-sub-nav-label" @click="open">
         <slot name="title"></slot>
         <span class="s-sub-nav-icon" :class="{opened}">
           <s-icon name="right"></s-icon>
         </span>
-      </span>
-      <div class="s-sub-nav-popover" v-show="opened">
+      </div>
+      <div class="s-sub-nav-popover" :class="{vertical}" v-show="opened">
           <slot></slot>
       </div>
   </div>
@@ -21,7 +21,7 @@ export default {
   directives: {ClickOutside},
   name: '',
   // nav组件  
-  inject: ['root'],
+  inject: ['root', 'vertical'],
   props: {
       name: {
           type: String
@@ -29,6 +29,16 @@ export default {
   },
   created() {
       this.root.addItems(this)
+  },
+  computed: {
+    active: {
+      get() {
+        return this.root.namePath.includes(this.name)
+      },
+      set(val) {
+        return val
+      }
+    }
   },
   data() { 
     return {
@@ -54,17 +64,19 @@ export default {
 @import 'var';
 
 .s-sub-nav {
-  padding: 10px 20px;
+  // padding: 10px 20px;
   position: relative;
-  display: inline-block;
   cursor: pointer;
-  &.active::after {
+    &:not(.vertical).active::after {
       content: '';
       width: 100%;
       position: absolute;
       left: 0;
       bottom: -1px;
       border-bottom: 1px solid $blue;
+    }
+  &-label {
+    padding: 10px 20px;
   }
   &-icon {
     position: absolute;
@@ -83,11 +95,17 @@ export default {
     margin-top: 2px;
     border: 1px solid $border-color;
     border-radius: $border-radius;
+    font-size: $font-size;
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
     background-color: #fff;
     position: absolute;
     left: 0;
     top: 100%;
+    &.vertical {
+      position: static;
+      border: 0;
+      filter: none;
+    }
     .s-nav-item {
       white-space: nowrap;
       color: $color;
@@ -103,8 +121,11 @@ export default {
   &.active::after {
     display: none;
   }
-  &.active {
+  &:not(.vertical).active {
     background-color: $background-selected-color;
+  }
+  &.vertical.active {
+    color: $blue;
   }
 }
 // popover里的sub-nav

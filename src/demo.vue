@@ -16,6 +16,21 @@
 				<s-nav-item name="finance">财务</s-nav-item>
 			</s-nav>
 		</div>
+		<div class="box" style="width:200px;">
+			<s-nav :selected.sync = "selectedNav" vertical>
+				<s-nav-item name="home">首页</s-nav-item>
+				<s-sub-nav name="product">
+					<span slot="title">商品</span>
+					<s-nav-item name="daily">日常用品</s-nav-item>
+					<s-sub-nav name="electronic">
+						<span slot="title">电子产品</span>
+						<s-nav-item name="watch">手表</s-nav-item>
+						<s-nav-item name="phone">手机</s-nav-item>
+					</s-sub-nav>
+				</s-sub-nav>
+				<s-nav-item name="finance">财务</s-nav-item>
+			</s-nav>
+		</div>
 		<!-- slides -->
 		<div class="box">
 			<s-slides :selected.sync="selectedSlides">

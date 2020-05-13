@@ -1,5 +1,5 @@
 <template>
-  <div class="s-nav">
+  <div class="s-nav" :class="{vertical}">
       <slot></slot>
   </div>
 </template>
@@ -10,12 +10,17 @@ export default {
   // 向子组件提供本组件实例，由于子组件有多种并且有嵌套关系所以选择使用provide  
   provide() {
       return {
-        root: this
+        root: this,
+        vertical: this.vertical
       }
   },
   props: {
       selected: {
           type: Array
+      },
+      vertical: {
+          type: Boolean,
+          default: false
       }
   },
   data() { 
@@ -60,6 +65,13 @@ export default {
 @import 'var';
 
 .s-nav {
+    display: flex;
     border-bottom: 1px solid $border-color;
+    // 垂直模式
+    &.vertical {
+        background-color: $background-color-lighter;
+        border: 1px solid $border-color;
+        flex-direction: column;
+    }
 }
 </style>
