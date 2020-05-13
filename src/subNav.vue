@@ -98,7 +98,6 @@ export default {
 @import 'var';
 
 .s-sub-nav {
-  // padding: 10px 20px;
   position: relative;
   cursor: pointer;
     &:not(.vertical).active::after {
@@ -110,11 +109,12 @@ export default {
       border-bottom: 1px solid $blue;
     }
   &-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
   }
   &-icon {
-    position: absolute;
-    top: 12px;
     transition: transform .5s;
     &.opened {
       transform: rotate(90deg);
@@ -142,6 +142,7 @@ export default {
       overflow: hidden;
       position: static;
       border: 0;
+      border-radius: 0;
       filter: none;
     }
     .s-nav-item {
@@ -159,15 +160,12 @@ export default {
   &.active::after {
     display: none;
   }
-  &:not(.vertical).active {
+  &.active {
     background-color: $background-selected-color;
-  }
-  &.vertical.active {
-    color: $blue;
   }
 }
 // popover里的sub-nav
-.s-sub-nav-popover .s-sub-nav {
+.s-sub-nav-popover:not(.vertical) .s-sub-nav {
   // 取消sub-nav下划线，这里的&代表.s-sub-nav
   &.active::after {
     display: none;
@@ -176,10 +174,6 @@ export default {
     white-space: nowrap;
     display: flex;
     align-items: center;
-  }
-  &-icon {
-    position: relative;
-    top: 2px;
   }
   &-popover {
     left: 100%;

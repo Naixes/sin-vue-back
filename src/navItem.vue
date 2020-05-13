@@ -51,7 +51,7 @@ export default {
         border-bottom: 1px solid $blue;
     }
     &.active.vertical {
-        color: $blue;
+        background-color: $background-selected-color;
     }
 }
 </style>
