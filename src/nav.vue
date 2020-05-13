@@ -21,7 +21,9 @@ export default {
   data() { 
     return {
         // 子组件数组
-        items: []
+        items: [],
+        // 当前选择的路径，在item组件中更改
+        namePath: []
     }
   },
   mounted() {

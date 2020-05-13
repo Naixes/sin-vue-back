@@ -6,8 +6,12 @@
 				<s-nav-item name="home">首页</s-nav-item>
 				<s-sub-nav name="product">
 					<span slot="title">商品</span>
-					<s-nav-item name="electronic">电子产品</s-nav-item>
 					<s-nav-item name="daily">日常用品</s-nav-item>
+					<s-sub-nav name="electronic">
+						<span slot="title">电子产品</span>
+						<s-nav-item name="watch">手表</s-nav-item>
+						<s-nav-item name="phone">手机</s-nav-item>
+					</s-sub-nav>
 				</s-sub-nav>
 				<s-nav-item name="finance">财务</s-nav-item>
 			</s-nav>
@@ -255,33 +259,33 @@
 </template>
 <script>
     import Vue from 'vue'
-    import Button from './button'
-    import Icon from './icon'
-    import ButtonGroup from './buttonGroup'
-    import Input from './input'
-    import Row from './row'
-    import Col from './col'
-    import Layout from './layout'
-    import Header from './header'
-    import Aside from './aside'
-    import Content from './content'
-    import Footer from './footer'
-    import Toast from './toast'
-    import Tabs from './tabs'
-    import TabsHeader from './tabsHeader'
-    import TabsItem from './tabsItem'
-    import TabsBody from './tabsBody'
-    import TabsPanel from './tabsPanel'
-    import Popover from './popover'
-    import Collapse from './collapse'
-    import CollapseItem from './collapseItem'
-    import Cascader from './cascader'
-	import CascaderItem from './cascaderItem'
-    import Slides from './slides'
-	import SlidesItem from './slidesItem'
-    import Snav from './nav'
-	import SnavItem from './navItem'
-	import SsubNav from './subNav'
+    import SButton from './button'
+    import SIcon from './icon'
+    import SButtonGroup from './buttonGroup'
+    import SInput from './input'
+    import SRow from './row'
+    import SCol from './col'
+    import SLayout from './layout'
+    import SHeader from './header'
+    import SAside from './aside'
+    import SContent from './content'
+    import SFooter from './footer'
+    import SToast from './toast'
+    import STabs from './tabs'
+    import STabsHeader from './tabsHeader'
+    import STabsItem from './tabsItem'
+    import STabsBody from './tabsBody'
+    import STabsPanel from './tabsPanel'
+    import SPopover from './popover'
+    import SCollapse from './collapse'
+    import SCollapseItem from './collapseItem'
+    import SCascader from './cascader'
+	import SCascaderItem from './cascaderItem'
+    import SSlides from './slides'
+	import SSlidesItem from './slidesItem'
+    import SNav from './nav'
+	import SNavItem from './navItem'
+	import SSubNav from './subNav'
 
 	import db from './db'
 	
@@ -305,44 +309,44 @@
     export default {
         name: "demo",
         components: {
-            's-button': Button,
-            's-button-group': ButtonGroup,
+            SButton,
+            SButtonGroup,
 
-            's-icon': Icon,
+            SIcon,
 
-            's-input': Input,
+            SInput,
 
-            's-row': Row,
-            's-col': Col,
+            SRow,
+            SCol,
 
-            's-layout': Layout,
-            's-header': Header,
-            's-aside': Aside,
-            's-content': Content,
-            's-footer': Footer,
+            SLayout,
+            SHeader,
+            SAside,
+            SContent,
+            SFooter,
 
-            's-toast': Toast,
+            SToast,
 
-            's-tabs': Tabs,
-            's-tabs-header': TabsHeader,
-            's-tabs-item': TabsItem,
-            's-tabs-body': TabsBody,
-            's-tabs-panel': TabsPanel,
+            STabs,
+            STabsHeader,
+            STabsItem,
+            STabsBody,
+            STabsPanel,
 
-            's-popover': Popover,
+            SPopover,
 
-            's-collapse': Collapse,
-            's-collapse-item': CollapseItem,
+            SCollapse,
+            SCollapseItem,
 
-            's-cascader': Cascader,
-            's-cascader-item': CascaderItem,
+            SCascader,
+            SCascaderItem,
 
-            's-slides': Slides,
-            's-slides-item': SlidesItem,
+            SSlides,
+            SSlidesItem,
 
-            's-nav': Snav,
-            's-nav-item': SnavItem,
-            's-sub-nav': SsubNav
+            SNav,
+            SNavItem,
+            SSubNav
         },
     data () {
       return {

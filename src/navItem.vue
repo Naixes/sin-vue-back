@@ -25,6 +25,10 @@ export default {
   },
   methods: {
       select() {
+          // 更新选择路径
+          this.root.namePath = []
+          this.$parent.updateNamePath && this.$parent.updateNamePath()
+          // 更新当前选中  
           this.$emit("add:selected", this.name)
       }
   }
@@ -35,7 +39,7 @@ export default {
 @import 'var';
 
 .s-nav-item {
-    padding: 20px;
+    padding: 10px 20px;
     display: inline-block;
     position: relative;
     cursor: pointer;
