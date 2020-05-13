@@ -7,9 +7,18 @@
           <s-icon name="right"></s-icon>
         </span>
       </div>
-      <div class="s-sub-nav-popover" :class="{vertical}" v-show="opened">
-          <slot></slot>
-      </div>
+      <template v-if="vertical">
+        <transition @enter="enter" @leave="leave" @after-enter="afterEnter" @after-leave="afterLeave">
+          <div class="s-sub-nav-popover" :class="{vertical}" v-show="opened">
+              <slot></slot>
+          </div>
+        </transition>
+      </template>
+      <template v-else>
+          <div class="s-sub-nav-popover" :class="{vertical}" v-show="opened">
+              <slot></slot>
+          </div>
+      </template>
   </div>
 </template>
 
@@ -24,7 +33,8 @@ export default {
   inject: ['root', 'vertical'],
   props: {
       name: {
-          type: String
+          type: String,
+          required:true
       }
   },
   created() {
@@ -46,6 +56,30 @@ export default {
     }
   },
   methods: {
+    enter(el, done) {
+      let {height} = el.getBoundingClientRect()
+      el.style.height = 0
+      el.getBoundingClientRect()
+      el.style.height = `${height}px`
+      el.addEventListener('transitionend', () => {
+        done()
+      })
+    },
+    leave(el, done) {
+      let {height} = el.getBoundingClientRect()
+      el.style.height = `${height}px`
+      el.getBoundingClientRect()
+      el.style.height = 0
+      el.addEventListener('transitionend', () => {
+        done()
+      })
+    },
+    afterEnter(el) {
+        el.style.height = 'auto'
+    },
+    afterLeave(el) {
+        el.style.height = 'auto'
+    },
     close() {
       this.opened = false
     },
@@ -91,6 +125,8 @@ export default {
     }
   }
   &-popover {
+    // 动画
+    transition: height 250ms;
     z-index: 1;
     margin-top: 2px;
     border: 1px solid $border-color;
@@ -102,6 +138,8 @@ export default {
     left: 0;
     top: 100%;
     &.vertical {
+      // 动画
+      overflow: hidden;
       position: static;
       border: 0;
       filter: none;
