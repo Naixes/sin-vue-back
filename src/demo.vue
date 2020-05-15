@@ -1,5 +1,9 @@
 <template>
 	<div id="demo">
+		<!-- pager -->
+		<div class="box">
+			<s-pager :total="5" :current.sync="currentPage"></s-pager>
+		</div>
 		<!-- nav -->
 		<div class="box">
 			<s-nav :selected.sync = "selectedNav">
@@ -301,6 +305,7 @@
     import SNav from './nav'
 	import SNavItem from './navItem'
 	import SSubNav from './subNav'
+	import SPager from './pager'
 
 	import db from './db'
 	
@@ -361,10 +366,14 @@
 
             SNav,
             SNavItem,
-            SSubNav
+			SSubNav,
+
+			SPager
         },
     data () {
       return {
+		// pager
+		currentPage: 1,
 		// nav
 		selectedNav: ['home'],
 		// slides

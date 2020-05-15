@@ -122,6 +122,7 @@ export default {
     .s-icon {
       width: 0.8em;
       height: 0.8em;
+      margin: -1px 0.2em;
     }
   }
   &-popover {
