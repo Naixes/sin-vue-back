@@ -2,7 +2,7 @@
 	<div id="demo">
 		<!-- pager -->
 		<div class="box">
-			<s-pager :total="5" :current.sync="currentPage"></s-pager>
+			<s-pager :total="6" :current.sync="currentPage"></s-pager>
 		</div>
 		<!-- nav -->
 		<div class="box">
