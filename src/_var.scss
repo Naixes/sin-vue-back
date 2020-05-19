@@ -16,6 +16,10 @@ $background-color-lighter: #eee;
 $background-hover-color: #eee;
 $background-selected-color: #ddd;
 
+$icon-width: 0.6em;
+$icon-height: 0.6em;
+$icon-margin: 0.1em 0.2em;
+
 .box-shadow {
     // h-shadow v-shadow blur spread color inset;
     box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.25);

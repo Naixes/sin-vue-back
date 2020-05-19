@@ -4,6 +4,8 @@
         <table class="s-table" :class="{striped}">
             <thead>
                 <tr>
+                    <!-- 展开项：占位 -->
+                    <th :style="{width: '50px'}" v-if="expendField"></th>
                     <!-- 勾选框 -->
                     <th :style="{width: '50px'}" v-if="checkable">
                         <input @change="checkAll" type="checkbox" :checked="isAllChecked">
@@ -12,13 +14,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="data in dataSource" :key="data.id">
-                    <!-- 勾选框 -->
-                    <td :style="{width: '50px'}" v-if="checkable">
-                        <input @change="checkItem(data, $event)" type="checkbox" :checked="isChecked(data)">
-                    </td>
-                    <td :style="{width: `${column.width}px`}" v-for="column in columns" :key="column.field">{{data[column.field]}}</td>
-                </tr>
+                <template v-for="data in dataSource">
+                    <tr :key="data.id">
+                        <!-- 展开按钮 -->
+                        <td :style="{width: '50px'}" v-if="expendField">
+                            <s-icon name="right" @click="expendItem(data.id)"></s-icon>
+                        </td>
+                        <!-- 勾选框 -->
+                        <td :style="{width: '50px'}" v-if="checkable">
+                            <input @change="checkItem(data, $event)" type="checkbox" :checked="isChecked(data)">
+                        </td>
+                        <td :style="{width: `${column.width}px`}" v-for="column in columns" :key="column.field">{{data[column.field]}}</td>
+                    </tr>
+                    <!-- 展开内容 -->
+                    <tr v-if="isExpend(data.id)" :key="`${data.id}-expend`">
+                        <td :colspan="expendedCellColSpan">{{data[expendField] || '-'}}</td>
+                    </tr>
+                </template>
             </tbody>
         </table>
       </div>
@@ -37,14 +49,21 @@ export default {
       SIcon
   },
   props: {
+      // 可展开项的字段名  
+      expendField: {
+          type: String,
+      },
+      // 选中项
       selected: {
           type: Array,
           default: () => ([])
       },
+      // 是否可勾选
       checkable: {
           type: Boolean,
           default: false
       },
+      // 条纹
       striped: {
           type: Boolean,
           default: true
@@ -82,14 +101,32 @@ export default {
               }
           }
           return equal
+      },
+      // 扩展项所占列数  
+      expendedCellColSpan() {
+          let span = this.columns.length
+          if(this.checkable) {span += 1}
+          if(this.expendField) {span += 1}
+          return span
       }
   },
   data() { 
     return {
-
+        // 展开项的id数组
+        expendIds: []
     }
   },
   methods: {
+      isExpend(id) {
+          return this.expendIds.some(i => i === id)
+      },
+      expendItem(id) {
+          if(this.isExpend(id)) {
+              this.expendIds.splice(this.expendIds.indexOf(id), 1)
+          }else {
+              this.expendIds.push(id)
+          }
+      },
       isChecked(item) {
           return this.selected.filter(i => i.id === item.id).length > 0
       },
@@ -125,6 +162,14 @@ export default {
             border-bottom: 1px solid $border-color-lighter;
             padding: 8px;
         }
+        td {
+            .s-icon {
+                width: $icon-width;
+                height: $icon-height;
+                margin: $icon-margin;
+                cursor: pointer;
+            }
+        }
         // 条纹
         &.striped {
             tbody {
@@ -151,7 +196,7 @@ export default {
         width: 100%;
         top: 0;
         left: 0;
-        svg {
+        .s-icon {
             width: 50px;
             height: 50px;
             @include spin;

@@ -1,5 +1,6 @@
 <template>
-    <svg v-if="name" class="s-icon">
+    <!-- 可以在组件上绑定click事件 -->
+    <svg v-if="name" class="s-icon" @click="$emit('click', $event)">
         <use :xlink:href="`#i-${name}`"></use>
     </svg>
 </template>

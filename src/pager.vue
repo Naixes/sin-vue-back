@@ -72,9 +72,9 @@ export default {
         display: none;
     }
     .s-icon {
-        width: 0.6em;
-        height: 0.6em;
-        margin: 0.1em 0.2em;
+        width: $icon-width;
+        height: $icon-height;
+        margin: $icon-margin;
     }
     &-prev,
     &-next,
