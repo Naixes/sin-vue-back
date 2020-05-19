@@ -2,7 +2,8 @@
 	<div id="demo">
 		<!-- table -->
 		<div class="box">
-			<s-table :height="400" :data-source="tableData" :columns="tableColumns" :loading="loading"></s-table>
+			{{tableSelected}}
+			<s-table :height="400" checkable :selected.sync="tableSelected" :data-source="tableData" :columns="tableColumns" :loading="loading"></s-table>
 		</div>
 		<div class="box">
 			<s-table loading :height="400" :data-source="tableData" :columns="tableColumns"></s-table>
@@ -382,6 +383,7 @@
     data () {
       return {
 		// table  
+		tableSelected: [],
         tableColumns: [
           {text: '姓名', field: 'name', width: 100}, // 1
           {text: '分数', field: 'score'},

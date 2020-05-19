@@ -1,15 +1,23 @@
 <template>
   <div class="s-table-wrapper">
       <div :style="{height: `${height}px`, overflow: 'auto'}">
-        <table class="s-table">
+        <table class="s-table" :class="{striped}">
             <thead>
                 <tr>
+                    <!-- 勾选框 -->
+                    <th :style="{width: '50px'}" v-if="checkable">
+                        <input @change="checkAll" type="checkbox" :checked="isAllChecked">
+                    </th>
                     <th v-for="column in columns" :key="column.field">{{column.text}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="data in dataSource" :key="data.id">
-                    <td v-for="column in columns" :key="column.field">{{data[column.field]}}</td>
+                    <!-- 勾选框 -->
+                    <td :style="{width: '50px'}" v-if="checkable">
+                        <input @change="checkItem(data, $event)" type="checkbox" :checked="isChecked(data)">
+                    </td>
+                    <td :style="{width: `${column.width}px`}" v-for="column in columns" :key="column.field">{{data[column.field]}}</td>
                 </tr>
             </tbody>
         </table>
@@ -29,6 +37,18 @@ export default {
       SIcon
   },
   props: {
+      selected: {
+          type: Array,
+          default: () => ([])
+      },
+      checkable: {
+          type: Boolean,
+          default: false
+      },
+      striped: {
+          type: Boolean,
+          default: true
+      },
       height: {
           type: Number
       },
@@ -48,10 +68,44 @@ export default {
           }
       }
   },
+  computed: {
+      // 根据id判断是否全选  
+      isAllChecked() {
+          const dataSourceIds = this.dataSource.map(item => item.id).sort()
+          const selectedIds = this.selected.map(item => item.id).sort()
+          if(dataSourceIds.length !== selectedIds.length) { return false}
+          let equal = true
+          for (let index = 0; index < dataSourceIds.length; index++) {
+              if(dataSourceIds[index] !== selectedIds[index]) {
+                  equal = false
+                  break
+              }
+          }
+          return equal
+      }
+  },
   data() { 
     return {
 
     }
+  },
+  methods: {
+      isChecked(item) {
+          return this.selected.filter(i => i.id === item.id).length > 0
+      },
+      checkItem(item, e) {
+          let isChecked = e.target.checked
+          let copySelected = JSON.parse(JSON.stringify(this.selected))
+          if(isChecked) {
+              copySelected.push(item)
+          }else {
+              copySelected = copySelected.filter(i => i.id !== item.id)
+          }
+          this.$emit('update:selected', copySelected)
+      },
+      checkAll(e) {
+          this.$emit('update:selected', e.target.checked ? this.dataSource : [])
+      }
   }
  }
 </script>
@@ -68,8 +122,22 @@ export default {
             text-align: left;
         }
         th, td {
-            border-bottom: 1px solid $border-color;
+            border-bottom: 1px solid $border-color-lighter;
             padding: 8px;
+        }
+        // 条纹
+        &.striped {
+            tbody {
+                >tr {
+                    &:nth-child(odd) {
+                        background: white;
+                    }
+                    &:nth-child(even) {
+                        // lighten：增加颜色亮度
+                        background: lighten($border-color-lighter, 10%);
+                    }
+                }
+            }
         }
     }
     .s-table-loading {
