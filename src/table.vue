@@ -10,7 +10,13 @@
                     <th :style="{width: '50px'}" v-if="checkable">
                         <input @change="checkAll" type="checkbox" :checked="isAllChecked">
                     </th>
-                    <th v-for="column in columns" :key="column.field">{{column.text}}</th>
+                    <th v-for="column in columns" :key="column.field">
+                        <span>{{column.text}}</span>
+                        <span class="s-table-order">
+                            <s-icon name="asc"></s-icon>
+                            <s-icon name="desc"></s-icon>
+                        </span>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +55,10 @@ export default {
       SIcon
   },
   props: {
+      // 排序
+      orderBy: {
+          type: Object
+      },
       // 可展开项的字段名  
       expendField: {
           type: String,
@@ -167,6 +177,17 @@ export default {
                 width: $icon-width;
                 height: $icon-height;
                 margin: $icon-margin;
+                cursor: pointer;
+            }
+        }
+        &-order {
+            vertical-align: bottom;
+            display: inline-flex;
+            flex-direction: column;
+            .s-icon {
+                width: $icon-width;
+                height: $icon-height;
+                margin: 0 0.2em;
                 cursor: pointer;
             }
         }

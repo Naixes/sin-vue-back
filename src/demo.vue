@@ -3,7 +3,7 @@
 		<!-- table -->
 		<div class="box">
 			{{tableSelected}}
-			<s-table :height="400" checkable expend-field="description" :selected.sync="tableSelected" :data-source="tableData" :columns="tableColumns" :loading="loading"></s-table>
+			<s-table :height="400" checkable expend-field="description" :selected.sync="tableSelected"  :order-by="orderBy" :data-source="tableData" :columns="tableColumns" :loading="loading"></s-table>
 		</div>
 		<div class="box">
 			<s-table loading :height="400" :data-source="tableData" :columns="tableColumns"></s-table>
