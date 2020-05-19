@@ -62,3 +62,6 @@ $toast-border-radius: 4px;
 		transform: rotate(360deg);
 	}
 }
+@mixin spin {
+  animation: spin 2s infinite linear;
+}

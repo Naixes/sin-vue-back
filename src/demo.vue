@@ -1,5 +1,12 @@
 <template>
 	<div id="demo">
+		<!-- table -->
+		<div class="box">
+			<s-table :height="400" :data-source="tableData" :columns="tableColumns" :loading="loading"></s-table>
+		</div>
+		<div class="box">
+			<s-table loading :height="400" :data-source="tableData" :columns="tableColumns"></s-table>
+		</div>
 		<!-- pager -->
 		<div class="box">
 			<s-pager :total="6" :current.sync="currentPage"></s-pager>
@@ -306,6 +313,7 @@
 	import SNavItem from './navItem'
 	import SSubNav from './subNav'
 	import SPager from './pager'
+	import STable from './table'
 
 	import db from './db'
 	
@@ -368,10 +376,42 @@
             SNavItem,
 			SSubNav,
 
-			SPager
+			SPager,
+			STable
         },
     data () {
       return {
+		// table  
+        tableColumns: [
+          {text: '姓名', field: 'name', width: 100}, // 1
+          {text: '分数', field: 'score'},
+        ],
+        orderBy: { // true - 开启排序，但是不确定asc desc
+          score: 'desc'
+        },
+        loading: false,
+        tableData: [
+          {id: 1, name: '方方', score: 100, description: 'xxxx xxxx'},
+          {id: 2, name: '圆圆', score: 99, description: 'yyyy yyyy'},
+          {id: 3, name: '张三', score: 100},
+          {id: 4, name: '李四', score: 99},
+          {id: 5, name: '超人', score: 100},
+          {id: 6, name: '蝙蝠侠', score: 11},
+          {id: 7, name: '蜘蛛侠', score: 3},
+          {id: 8, name: '钢铁侠', score: 0},
+          {id: 9, name: '方方', score: 100},
+          {id: 10, name: '圆圆', score: 99},
+          {id: 11, name: '张三', score: 100},
+          {id: 12, name: '李四', score: 99},
+          {id: 13, name: '超人', score: 100},
+          {id: 14, name: '蝙蝠侠', score: 99},
+          {id: 15, name: '蜘蛛侠', score: 100},
+          {id: 16, name: '钢铁侠', score: 99},
+          {id: 17, name: '蜘蛛侠', score: 100},
+          {id: 18, name: '钢铁侠', score: 99},
+          {id: 19, name: '方方', score: 100},
+          {id: 20, name: '圆圆', score: 99},
+        ],
 		// pager
 		currentPage: 1,
 		// nav
