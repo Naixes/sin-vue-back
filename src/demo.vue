@@ -3,7 +3,7 @@
 		<!-- table -->
 		<div class="box">
 			{{tableSelected}}
-			<s-table :height="400" checkable expend-field="description" :selected.sync="tableSelected"  :order-by="orderBy" :data-source="tableData" :columns="tableColumns" :loading="loading"></s-table>
+			<s-table :height="400" checkable expend-field="description" :selected.sync="tableSelected"  :order-by.sync="orderBy" @update:orderBy="tableOrderBy"  :data-source="tableData" :columns="tableColumns" :loading="tableLoading"></s-table>
 		</div>
 		<div class="box">
 			<s-table loading :height="400" :data-source="tableData" :columns="tableColumns"></s-table>
@@ -391,7 +391,7 @@
         orderBy: { // true - 开启排序，但是不确定asc desc
           score: 'desc'
         },
-        loading: false,
+        tableLoading: false,
         tableData: [
           {id: 1, name: '方方', score: 100, description: 'xxxx xxxx'},
           {id: 2, name: '圆圆', score: 99, description: 'yyyy yyyy'},
@@ -473,6 +473,15 @@
 		})
 	},
     methods: {
+		// table
+		// 模拟改变排序
+		tableOrderBy() {
+			this.tableLoading = true
+			setTimeout(() => {
+			this.tableData = this.tableData.sort((a, b) => a.score - b.score)
+			this.tableLoading = false
+			}, 1000)
+		},
 		// cascader
 		// 查询当前元素的子元素，传给子组件，子组件调用
 		loadSource(parentId, updateSource) {

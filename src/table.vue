@@ -12,9 +12,11 @@
                     </th>
                     <th v-for="column in columns" :key="column.field">
                         <span>{{column.text}}</span>
-                        <span class="s-table-order">
-                            <s-icon name="asc"></s-icon>
-                            <s-icon name="desc"></s-icon>
+                        <span class="s-table-order" @click="changeOrderBy(column.field)">
+                            <!-- 升序 -->
+                            <s-icon name="asc" :class="{active: orderBy[column.field] === 'asc'}"></s-icon>
+                            <!-- 降序 -->
+                            <s-icon name="desc" :class="{active: orderBy[column.field] === 'desc'}"></s-icon>
                         </span>
                     </th>
                 </tr>
@@ -57,7 +59,8 @@ export default {
   props: {
       // 排序
       orderBy: {
-          type: Object
+          type: Object,
+          default: () => ({})
       },
       // 可展开项的字段名  
       expendField: {
@@ -127,6 +130,17 @@ export default {
     }
   },
   methods: {
+      changeOrderBy(field) {
+          let copyOrderBy = JSON.parse(JSON.stringify(this.orderBy))
+          let oldvalue = copyOrderBy[field]
+          if(oldvalue === 'asc') {
+              copyOrderBy[field] = 'desc'
+          }else {
+              // 之前是降序或者没有  
+              copyOrderBy[field] = 'asc'
+          }
+          this.$emit('update:orderBy', copyOrderBy)
+      },
       isExpend(id) {
           return this.expendIds.some(i => i === id)
       },
@@ -189,6 +203,9 @@ export default {
                 height: $icon-height;
                 margin: 0 0.2em;
                 cursor: pointer;
+                &.active {
+                    fill: $red;
+                }
             }
         }
         // 条纹
