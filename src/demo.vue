@@ -1,5 +1,17 @@
 <template>
 	<div id="demo">
+		<!-- form-row -->
+		<div class="box">
+			<form @submit.prevent="onSubmit">
+				<s-form-row label="邮箱" :error="errors.email">
+					<s-input type="text" v-model="params.email" placeholder="请输入邮箱"></s-input>
+				</s-form-row>
+				<s-form-row label="密码" :error="errors.password">
+					<s-input type="password" v-model="params.password" placeholder="请输入密码"></s-input>
+				</s-form-row>
+				<s-button class="ok" type="submit">提交</s-button>
+			</form>
+		</div>
 		<!-- table -->
 		<div class="box">
 			{{tableSelected}}
@@ -291,6 +303,8 @@
 	</div>
 </template>
 <script>
+	import formMixin from './form-mixin'
+
     import Vue from 'vue'
     import SButton from './button'
     import SIcon from './icon'
@@ -321,6 +335,7 @@
 	import SSubNav from './subNav'
 	import SPager from './pager'
 	import STable from './table'
+	import SFormRow from './form-row'
 
 	import db from './db'
 	
@@ -343,6 +358,7 @@
 
     export default {
         name: "demo",
+    	mixins: [formMixin],
         components: {
             SButton,
             SButtonGroup,
@@ -384,10 +400,21 @@
 			SSubNav,
 
 			SPager,
-			STable
+			STable,
+
+			SFormRow
         },
     data () {
       return {
+		// form-row
+		params: {
+			email: '',
+			password: ''
+		},
+		rules: [
+			{key: 'email', pattern: 'email', required: true},
+			{key: 'password', minlength: 6, required: true}
+		],
 		// table  
 		tableSelected: [],
         tableColumns: [
@@ -479,6 +506,10 @@
 		})
 	},
     methods: {
+		// form-row
+		onSubmit() {
+			this.validate(this.params, this.rules)
+		},
 		// table
 		action(data) {
 			alert(data.score)
