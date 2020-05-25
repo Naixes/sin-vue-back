@@ -3,7 +3,13 @@
 		<!-- table -->
 		<div class="box">
 			{{tableSelected}}
-			<s-table :height="400" checkable expend-field="description" :selected.sync="tableSelected"  :order-by.sync="orderBy" @update:orderBy="tableOrderBy"  :data-source="tableData" :columns="tableColumns" :loading="tableLoading"></s-table>
+			<s-table :height="400" checkable expend-field="description" :selected.sync="tableSelected"  :order-by.sync="orderBy" @update:orderBy="tableOrderBy"  :data-source="tableData" :columns="tableColumns" :loading="tableLoading">
+				<template slot-scope="data">
+					<button @click="action(data.data)">编辑</button>
+					<button @click="action(data.data)">查看</button>
+					<button @click="action(data.data)">删除</button>
+				</template>
+			</s-table>
 		</div>
 		<div class="box">
 			<s-table loading :height="400" :data-source="tableData" :columns="tableColumns"></s-table>
@@ -474,6 +480,9 @@
 	},
     methods: {
 		// table
+		action(data) {
+			alert(data.score)
+		},
 		// 模拟改变排序
 		tableOrderBy() {
 			this.tableLoading = true

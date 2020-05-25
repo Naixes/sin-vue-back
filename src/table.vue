@@ -19,6 +19,7 @@
                             <s-icon name="desc" :class="{active: orderBy[column.field] === 'desc'}"></s-icon>
                         </span>
                     </th>
+                    <th v-if="$scopedSlots.default"></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,11 @@
                             <input @change="checkItem(data, $event)" type="checkbox" :checked="isChecked(data)">
                         </td>
                         <td :style="{width: `${column.width}px`}" v-for="column in columns" :key="column.field">{{data[column.field]}}</td>
+                        <td v-if="$scopedSlots.default">
+                            <div>
+                                <slot :data="data"></slot>
+                            </div>
+                        </td>
                     </tr>
                     <!-- 展开内容 -->
                     <tr v-if="isExpend(data.id)" :key="`${data.id}-expend`">
