@@ -1,5 +1,13 @@
 <template>
 	<div id="demo">
+		<!-- uploader -->
+		<div class="box">
+			{{error}}
+			{{uploadFileList}}
+			<s-uploader name="file" action="http://127.0.0.1:3000/upload" :parseResponse="parseResponse" @error="error=$event" :fileList.sync="uploadFileList">
+				<s-button icon="setting">上传</s-button>
+			</s-uploader>
+		</div>
 		<!-- form-row -->
 		<div class="box">
 			<form @submit.prevent="onSubmit">
@@ -336,6 +344,7 @@
 	import SPager from './pager'
 	import STable from './table'
 	import SFormRow from './form-row'
+	import SUploader from './uploader'
 
 	import db from './db'
 	
@@ -402,10 +411,15 @@
 			SPager,
 			STable,
 
-			SFormRow
+			SFormRow,
+
+			SUploader
         },
     data () {
       return {
+		// uploader
+		uploadFileList: [],
+        error: '',
 		// form-row
 		params: {
 			email: '',
@@ -506,6 +520,12 @@
 		})
 	},
     methods: {
+		// uploader
+		parseResponse (response) {
+			let object = JSON.parse(response)
+			let url = `http://127.0.0.1:3000/preview/${object.id}`
+			return url
+		},
 		// form-row
 		onSubmit() {
 			this.validate(this.params, this.rules)
