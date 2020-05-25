@@ -555,7 +555,9 @@
     }
   };
 </script>
-<style>
+<style lang="scss" scoped>
+	@import "var";
+
     * {margin: 0; padding: 0; box-sizing: border-box;}
     /* 已改为sass变量 */
     /* :root { */
@@ -582,7 +584,7 @@
         margin: 20px;
     }
     body {
-        font-size: var(--font-size);
+        font-size: $font-size;
     }
     .box {
         margin: 20px;
