@@ -1,5 +1,19 @@
 <template>
 	<div id="demo">
+		<!-- affix -->
+		<div class="box">
+			<p>段落1</p>
+			<p>段落2</p>
+			<p>段落3</p>
+			<p>段落4</p>
+			<p>段落5</p>
+			<p>段落6</p>
+			<p>段落7</p>
+			<p>段落8</p>
+			<s-affix :distance="100">
+				<s-button>嘿嘿</s-button>
+			</s-affix>
+		</div>
 		<!-- uploader -->
 		<div class="box">
 			{{error}}
@@ -345,6 +359,7 @@
 	import STable from './table'
 	import SFormRow from './form-row'
 	import SUploader from './uploader'
+	import SAffix from './affix'
 
 	import db from './db'
 	
@@ -413,7 +428,9 @@
 
 			SFormRow,
 
-			SUploader
+			SUploader,
+
+			SAffix
         },
     data () {
       return {
