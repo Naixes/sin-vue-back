@@ -1196,14 +1196,116 @@ is动态组件
 
 复用过渡，动态过渡，状态过渡
 
-Nav
+### Nav
 
-Karma测试
+### Karma测试
 
-表单验证
+### 表单验证
 
-分页
+### 分页
 
-Table
+### Table
 
-Upload
+### Upload
+
+#### 需求分析
+
+##### 流程
+
+尽量避免前端压缩文件
+
+默认头像
+
+点击上传（自动上传），手机：拍照/相册，电脑：选择文件
+
+确定，开始上传，post
+
+响应一个连接url，放入隐藏input
+
+预览
+
+保存
+
+##### 需求
+
+自动上传
+
+列表，进度（真：从服务器获取且浏览器支持/假），删除，提示
+
+拖拽
+
+手动上传，先选择后上传
+
+头像上传
+
+#### 接口设计
+
+action
+
+#### ajax实现文件上传
+
+通过formData收集文件，上传到服务器，上传完成后将图片src设置为返回的url
+
+后台实现上传接口和预览接口
+
+##### 使用heroku
+
+提供一个服务器
+
+注册（fq），创建项目，上传/关联代码，部署（从环境中获取端口号，添加start命令）
+
+##### 后台
+
+```js
+const express = require('express')
+const multer = require('multer')
+const cors = require('cors')
+
+// 插件，获取上传的文件放到uploads中
+const upload = multer({dest: 'uploads/'})
+
+const app = express()
+
+// 插件，设置跨域
+app.options('upload', cors())
+
+app.get('/', cors(), (req, res) => {
+    res.send("hello nodejs")
+})
+
+// upload.single('文件上传时的name')
+app.post('/upload', cors(), upload.single('file'), (req, res, next) => {
+    // 获取文件
+    console.log(req.file);
+    // 设置跨域
+    // res.set('Access-Control-Allow-Origin', '*')
+    const result = {
+        id: req.file.filename
+    }
+    res.send(JSON.stringify(result))
+})
+
+// 预览
+app.get('/preview/:id', cors(), (req, res) => {
+    res.sendFile(`uploads/${req.params.id}`, {
+        root: __dirname,
+        headers: {
+            'Content-Type': 'image/png',
+        }
+    }, (err) => {
+        if(err) {
+            console.log('err', err);
+            res.status(400).send('file not found')
+        }
+    })
+})
+
+// heroku的端口号可能是随机的
+// PORT=5000 node index.js
+const port = process.env.PORT || 3000
+console.log(`at port:${port}`);
+app.listen(port)
+```
+
+
+

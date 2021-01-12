@@ -18,8 +18,8 @@
 		<div class="box">
 			{{error}}
 			{{uploadFileList}}
-			<s-uploader name="file" action="http://127.0.0.1:3000/upload" :parseResponse="parseResponse" @error="error=$event" :fileList.sync="uploadFileList">
-				<s-button icon="setting">上传</s-button>
+			<s-uploader accept="image/*" name="file" action="http://127.0.0.1:3000/upload" :parseResponse="parseResponse" @error="error=$event" :fileList.sync="uploadFileList">
+				<s-button>上传</s-button>
 			</s-uploader>
 		</div>
 		<!-- form-row -->
@@ -539,6 +539,8 @@
     methods: {
 		// uploader
 		parseResponse (response) {
+			console.log('response', response);
+			// let url = `http://127.0.0.1:3000/preview/${response}`
 			let object = JSON.parse(response)
 			let url = `http://127.0.0.1:3000/preview/${object.id}`
 			return url
