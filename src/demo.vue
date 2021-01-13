@@ -1,18 +1,28 @@
 <template>
 	<div id="demo">
 		<!-- affix -->
-		<div class="box">
-			<p>段落1</p>
-			<p>段落2</p>
-			<p>段落3</p>
-			<p>段落4</p>
-			<p>段落5</p>
-			<p>段落6</p>
-			<p>段落7</p>
-			<p>段落8</p>
-			<s-affix :distance="100">
-				<s-button>嘿嘿</s-button>
-			</s-affix>
+		<div class="box" style="display: flex; justify-content: center;">
+			<div>
+				<p>段落1</p>
+				<p>段落2</p>
+				<p>段落3</p>
+				<p>段落4</p>
+				<p>段落5</p>
+				<p>段落6</p>
+				<p>段落7</p>
+				<p>段落8</p>
+				<s-affix :distance="100">
+					<s-button>affix</s-button>
+				</s-affix>
+				<p>段落1</p>
+				<p>段落2</p>
+				<p>段落3</p>
+				<p>段落4</p>
+				<p>段落5</p>
+				<p>段落6</p>
+				<p>段落7</p>
+				<p>段落8</p>
+			</div>
 		</div>
 		<!-- uploader -->
 		<div class="box">

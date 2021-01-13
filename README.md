@@ -1309,3 +1309,12 @@ app.listen(port)
 
 工具：CodeSandbox
 
+### Sticky
+
+top需要获取初始值
+
+父元素占位：固定前需要获取当前的height，width，left
+
+取消事件监听
+
+节流
