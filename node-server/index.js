@@ -26,6 +26,12 @@ app.post('/upload', cors(), upload.single('file'), (req, res, next) => {
     res.send(JSON.stringify(result))
 })
 
+// 多文件上传
+// app.post('/uploads', cors(), upload.array('files', 12), (req, res, next) => {
+//     const result = req.files.map(f => f.filename)
+//     res.send(JSON.stringify(result))
+// })
+
 // 预览
 app.get('/preview/:id', cors(), (req, res) => {
     res.sendFile(`uploads/${req.params.id}`, {

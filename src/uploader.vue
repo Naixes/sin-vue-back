@@ -79,6 +79,7 @@ export default {
         input.click()
     },
     createFileInput() {
+        // 清空之前的 input 防止多次取消重复创建多个 input 或者直接固定将一个 input 绝对定位到按钮位置
         this.$refs.temp.innerHTML = ''
         let input = document.createElement('input')
         input.accept = this.accept
@@ -135,6 +136,7 @@ export default {
             let {type, size} = file
             return {name: newNames[i], type, size, status: 'uploading'}
         })
+        // 注意不能在循环里触发事件只会执行最后一次
         this.$emit('update:fileList', [...this.fileList, ...files])
         return true
     },
@@ -164,6 +166,7 @@ export default {
         if(xhr.status === 0) {
             error = '网络错误'
         }
+        // 触发父组件监听的 error 事件
         this.$emit('error', error)
     },
   }
