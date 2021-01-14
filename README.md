@@ -1398,3 +1398,27 @@ export {default as SAffix} from './affix'
 
 lib模式打包好的包中默认不包括vue
 
+#### .npmignore
+
+```
+/.idea/
+/docs/
+/src/
+/tests/
+/history/
+/dist/demo.html
+```
+
+修改package.json增加入口配置
+
+```json
+{
+  "name": "sin-vue",
+  "version": "0.0.5",
+  "private": false,
+  "main": "dist/sin-vue.umd.min.js",
+  ...
+}
+```
+
+#### 发布0.04版

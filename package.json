@@ -1,7 +1,8 @@
 {
   "name": "sin-vue",
-  "version": "0.0.3",
-  "private": true,
+  "version": "0.0.8",
+  "private": false,
+  "main": "dist/sin-vue.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name sin-vue src/index.js",
