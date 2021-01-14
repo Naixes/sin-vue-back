@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import SIcon from './icon'
+import SIcon from '../icon'
 export default {
   components: {SIcon},
   name: '',

@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import SIcon from './icon'
+import SIcon from '../icon'
 
 export default {
   name: '',
@@ -178,7 +178,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "var";
+@import "../var";
 
 .s-table-wrapper{
     position: relative;

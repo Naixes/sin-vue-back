@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Icon from './icon'
+import Icon from '../icon'
 
 export default {
 	components: {
@@ -51,7 +51,7 @@ export default {
 
 <style lang="scss" scoped>
 // 测试会报错？？？
-// @import 'var';
+// @import '../var';
 
 $font-size: 14px ;
 

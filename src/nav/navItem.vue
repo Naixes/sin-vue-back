@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'var';
+@import '../var';
 
 .s-nav-item {
     padding: 10px 20px;

@@ -1,4 +1,4 @@
-import Validator from './validate'
+import Validator from '../validate'
 export default {
     data() {
         return {

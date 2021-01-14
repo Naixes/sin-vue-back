@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import SIcon from './icon'
-import ClickOutside from './click-outside'
+import SIcon from '../icon'
+import ClickOutside from '../click-outside'
 export default {
   components: {SIcon},
   directives: {ClickOutside},
@@ -95,7 +95,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'var';
+@import '../var';
 
 .s-sub-nav {
   position: relative;

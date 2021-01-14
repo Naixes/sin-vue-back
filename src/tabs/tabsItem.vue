@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "var";
+@import "../var";
 
 .s-tabs-item {
     display: flex; align-items: center;

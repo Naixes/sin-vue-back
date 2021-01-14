@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import SIcon from './icon'
+import SIcon from '../icon'
 export default {
   name: '',
   components: {SIcon},
@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "var";
+@import "../var";
 
 .s-pager{
     .hide,

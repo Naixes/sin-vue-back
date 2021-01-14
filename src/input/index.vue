@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Icon from './icon'
+import Icon from '../icon'
 
 export default {
     props: {
@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "var";
+@import "../var";
 
 .input-wrapper { 
     font-size: $input-font-size;

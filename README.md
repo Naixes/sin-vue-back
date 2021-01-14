@@ -1318,3 +1318,83 @@ top需要获取初始值
 取消事件监听
 
 节流
+
+### 打包上传
+
+#### lib模式
+
+当你运行 `vue-cli-service build` 时，你可以通过 `--target` 选项指定不同的构建目标。它允许你将相同的源代码根据不同的用例生成不同的构建。
+
+vue cli默认应用模式
+
+你可以通过下面的命令将一个单独的入口构建为一个库：
+
+```text
+vue-cli-service build --target lib --name myLib src/index.js
+```
+
+这个入口可以是一个 `.js` 或一个 `.vue` 文件。如果没有指定入口，则会使用 `src/App.vue`。当前使用的是`src/index.js`
+
+构建一个库会输出：
+
+- `dist/myLib.common.js`：一个给打包器用的 CommonJS 包 (不幸的是，webpack 目前还并没有支持 ES modules 输出格式的包)
+- `dist/myLib.umd.js`：一个直接给浏览器或 AMD loader 使用的 UMD 包
+- `dist/myLib.umd.min.js`：压缩后的 UMD 构建版本
+- `dist/myLib.css`：提取出来的 CSS 文件 (可以通过在 `vue.config.js` 中设置 `css: { extract: false }` 强制内联)
+
+打包结果myLib.umd.js
+
+```js
+// factory 会返回入口文件导出的内容
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object') // nodejs
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd) // amd(webpack runtime/浏览器环境)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["myLib"] = factory();
+	else // window
+		root["myLib"] = factory();
+})((typeof self !== 'undefined' ? self : this), function() {...});
+```
+
+入口文件
+
+```js
+// 导出所有组件
+export {default as SButton} from './button'
+export {default as SIcon} from './icon'
+export {default as SButtonGroup} from './buttonGroup'
+export {default as SInput} from './input'
+export {default as SRow} from './row'
+export {default as SCol} from './col'
+export {default as SLayout} from './layout'
+export {default as SHeader} from './header'
+export {default as SAside} from './aside'
+export {default as SContent} from './content'
+export {default as SFooter} from './footer'
+export {default as SToast} from './toast'
+export {default as STabs} from './tabs'
+export {default as STabsHeader} from './tabsHeader'
+export {default as STabsItem} from './tabsItem'
+export {default as STabsBody} from './tabsBody'
+export {default as STabsPanel} from './tabsPanel'
+export {default as SPopover} from './popover'
+export {default as SCollapse} from './collapse'
+export {default as SCollapseItem} from './collapseItem'
+export {default as SCascader} from './cascader'
+export {default as SCascaderItem} from './cascaderItem'
+export {default as SSlides} from './slides'
+export {default as SSlidesItem} from './slidesItem'
+export {default as SNav} from './nav'
+export {default as SNavItem} from './navItem'
+export {default as SSubNav} from './subNav'
+export {default as SPager} from './pager'
+export {default as STable} from './table'
+export {default as SFormRow} from './form-row'
+export {default as SUploader} from './uploader'
+export {default as SAffix} from './affix'
+```
+
+lib模式打包好的包中默认不包括vue
+

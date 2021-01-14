@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "var";
+@import "../var";
 
 .s-tabs-header {
     display: flex; align-items: center;

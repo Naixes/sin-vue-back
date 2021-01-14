@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import SIcon from './icon'
-import http from './http'
+import SIcon from '../icon'
+import http from '../http'
 
 export default {
   name: '',
@@ -174,7 +174,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "var";
+@import "../var";
 .s-uploader {
     &-name {
         margin-right: auto;

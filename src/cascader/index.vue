@@ -18,8 +18,8 @@
     </div>
 </template>
 <script>
-import SCascaderItem from './cascaderItem'
-import clickOutside from './click-outside.js'
+import SCascaderItem from '../cascader/cascaderItem'
+import clickOutside from '../click-outside.js'
 export default {
     components: {
         // 动态引入的组件，样式会不生效
@@ -170,7 +170,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "var";
+@import "../var";
 
 .s-cascader {
     // 点击外部关闭需要

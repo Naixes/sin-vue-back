@@ -78,7 +78,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "var";
+@import "../var";
 
 // 动画
 @keyframes slide-down {

@@ -41,7 +41,7 @@
     </div>
 </template>
 <script>
-import Icon from './icon'
+import Icon from '../icon'
 
 export default {
     name: 'CascaderItem',
@@ -124,7 +124,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "var";
+@import "../var";
 
 .s-cascader-list {
     display: flex;

@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'var';
+@import '../var';
 
 .s-form-row {
     margin-bottom: 16px;
