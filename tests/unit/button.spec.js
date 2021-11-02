@@ -1,6 +1,6 @@
 import Vue from 'vue'
 // 引入要测试的组件
-import Button from '@/button.vue'
+import Button from '@/button'
 import chai, {expect} from 'chai'
 import {mount} from '@vue/test-utils'
 import sinon from 'sinon'
